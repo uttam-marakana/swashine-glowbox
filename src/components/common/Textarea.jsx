@@ -1,4 +1,10 @@
-export default function Textarea({ label, error, className = '', rows = 4, ...props }) {
+export default function Textarea({
+  label,
+  error,
+  className = "",
+  rows = 4,
+  ...props
+}) {
   return (
     <div className="space-y-2">
       {label && <label className="block text-sm text-zinc-400">{label}</label>}

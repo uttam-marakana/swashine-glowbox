@@ -1,4 +1,4 @@
-export default function Input({ label, error, className = '', ...props }) {
+export default function Input({ label, error, className = "", ...props }) {
   return (
     <div className="space-y-2">
       {label && <label className="block text-sm text-zinc-400">{label}</label>}

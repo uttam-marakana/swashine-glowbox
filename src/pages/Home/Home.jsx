@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { company, features, products, stats, useCases, beforeAfter } from '@/data/company';
+import { company, features, products, stats, useCases } from '@/data/company';
 import Button from '@/components/common/Button';
+import BeforeAfter from '@/components/common/BeforeAfter';
 import { Zap, RefreshCw, Shield, Ruler } from 'lucide-react';
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
@@ -113,38 +114,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Before / After */}
+      {/* Before / After with image upload */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6">
             <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">See the Difference</span>
-            <h2 className="text-4xl font-bold mt-2">Before & After</h2>
-            <p className="text-zinc-400 mt-3 max-w-lg mx-auto">OFF vs ON — watch ordinary prints transform into stunning illuminated displays.</p>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-10">
-            {beforeAfter.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden">
-                <div className="grid grid-cols-2">
-                  <div className="relative aspect-square bg-zinc-800 flex items-center justify-center border-r border-zinc-700">
-                    <span className="text-5xl opacity-40">💡</span>
-                    <span className="absolute top-3 left-3 bg-red-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">{item.beforeLabel}</span>
-                  </div>
-                  <div className="relative aspect-square bg-zinc-800 flex items-center justify-center">
-                    <span className="text-5xl">💡</span>
-                    <span className="absolute top-3 left-3 bg-green-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">{item.afterLabel}</span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-semibold text-lg">{item.title}</h3>
-                  <p className="text-sm text-zinc-400 mt-1">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <p className="text-center text-sm text-zinc-500 mt-8">
-            Tip: On product pages you can also compare ON / OFF views where available.
-          </p>
+          <BeforeAfter
+            title="Before & After"
+            description="Upload OFF and ON photos of any glowbox or print to compare lighting side by side."
+          />
         </div>
       </section>
 

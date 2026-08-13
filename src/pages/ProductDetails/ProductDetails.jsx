@@ -4,17 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Check, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { products, company, orderNotes } from '@/data/company';
 import Button from '@/components/common/Button';
+import BeforeAfter from '@/components/common/BeforeAfter';
+import Product360Viewer from '@/components/common/Product360Viewer';
 
 export default function ProductDetails() {
   const { slug } = useParams();
   const product = products.find((p) => p.slug === slug);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [showOn, setShowOn] = useState(true);
 
   // Reset thumbnail when product changes
   useEffect(() => {
     setActiveIndex(0);
-    setShowOn(true);
   }, [slug]);
 
   if (!product) {
@@ -188,58 +188,21 @@ export default function ProductDetails() {
           </motion.div>
         </div>
 
-        {/* Before / After */}
-        <section className="mt-24">
-          <h2 className="text-3xl font-bold mb-3 text-center">Before & After</h2>
-          <p className="text-zinc-400 text-center mb-10 max-w-lg mx-auto">
-            Toggle OFF / ON to see how this glowbox transforms your print.
-          </p>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex justify-center gap-3 mb-6">
-              <button
-                onClick={() => setShowOn(false)}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition ${
-                  !showOn ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
-                }`}
-              >
-                OFF
-              </button>
-              <button
-                onClick={() => setShowOn(true)}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition ${
-                  showOn ? 'bg-green-500 text-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
-                }`}
-              >
-                ON
-              </button>
-            </div>
-            <motion.div
-              key={showOn ? 'on' : 'off'}
-              initial={{ opacity: 0.6 }}
-              animate={{ opacity: 1 }}
-              className={`rounded-3xl border overflow-hidden aspect-[4/3] flex items-center justify-center ${
-                showOn ? 'bg-zinc-800 border-green-500/30' : 'bg-zinc-900 border-zinc-700'
-              }`}
-            >
-              {mainSrc ? (
-                <img
-                  src={mainSrc}
-                  alt={`${product.name} ${showOn ? 'ON' : 'OFF'}`}
-                  className={`max-h-full max-w-full object-contain p-8 transition ${
-                    showOn ? 'brightness-110' : 'brightness-50 opacity-70'
-                  }`}
-                />
-              ) : (
-                <div className="text-center">
-                  <div className={`text-7xl mb-3 ${showOn ? '' : 'opacity-40'}`}>💡</div>
-                  <div className={`text-sm font-bold ${showOn ? 'text-green-400' : 'text-red-400'}`}>
-                    {showOn ? 'ON — Illuminated' : 'OFF — Unlit'}
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        </section>
+        {/* 360° Viewer */}
+        <Product360Viewer
+          className="mt-24"
+          frames={gallery}
+          productName={product.name}
+        />
+
+        {/* Before / After with upload */}
+        <BeforeAfter
+          className="mt-24"
+          title="Before & After"
+          description="Toggle OFF / ON, or upload your own photos to preview how this glowbox looks lit vs unlit."
+          defaultOffSrc={mainSrc}
+          defaultOnSrc={mainSrc}
+        />
 
         {/* Specs */}
         <section className="mt-24 max-w-3xl mx-auto">

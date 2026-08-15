@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import Header from '@/components/global/Header';
-import Footer from '@/components/global/Footer';
-import ScrollToTop from '@/components/global/ScrollToTop';
+import { Outlet } from "react-router-dom";
+import Header from "@/components/global/Header";
+import Footer from "@/components/global/Footer";
+import ScrollToTop from "@/components/global/ScrollToTop";
+import StickyWhatsApp from "@/components/global/StickyWhatsApp";
 
 export default function MainLayout() {
   return (
@@ -12,6 +13,7 @@ export default function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+      <StickyWhatsApp />
     </div>
   );
 }

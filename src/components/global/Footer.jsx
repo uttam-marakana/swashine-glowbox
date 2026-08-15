@@ -4,7 +4,7 @@ import logo from "@/assets/images/logo-swashine.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-zinc-800 py-16">
+    <footer className="bg-black border-t border-zinc-800 py-10">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
         <div>
           <Link to="/" className="inline-block mb-4">

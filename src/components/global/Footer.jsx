@@ -11,7 +11,7 @@ export default function Footer() {
             <img
               src={logo}
               alt="Swashine Glowbox"
-              className="h-12 w-auto object-contain"
+              className="h-24 w-auto object-contain"
             />
           </Link>
           <p className="text-sm text-zinc-500">
@@ -62,9 +62,10 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div className="text-center text-xs text-zinc-600 mt-12">
-        © {new Date().getFullYear()} Swastik Industries • All Rights Reserved •
-        Made with ❤️ in Gujarat
+      <div className="flex align-center justify-center text-center text-xs text-zinc-600 mt-12">
+        <p>© {new Date().getFullYear()} Swastik Industries</p>
+        <p>All Rights Reserved</p>
+        <p>Made with ❤️ in Gujarat</p>
       </div>
     </footer>
   );

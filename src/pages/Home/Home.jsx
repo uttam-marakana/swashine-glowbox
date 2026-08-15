@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   company,
   features,
@@ -13,24 +13,24 @@ import {
   sizeCompare,
   reviews,
   videoHighlights,
-} from '@/data/company';
-import Button from '@/components/common/Button';
-import BeforeAfter from '@/components/common/BeforeAfter';
-import FaqList from '@/components/common/FaqList';
-import { Zap, RefreshCw, Shield, Ruler } from 'lucide-react';
+} from "@/data/company";
+import Button from "@/components/common/Button";
+import BeforeAfter from "@/components/common/BeforeAfter";
+import FaqList from "@/components/common/FaqList";
+import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
 
 /** Shared glass panel classes (iOS-style frosted glass) */
 const glass =
-  'bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]';
+  "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
 const glassHover =
-  'hover:bg-white/[0.07] hover:border-brand-400/30 transition-all duration-300';
+  "hover:bg-white/[0.07] hover:border-brand-400/30 transition-all duration-300";
 const glassCard = `${glass} ${glassHover} rounded-3xl`;
 
 export default function Home() {
   const heroProduct =
-    products.find((p) => p.badge === 'Popular' && p.image) ||
+    products.find((p) => p.badge === "Popular" && p.image) ||
     products.find((p) => p.image);
 
   return (
@@ -55,21 +55,23 @@ export default function Home() {
               className={`inline-flex items-center gap-2 ${glass} px-5 py-2 rounded-full text-sm`}
             >
               <span>🇮🇳</span>
-              <span className="text-zinc-200">Made in Gujarat • Manufacturer Direct</span>
+              <span className="text-zinc-200">
+                Made in Gujarat • Manufacturer Direct
+              </span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold leading-[0.95] tracking-tighter">
               LIGHT UP
               <br />
-              YOUR{' '}
+              YOUR{" "}
               <span className="text-brand-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.35)]">
                 BRAND
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-zinc-400 max-w-lg leading-relaxed">
-              Premium LED Glowboxes with tool-free poster change. Perfect for retail, temples,
-              restaurants & exhibitions.
+              Premium LED Glowboxes with tool-free poster change. Perfect for
+              retail, temples, restaurants & exhibitions.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -83,14 +85,16 @@ export default function Home() {
             </div>
 
             <div className="flex flex-wrap gap-3 text-sm pt-1">
-              {['Custom Sizes', '1 Year Warranty', '5–6 Days Delivery'].map((t) => (
-                <span
-                  key={t}
-                  className={`${glass} px-3 py-1.5 rounded-full text-green-400/90 text-xs font-medium`}
-                >
-                  ✔ {t}
-                </span>
-              ))}
+              {["Custom Sizes", "1 Year Warranty", "5–6 Days Delivery"].map(
+                (t) => (
+                  <span
+                    key={t}
+                    className={`${glass} px-3 py-1.5 rounded-full text-green-400/90 text-xs font-medium`}
+                  >
+                    ✔ {t}
+                  </span>
+                ),
+              )}
             </div>
           </motion.div>
 
@@ -113,8 +117,12 @@ export default function Home() {
               ) : (
                 <div className="text-center p-8 relative">
                   <div className="text-7xl mb-4">💡</div>
-                  <div className="text-brand-400 font-semibold text-lg">Swashine Glowbox</div>
-                  <div className="text-zinc-500 text-sm mt-1">Premium LED Displays</div>
+                  <div className="text-brand-400 font-semibold text-lg">
+                    Swashine Glowbox
+                  </div>
+                  <div className="text-zinc-500 text-sm mt-1">
+                    Premium LED Displays
+                  </div>
                 </div>
               )}
             </div>
@@ -128,7 +136,9 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((s) => (
               <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-bold text-brand-400">{s.value}</div>
+                <div className="text-3xl md:text-4xl font-bold text-brand-400">
+                  {s.value}
+                </div>
                 <div className="text-sm text-zinc-500 mt-1">{s.label}</div>
               </div>
             ))}
@@ -161,9 +171,13 @@ export default function Home() {
                 transition={{ delay: i * 0.08 }}
                 className={`${glassCard} p-6`}
               >
-                <div className="text-brand-400 font-bold text-sm mb-2">{s.step}</div>
+                <div className="text-brand-400 font-bold text-sm mb-2">
+                  {s.step}
+                </div>
                 <h3 className="font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{s.desc}</p>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  {s.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -197,7 +211,9 @@ export default function Home() {
                     <Icon className="w-6 h-6 text-brand-400" />
                   </div>
                   <h4 className="text-xl font-semibold mb-3">{f.title}</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{f.desc}</p>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    {f.desc}
+                  </p>
                 </motion.div>
               );
             })}
@@ -215,7 +231,10 @@ export default function Home() {
               </span>
               <h2 className="text-4xl font-bold mt-2">Featured products</h2>
             </div>
-            <Link to="/products" className="text-brand-400 hover:underline text-sm font-medium">
+            <Link
+              to="/products"
+              className="text-brand-400 hover:underline text-sm font-medium"
+            >
               View all products →
             </Link>
           </div>
@@ -250,7 +269,9 @@ export default function Home() {
                       {p.name}
                     </h3>
                     <p className="text-xs text-zinc-500 mt-1">{p.size}</p>
-                    <p className="text-sm text-brand-400 mt-2">{p.priceLabel}</p>
+                    <p className="text-sm text-brand-400 mt-2">
+                      {p.priceLabel}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -258,7 +279,7 @@ export default function Home() {
         </div>
       </section>
 
-            {/* Size compare */}
+      {/* Size compare */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-4">Compare sizes</h2>
@@ -281,13 +302,19 @@ export default function Home() {
                     <tr
                       key={row.size}
                       className={`border-b border-white/5 ${
-                        i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.02]'
+                        i % 2 === 0 ? "bg-transparent" : "bg-white/[0.02]"
                       }`}
                     >
-                      <td className="px-5 py-3.5 font-medium text-white">{row.size}</td>
-                      <td className="px-5 py-3.5 text-zinc-400">{row.bestFor}</td>
+                      <td className="px-5 py-3.5 font-medium text-white">
+                        {row.size}
+                      </td>
+                      <td className="px-5 py-3.5 text-zinc-400">
+                        {row.bestFor}
+                      </td>
                       <td className="px-5 py-3.5 text-zinc-400">{row.type}</td>
-                      <td className="px-5 py-3.5 text-brand-400">{row.price}</td>
+                      <td className="px-5 py-3.5 text-brand-400">
+                        {row.price}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -300,7 +327,9 @@ export default function Home() {
       {/* Industries */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">Industries we serve</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">
+            Industries we serve
+          </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {industries.map((ind, i) => (
               <motion.a
@@ -310,7 +339,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
                 href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-                  `Hi, I need a glowbox for: ${ind.query}`
+                  `Hi, I need a glowbox for: ${ind.query}`,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -334,7 +363,8 @@ export default function Home() {
             </span>
             <h2 className="text-4xl font-bold mt-2">See Swashine in action</h2>
             <p className="text-zinc-400 mt-3 text-sm">
-              Replace placeholders with your YouTube / Instagram embeds when ready.
+              Replace placeholders with your YouTube / Instagram embeds when
+              ready.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -351,7 +381,9 @@ export default function Home() {
                   ▶️
                 </div>
                 <div className="p-5">
-                  <span className="text-xs text-brand-400 font-semibold uppercase">{v.tag}</span>
+                  <span className="text-xs text-brand-400 font-semibold uppercase">
+                    {v.tag}
+                  </span>
                   <h3 className="font-semibold mt-1">{v.title}</h3>
                   <p className="text-sm text-zinc-400 mt-1">{v.desc}</p>
                 </div>
@@ -411,7 +443,9 @@ export default function Home() {
       {/* Warranty */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">Quality & warranty</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">
+            Quality & warranty
+          </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {warrantyPoints.map((w) => (
               <div key={w.title} className={`${glassCard} p-6`}>
@@ -428,15 +462,22 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <h2 className="text-4xl font-bold">Customer reviews</h2>
-            <Link to="/reviews" className="text-brand-400 text-sm hover:underline">
+            <Link
+              to="/reviews"
+              className="text-brand-400 text-sm hover:underline"
+            >
               All reviews →
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {reviews.map((r, i) => (
               <div key={i} className={`${glassCard} p-6`}>
-                <div className="text-brand-400 text-sm mb-2">{'★'.repeat(r.rating)}</div>
-                <p className="text-sm text-zinc-300 line-clamp-4 mb-3">“{r.text}”</p>
+                <div className="text-brand-400 text-sm mb-2">
+                  {"★".repeat(r.rating)}
+                </div>
+                <p className="text-sm text-zinc-300 line-clamp-4 mb-3">
+                  “{r.text}”
+                </p>
                 <div className="text-xs text-zinc-500">{r.name}</div>
               </div>
             ))}
@@ -449,7 +490,10 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-bold">FAQs</h2>
-            <Link to="/faq" className="text-brand-400 text-sm hover:underline mt-2 inline-block">
+            <Link
+              to="/faq"
+              className="text-brand-400 text-sm hover:underline mt-2 inline-block"
+            >
               View all FAQs →
             </Link>
           </div>
@@ -466,16 +510,19 @@ export default function Home() {
             className={`${glass} rounded-[2rem] p-10 md:p-14 text-center relative overflow-hidden`}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
-            <h2 className="relative text-3xl font-bold mb-3">Become a dealer</h2>
+            <h2 className="relative text-3xl font-bold mb-3">
+              Become a dealer
+            </h2>
             <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
-              Trade pricing and bulk supply across India. Partner with a Gujarat-based manufacturer.
+              Trade pricing and bulk supply across India. Partner with a
+              Gujarat-based manufacturer.
             </p>
             <div className="relative flex flex-wrap justify-center gap-4">
               <Button href="/dealers">Dealer enquiry</Button>
               <Button
                 variant="whatsapp"
                 href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-                  'Hi, I want dealer / distributor pricing.'
+                  "Hi, I want dealer / distributor pricing.",
                 )}`}
               >
                 WhatsApp trade
@@ -487,7 +534,9 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="py-24 text-center px-6">
-        <h2 className="text-4xl font-bold mb-4">Ready to light up your space?</h2>
+        <h2 className="text-4xl font-bold mb-4">
+          Ready to light up your space?
+        </h2>
         <p className="text-zinc-400 mb-8 max-w-md mx-auto">
           Get a custom quote on WhatsApp or explore our full product range.
         </p>

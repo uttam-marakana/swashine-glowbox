@@ -27,14 +27,68 @@ export const orderNotes = [
 ];
 
 const img = {
-  p1: ["/src/assets/images/products/p1-18x24/18x24-inch-glowbox-img1.png"],
-  p2: ["/src/assets/images/products/p2-24x36/36x24-inch-glowbox-img1.png"],
-  p4: [
-    "/src/assets/images/products/p4-12x18/18x12-inch-glowbox-img1_2.png",
-    "/src/assets/images/products/p4-12x18/18x12-inch-glowbox-img1_1.png",
-    "/src/assets/images/products/p4-12x18/18x12-inch-glowbox-img1_3.png",
+  p1: [
+    "/src/assets/images/products/p1-18x24/18x24-inch-glowbox-img1.png",
+    "/src/assets/images/products/p1-18x24/18-24-inch-img2.png",
+    "/src/assets/images/products/p1-18x24/18-24-inch-img3.png",
+    "/src/assets/images/products/p1-18x24/18-24-inch-img4.png",
+    "/src/assets/images/products/p1-18x24/18-24-inch-img5.png",
+    "/src/assets/images/products/p1-18x24/18-24-inch-img6.png",
   ],
-  p8: ["/src/assets/images/products/p8-custom/image.png"],
+  p2: [
+    "/src/assets/images/products/p2-24x36/36x24-inch-glowbox-img1.png",
+    "/src/assets/images/products/p2-24x36/36x24-inch-img1.png",
+    "/src/assets/images/products/p2-24x36/36x24-inch-img2.png",
+    "/src/assets/images/products/p2-24x36/36x24-inch-img3.png",
+    "/src/assets/images/products/p2-24x36/36x24-inch-img4.png",
+    "/src/assets/images/products/p2-24x36/36x24-inch-img5.png",
+  ],
+  p3: [
+    "/src/assets/images/products/p3-24x42/24x42-inch-glowbox-img1.png",
+    "/src/assets/images/products/p3-24x42/42x24-inch-img1.png",
+    "/src/assets/images/products/p3-24x42/42x24-inch-img2.png",
+    "/src/assets/images/products/p3-24x42/42x24-inch-img3.png",
+    "/src/assets/images/products/p3-24x42/42x24-inch-img4.png",
+    "/src/assets/images/products/p3-24x42/42x24-inch-img5.png",
+  ],
+  p4: [
+    "/src/assets/images/products/p4-18x12/18x12-inch-glowbox-img.png",
+    "/src/assets/images/products/p4-18x12/18x12_product_img1.png",
+    "/src/assets/images/products/p4-18x12/18x12_product_img2.png",
+    "/src/assets/images/products/p4-18x12/18x12_product_img3.png",
+    "/src/assets/images/products/p4-18x12/18x12_product_img4.png",
+    "/src/assets/images/products/p4-18x12/18x12_product_img5.png",
+  ],
+  p5: [
+    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img1.png",
+    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img2.png",
+    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img3.png",
+    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img4.png",
+    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img5.png",
+  ],
+  p6: [
+    "/src/assets/images/products/p6-arch/arch_img.png",
+    "/src/assets/images/products/p6-arch/arch_img1.png",
+    "/src/assets/images/products/p6-arch/arch_img2.png",
+    "/src/assets/images/products/p6-arch/arch_img3.png",
+  ],
+  p7: [
+    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img1.png",
+    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img2.png",
+    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img3.png",
+    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img4.png",
+    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img5.png",
+  ],
+  p8: [
+    "/src/assets/images/products/p8-custom/custom_size_img1.png",
+    "/src/assets/images/products/p8-custom/custom_size_img2.png",
+    "/src/assets/images/products/p8-custom/custom_size_img3.png",
+    "/src/assets/images/products/p8-custom/custom_size_img4.png",
+    "/src/assets/images/products/p8-custom/custom_size_img5.png",
+    "/src/assets/images/products/p8-custom/custom_size_img6.png",
+    "/src/assets/images/products/p8-custom/custom_size_img7.png",
+    "/src/assets/images/products/p8-custom/custom_size_img8.png",
+  ],
 };
 
 export const products = [

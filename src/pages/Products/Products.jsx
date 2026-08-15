@@ -191,7 +191,7 @@ export default function Products() {
                     </div>
                   )}
                   <div className="mt-auto flex gap-2">
-                    <Link to={`/products/${p.slug}`} className="flex-1">
+                    <Link to={`/products/${p.slug}`} className="">
                       <Button
                         variant="secondary"
                         className="w-full text-sm py-2.5"

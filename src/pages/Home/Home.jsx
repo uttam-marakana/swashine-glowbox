@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Hero */}
-      <section className="min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden">
+      <section className="min-h-screen flex items-center pt-24 pb-10 relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -147,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
             <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -222,7 +222,7 @@ export default function Home() {
       </section>
 
       {/* Featured products */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div>
@@ -280,7 +280,7 @@ export default function Home() {
       </section>
 
       {/* Size compare */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-4">Compare sizes</h2>
           <p className="text-zinc-400 text-center text-sm mb-10">
@@ -325,7 +325,7 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12">
             Industries we serve
@@ -355,7 +355,7 @@ export default function Home() {
       </section>
 
       {/* Video highlights */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
@@ -394,7 +394,7 @@ export default function Home() {
       </section>
 
       {/* Before / After */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -416,7 +416,7 @@ export default function Home() {
       </section>
 
       {/* Case studies */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12">Client work</h2>
           <div className="grid md:grid-cols-2 gap-5">
@@ -441,7 +441,7 @@ export default function Home() {
       </section>
 
       {/* Warranty */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12">
             Quality & warranty
@@ -458,7 +458,7 @@ export default function Home() {
       </section>
 
       {/* Reviews */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <h2 className="text-4xl font-bold">Customer reviews</h2>
@@ -486,7 +486,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-bold">FAQs</h2>
@@ -504,7 +504,7 @@ export default function Home() {
       </section>
 
       {/* Dealer CTA */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="max-w-4xl mx-auto px-6">
           <div
             className={`${glass} rounded-[2rem] p-10 md:p-14 text-center relative overflow-hidden`}
@@ -533,7 +533,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 text-center px-6">
+      <section className="py-12 text-center px-6">
         <h2 className="text-4xl font-bold mb-4">
           Ready to light up your space?
         </h2>

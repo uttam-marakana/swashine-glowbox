@@ -26,69 +26,98 @@ export const orderNotes = [
   "There will be no refund for order cancellation",
 ];
 
+// Vite: string paths like "/src/assets/..." do NOT load — resolve via import.meta.glob
+const productImageModules = import.meta.glob(
+  "../assets/images/products/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
+  { eager: true, import: "default" },
+);
+
+/** @param {string} relativePath under products/ e.g. "p1-18x24/file.png" */
+function resolveProductImage(relativePath) {
+  const normalized = relativePath.replace(/^\/+/, "").replace(/\\/g, "/");
+  const entry = Object.entries(productImageModules).find(([key]) => {
+    const k = key.replace(/\\/g, "/");
+    return k.endsWith("/" + normalized) || k.endsWith(normalized);
+  });
+  if (entry) return entry[1];
+  return `/images/products/${normalized}`;
+}
+
+function gallery(paths) {
+  return paths
+    .map((p) => {
+      const rel = String(p)
+        .replace(/^\/src\/assets\/images\/products\//, "")
+        .replace(/^\/images\/products\//, "")
+        .replace(/^src\/assets\/images\/products\//, "");
+      return resolveProductImage(rel);
+    })
+    .filter(Boolean);
+}
+
 const img = {
-  p1: [
-    "/src/assets/images/products/p1-18x24/18x24-inch-glowbox-img1.png",
-    "/src/assets/images/products/p1-18x24/18-24-inch-img2.png",
-    "/src/assets/images/products/p1-18x24/18-24-inch-img3.png",
-    "/src/assets/images/products/p1-18x24/18-24-inch-img4.png",
-    "/src/assets/images/products/p1-18x24/18-24-inch-img5.png",
-    "/src/assets/images/products/p1-18x24/18-24-inch-img6.png",
-  ],
-  p2: [
-    "/src/assets/images/products/p2-24x36/36x24-inch-glowbox-img1.png",
-    "/src/assets/images/products/p2-24x36/36x24-inch-img1.png",
-    "/src/assets/images/products/p2-24x36/36x24-inch-img2.png",
-    "/src/assets/images/products/p2-24x36/36x24-inch-img3.png",
-    "/src/assets/images/products/p2-24x36/36x24-inch-img4.png",
-    "/src/assets/images/products/p2-24x36/36x24-inch-img5.png",
-  ],
-  p3: [
-    "/src/assets/images/products/p3-24x42/24x42-inch-glowbox-img1.png",
-    "/src/assets/images/products/p3-24x42/42x24-inch-img1.png",
-    "/src/assets/images/products/p3-24x42/42x24-inch-img2.png",
-    "/src/assets/images/products/p3-24x42/42x24-inch-img3.png",
-    "/src/assets/images/products/p3-24x42/42x24-inch-img4.png",
-    "/src/assets/images/products/p3-24x42/42x24-inch-img5.png",
-  ],
-  p4: [
-    "/src/assets/images/products/p4-18x12/18x12-inch-glowbox-img.png",
-    "/src/assets/images/products/p4-18x12/18x12_product_img1.png",
-    "/src/assets/images/products/p4-18x12/18x12_product_img2.png",
-    "/src/assets/images/products/p4-18x12/18x12_product_img3.png",
-    "/src/assets/images/products/p4-18x12/18x12_product_img4.png",
-    "/src/assets/images/products/p4-18x12/18x12_product_img5.png",
-  ],
-  p5: [
-    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img1.png",
-    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img2.png",
-    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img3.png",
-    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img4.png",
-    "/src/assets/images/products/p5-a4-tabletop/a4-tabletop-img5.png",
-  ],
-  p6: [
-    "/src/assets/images/products/p6-arch/arch_img.png",
-    "/src/assets/images/products/p6-arch/arch_img1.png",
-    "/src/assets/images/products/p6-arch/arch_img2.png",
-    "/src/assets/images/products/p6-arch/arch_img3.png",
-  ],
-  p7: [
-    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img1.png",
-    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img2.png",
-    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img3.png",
-    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img4.png",
-    "/src/assets/images/products/p7-a5-tabletop/a5-tabletop-img5.png",
-  ],
-  p8: [
-    "/src/assets/images/products/p8-custom/custom_size_img1.png",
-    "/src/assets/images/products/p8-custom/custom_size_img2.png",
-    "/src/assets/images/products/p8-custom/custom_size_img3.png",
-    "/src/assets/images/products/p8-custom/custom_size_img4.png",
-    "/src/assets/images/products/p8-custom/custom_size_img5.png",
-    "/src/assets/images/products/p8-custom/custom_size_img6.png",
-    "/src/assets/images/products/p8-custom/custom_size_img7.png",
-    "/src/assets/images/products/p8-custom/custom_size_img8.png",
-  ],
+  p1: gallery([
+    "p1-18x24/18x24-inch-glowbox-img1.png",
+    "p1-18x24/18-24-inch-img2.png",
+    "p1-18x24/18-24-inch-img3.png",
+    "p1-18x24/18-24-inch-img4.png",
+    "p1-18x24/18-24-inch-img5.png",
+    "p1-18x24/18-24-inch-img6.png",
+  ]),
+  p2: gallery([
+    "p2-24x36/36x24-inch-glowbox-img1.png",
+    "p2-24x36/36x24-inch-img1.png",
+    "p2-24x36/36x24-inch-img2.png",
+    "p2-24x36/36x24-inch-img3.png",
+    "p2-24x36/36x24-inch-img4.png",
+    "p2-24x36/36x24-inch-img5.png",
+  ]),
+  p3: gallery([
+    "p3-24x42/24x42-inch-glowbox-img1.png",
+    "p3-24x42/42x24-inch-img1.png",
+    "p3-24x42/42x24-inch-img2.png",
+    "p3-24x42/42x24-inch-img3.png",
+    "p3-24x42/42x24-inch-img4.png",
+    "p3-24x42/42x24-inch-img5.png",
+  ]),
+  p4: gallery([
+    "p4-18x12/18x12-inch-glowbox-img.png",
+    "p4-18x12/18x12_product_img1.png",
+    "p4-18x12/18x12_product_img2.png",
+    "p4-18x12/18x12_product_img3.png",
+    "p4-18x12/18x12_product_img4.png",
+    "p4-18x12/18x12_product_img5.png",
+  ]),
+  p5: gallery([
+    "p5-a4-tabletop/a4-tabletop-img1.png",
+    "p5-a4-tabletop/a4-tabletop-img2.png",
+    "p5-a4-tabletop/a4-tabletop-img3.png",
+    "p5-a4-tabletop/a4-tabletop-img4.png",
+    "p5-a4-tabletop/a4-tabletop-img5.png",
+  ]),
+  p6: gallery([
+    "p6-arch/arch_img.png",
+    "p6-arch/arch_img1.png",
+    "p6-arch/arch_img2.png",
+    "p6-arch/arch_img3.png",
+  ]),
+  p7: gallery([
+    "p7-a5-tabletop/a5-tabletop-img1.png",
+    "p7-a5-tabletop/a5-tabletop-img2.png",
+    "p7-a5-tabletop/a5-tabletop-img3.png",
+    "p7-a5-tabletop/a5-tabletop-img4.png",
+    "p7-a5-tabletop/a5-tabletop-img5.png",
+  ]),
+  p8: gallery([
+    "p8-custom/custom_size_img1.png",
+    "p8-custom/custom_size_img2.png",
+    "p8-custom/custom_size_img3.png",
+    "p8-custom/custom_size_img4.png",
+    "p8-custom/custom_size_img5.png",
+    "p8-custom/custom_size_img6.png",
+    "p8-custom/custom_size_img7.png",
+    "p8-custom/custom_size_img8.png",
+  ]),
 };
 
 export const products = [
@@ -159,8 +188,8 @@ export const products = [
     ],
     includes: "Frame + Power supply + Cord",
     badge: "Large",
-    image: null,
-    gallery: [],
+    image: img.p3[0],
+    gallery: img.p3,
     type: "wall",
   },
   {
@@ -206,8 +235,8 @@ export const products = [
     ],
     includes: "Standee unit + Base + Battery",
     badge: "Battery",
-    image: null,
-    gallery: [],
+    image: img.p5[0],
+    gallery: img.p5,
     type: "desktop",
   },
   {
@@ -230,8 +259,8 @@ export const products = [
     ],
     includes: "Frame + Power supply + Print",
     badge: "Bestseller",
-    image: null,
-    gallery: [],
+    image: img.p6[0],
+    gallery: img.p6,
     type: "arch",
     note: "Excluding GST",
   },
@@ -255,8 +284,8 @@ export const products = [
     ],
     includes: "Unit + Base + Battery",
     badge: "Battery",
-    image: null,
-    gallery: [],
+    image: img.p7[0],
+    gallery: img.p7,
     type: "desktop",
   },
   {

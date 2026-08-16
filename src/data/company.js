@@ -58,7 +58,7 @@ function gallery(paths) {
 const img = {
   p1: gallery([
     "p1-18x24/18x24-inch-glowbox-img1.png",
-    "p1-18x24/18-24-inch-img2.png",
+    // "p1-18x24/18-24-inch-img2.png",
     "p1-18x24/18-24-inch-img3.png",
     "p1-18x24/18-24-inch-img4.png",
     "p1-18x24/18-24-inch-img5.png",
@@ -705,6 +705,39 @@ export const reviews = [
     name: "Showroom brand",
     text: "Ordered multiple sizes. Packaging was safe and delivery as promised.",
     rating: 5,
+  },
+];
+
+export const instagramFeed = [
+  {
+    id: "1",
+    caption: "Premium LED glowbox for retail & cafés ✨ #SwashineGlowbox",
+    url: "https://www.instagram.com/swashine_glowbox/p/DcFwZ99j_z_/",
+  },
+  {
+    id: "2",
+    caption: "Tool-free poster change — swap graphics in seconds 🔄",
+    url: "https://www.instagram.com/swashine_glowbox/reel/Db95MmEhK0n/",
+  },
+  {
+    id: "3",
+    caption: "Arch glowbox for temples & boutiques 🛕",
+    url: "https://instagram.com/swashine_glowbox",
+  },
+  {
+    id: "4",
+    caption: "Made in Rajkot · Manufacturer direct 🇮🇳",
+    url: "https://instagram.com/swashine_glowbox",
+  },
+  {
+    id: "5",
+    caption: "A4 / A5 battery table-top units for counters ☕",
+    url: "https://instagram.com/swashine_glowbox",
+  },
+  {
+    id: "6",
+    caption: "Custom sizes up to 2×6 ft 📐",
+    url: "https://instagram.com/swashine_glowbox",
   },
 ];
 

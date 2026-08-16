@@ -234,7 +234,7 @@ export const products = [
       "Compact footprint",
     ],
     includes: "Standee unit + Base + Battery",
-    badge: "Battery",
+    badge: "Battery operated Table",
     image: img.p5[0],
     gallery: img.p5,
     type: "desktop",
@@ -283,7 +283,7 @@ export const products = [
       "Portable",
     ],
     includes: "Unit + Base + Battery",
-    badge: "Battery",
+    badge: "Battery operated Table",
     image: img.p7[0],
     gallery: img.p7,
     type: "desktop",
@@ -306,7 +306,7 @@ export const products = [
       "Commercial grade",
     ],
     includes: "Frame + Power supply (Print, shipping & GST extra)",
-    badge: "Custom",
+    badge: "Custom Frame",
     image: img.p8[0],
     gallery: img.p8,
     type: "custom",
@@ -585,7 +585,7 @@ export const faqs = [
   },
   {
     q: "Can I change the poster myself?",
-    a: "Yes. Our frames use a tool-free top-slot system so you can change graphics in seconds.",
+    a: "Yes. Our frames use a tool-free top-slot system so you can change Print in seconds.",
   },
   {
     q: "Do you supply dealers / distributors?",
@@ -655,7 +655,7 @@ export const artworkGuidelines = [
   },
   {
     title: "Colour",
-    desc: "RGB is fine for review; we process for print. Keep important text inside a safe margin.",
+    desc: "CMYK is fine for review; we process for print. Keep important text inside a safe margin.",
   },
   {
     title: "Bleed & margins",
@@ -675,7 +675,7 @@ export const videoHighlights = [
   },
   {
     title: "Tool-free poster change",
-    desc: "Top-slot system — change graphics in seconds.",
+    desc: "Top-slot system — change Prints in seconds.",
     tag: "Feature",
   },
   {

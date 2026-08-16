@@ -9,11 +9,13 @@ import Button from "@/components/common/Button";
 import { submitInquiry } from "@/services/contactService";
 
 const schema = Yup.object({
-  name: Yup.string().required("Required"),
-  phone: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
-  email: Yup.string().required("Required"),
-  business: Yup.string().required("Required"),
+  name: Yup.string().required("Name is required"),
+  phone: Yup.string().required("Phone is required"),
+  city: Yup.string().required("City is required"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
+  business: Yup.string().required("Business type is required"),
   volume: Yup.string(),
   message: Yup.string(),
 });
@@ -173,6 +175,7 @@ export default function Dealers() {
                       {({ field }) => (
                         <Input
                           {...field}
+                          type="email"
                           label="Email *"
                           error={touched.email && errors.email}
                         />

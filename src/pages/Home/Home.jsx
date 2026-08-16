@@ -13,11 +13,13 @@ import {
   sizeCompare,
   reviews,
   videoHighlights,
+  instagramFeed,
 } from "@/data/company";
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FaqList from "@/components/common/FaqList";
 import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
+import InstagramFeed from "@/components/common/InstagramFeed";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
 
@@ -482,6 +484,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Instafeeds */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <InstagramFeed />
         </div>
       </section>
 

@@ -12,6 +12,7 @@ const schema = Yup.object({
   name: Yup.string().required("Required"),
   phone: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
+  email: Yup.string().required("Required"),
   business: Yup.string().required("Required"),
   volume: Yup.string(),
   message: Yup.string(),
@@ -94,6 +95,7 @@ export default function Dealers() {
                 name: "",
                 phone: "",
                 city: "",
+                email: "",
                 business: "",
                 volume: "",
                 message: "",
@@ -108,6 +110,7 @@ export default function Dealers() {
                   message: [
                     values.business,
                     values.city,
+                    values.email,
                     values.volume,
                     values.message,
                   ]
@@ -166,6 +169,15 @@ export default function Dealers() {
                       )}
                     </Field>
                   </div>
+                  <Field name="email">
+                      {({ field }) => (
+                        <Input
+                          {...field}
+                          label="Email *"
+                          error={touched.email && errors.email}
+                        />
+                      )}
+                    </Field>
                   <Field name="volume">
                     {({ field }) => (
                       <Input

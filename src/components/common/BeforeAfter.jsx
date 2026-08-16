@@ -188,7 +188,7 @@ export default function BeforeAfter({
             <img
               src={activeSrc}
               alt={showOn ? "ON — illuminated" : "OFF — unlit"}
-              className={`max-h-full max-w-full object-contain p-6 transition ${
+              className={`max-h-full max-w-full object-contain p-2 transition ${
                 showOn ? "brightness-110" : "brightness-75 opacity-90"
               }`}
             />

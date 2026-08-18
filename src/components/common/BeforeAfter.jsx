@@ -3,68 +3,52 @@ import { motion } from "framer-motion";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
 
 /**
- * Before & After viewer with optional image upload for OFF and ON states.
- * Uploaded images stay in browser memory (object URLs) until page leave.
+ * Before & After — single image upload.
+ * OFF / ON toggle applies brightness only (no second upload).
+ * Uploaded file stays in the browser (object URL).
  */
 export default function BeforeAfter({
   title = "Before & After",
-  description = "Upload your print or product photos to preview OFF vs ON lighting.",
+  description = "Upload one photo, then toggle OFF / ON to preview unlit vs illuminated.",
+  defaultSrc = null,
   defaultOffSrc = null,
   defaultOnSrc = null,
   className = "",
 }) {
-  const [showOn, setShowOn] = useState(true);
-  const [offSrc, setOffSrc] = useState(defaultOffSrc);
-  const [onSrc, setOnSrc] = useState(defaultOnSrc);
-  const offInputRef = useRef(null);
-  const onInputRef = useRef(null);
-  const offUrlRef = useRef(null);
-  const onUrlRef = useRef(null);
+  // Prefer explicit defaultSrc; else product gallery defaults
+  const initial = defaultSrc || defaultOnSrc || defaultOffSrc || null;
 
-  // Sync if parent default images change (e.g. product gallery)
+  const [showOn, setShowOn] = useState(true);
+  const [src, setSrc] = useState(initial);
+  const inputRef = useRef(null);
+  const objectUrlRef = useRef(null);
+
   useEffect(() => {
-    if (!offUrlRef.current) setOffSrc(defaultOffSrc);
-  }, [defaultOffSrc]);
-  useEffect(() => {
-    if (!onUrlRef.current) setOnSrc(defaultOnSrc);
-  }, [defaultOnSrc]);
+    if (!objectUrlRef.current) {
+      setSrc(defaultSrc || defaultOnSrc || defaultOffSrc || null);
+    }
+  }, [defaultSrc, defaultOffSrc, defaultOnSrc]);
 
   useEffect(() => {
     return () => {
-      if (offUrlRef.current) URL.revokeObjectURL(offUrlRef.current);
-      if (onUrlRef.current) URL.revokeObjectURL(onUrlRef.current);
+      if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
     };
   }, []);
 
-  const handleFile = (file, which) => {
+  const handleFile = (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
     const url = URL.createObjectURL(file);
-    if (which === "off") {
-      if (offUrlRef.current) URL.revokeObjectURL(offUrlRef.current);
-      offUrlRef.current = url;
-      setOffSrc(url);
-    } else {
-      if (onUrlRef.current) URL.revokeObjectURL(onUrlRef.current);
-      onUrlRef.current = url;
-      setOnSrc(url);
-    }
+    objectUrlRef.current = url;
+    setSrc(url);
   };
 
-  const clearUpload = (which) => {
-    if (which === "off") {
-      if (offUrlRef.current) URL.revokeObjectURL(offUrlRef.current);
-      offUrlRef.current = null;
-      setOffSrc(defaultOffSrc);
-      if (offInputRef.current) offInputRef.current.value = "";
-    } else {
-      if (onUrlRef.current) URL.revokeObjectURL(onUrlRef.current);
-      onUrlRef.current = null;
-      setOnSrc(defaultOnSrc);
-      if (onInputRef.current) onInputRef.current.value = "";
-    }
+  const clearUpload = () => {
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+    objectUrlRef.current = null;
+    setSrc(defaultSrc || defaultOnSrc || defaultOffSrc || null);
+    if (inputRef.current) inputRef.current.value = "";
   };
-
-  const activeSrc = showOn ? onSrc : offSrc;
 
   return (
     <section className={className}>
@@ -75,78 +59,43 @@ export default function BeforeAfter({
         {description}
       </p>
 
-      {/* Upload controls */}
-      <div className="max-w-3xl mx-auto mb-6 grid sm:grid-cols-2 gap-4">
-        {/* OFF upload */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+      {/* Single upload */}
+      <div className="max-w-md mx-auto mb-6">
+        <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-2xl p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-red-400">
-              OFF image
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-400">
+              Preview image
             </span>
-            {offSrc && offUrlRef.current && (
+            {src && objectUrlRef.current && (
               <button
                 type="button"
-                onClick={() => clearUpload("off")}
+                onClick={clearUpload}
                 className="text-zinc-500 hover:text-red-400 transition"
-                aria-label="Clear OFF image"
+                aria-label="Clear uploaded image"
               >
                 <X size={16} />
               </button>
             )}
           </div>
           <input
-            ref={offInputRef}
+            ref={inputRef}
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={(e) => handleFile(e.target.files?.[0], "off")}
+            onChange={(e) => handleFile(e.target.files?.[0])}
           />
           <button
             type="button"
-            onClick={() => offInputRef.current?.click()}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-zinc-600 hover:border-red-400/60 text-sm text-zinc-400 hover:text-red-300 transition"
+            onClick={() => inputRef.current?.click()}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-zinc-600 hover:border-brand-400/60 text-sm text-zinc-400 hover:text-brand-300 transition"
           >
             <Upload size={16} />
-            {offSrc ? "Change OFF photo" : "Upload OFF photo"}
-          </button>
-        </div>
-
-        {/* ON upload */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-green-400">
-              ON image
-            </span>
-            {onSrc && onUrlRef.current && (
-              <button
-                type="button"
-                onClick={() => clearUpload("on")}
-                className="text-zinc-500 hover:text-red-400 transition"
-                aria-label="Clear ON image"
-              >
-                <X size={16} />
-              </button>
-            )}
-          </div>
-          <input
-            ref={onInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => handleFile(e.target.files?.[0], "on")}
-          />
-          <button
-            type="button"
-            onClick={() => onInputRef.current?.click()}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-zinc-600 hover:border-green-400/60 text-sm text-zinc-400 hover:text-green-300 transition"
-          >
-            <Upload size={16} />
-            {onSrc ? "Change ON photo" : "Upload ON photo"}
+            {src ? "Change photo" : "Upload photo"}
           </button>
         </div>
       </div>
 
-      {/* Toggle */}
+      {/* OFF / ON toggle (unchanged behaviour) */}
       <div className="flex justify-center gap-3 mb-6">
         <button
           type="button"
@@ -172,33 +121,33 @@ export default function BeforeAfter({
         </button>
       </div>
 
-      {/* Preview */}
+      {/* Preview — one image, brightness for OFF vs ON */}
       <div className="max-w-3xl mx-auto">
         <motion.div
           key={showOn ? "on" : "off"}
           initial={{ opacity: 0.6 }}
           animate={{ opacity: 1 }}
-          className={`rounded-3xl border overflow-hidden aspect-[4/3] flex items-center justify-center ${
+          className={`rounded-3xl border overflow-hidden aspect-[4/3] max-h-[min(65vh,480px)] flex items-center justify-center ${
             showOn
-              ? "bg-zinc-800 border-green-500/30"
-              : "bg-zinc-900 border-zinc-700"
+              ? "bg-zinc-800/80 border-green-500/30"
+              : "bg-zinc-900/80 border-zinc-700"
           }`}
         >
-          {activeSrc ? (
+          {src ? (
             <img
-              src={activeSrc}
+              src={src}
               alt={showOn ? "ON — illuminated" : "OFF — unlit"}
-              className={`max-h-full max-w-full object-contain p-2 transition ${
-                showOn ? "brightness-110" : "brightness-75 opacity-90"
+              className={`max-h-full max-w-full object-contain p-2 transition duration-300 ${
+                showOn
+                  ? "brightness-110 contrast-105"
+                  : "brightness-50 saturate-50 opacity-90"
               }`}
             />
           ) : (
             <div className="text-center text-zinc-500 p-8">
               <ImageIcon size={48} className="mx-auto mb-3 opacity-40" />
               <p className="text-sm">
-                {showOn
-                  ? "Upload an ON (lit) photo to preview"
-                  : "Upload an OFF (unlit) photo to preview"}
+                Upload a photo to preview OFF / ON lighting
               </p>
             </div>
           )}

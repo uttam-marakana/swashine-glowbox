@@ -198,7 +198,7 @@ export default function InstagramFeed({ className = "" }) {
           className={`inline-flex items-center gap-2 ${glass} px-6 py-3 rounded-full text-sm font-medium text-zinc-200 hover:text-brand-400 hover:border-brand-400/30 transition`}
         >
           <Instagram size={16} />
-          @swashine_glowbox
+          View full profile
         </a>
       </div>
     </section>

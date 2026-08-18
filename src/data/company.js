@@ -709,34 +709,39 @@ export const reviews = [
 export const instagramFeed = [
   {
     id: "1",
-    caption: "Premium LED glowbox for retail & cafés ✨ #SwashineGlowbox",
-    url: "https://www.instagram.com/swashine_glowbox/p/DcFwZ99j_z_/",
-  },
-  {
-    id: "2",
     caption: "Tool-free poster change — swap graphics in seconds 🔄",
     url: "https://www.instagram.com/swashine_glowbox/reel/Db95MmEhK0n/",
   },
   {
-    id: "3",
+    id: "2",
     caption: "Arch glowbox for temples & boutiques 🛕",
-    url: "https://instagram.com/swashine_glowbox",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DYBVkdPBv7n/",
+  },
+  {
+    id: "3",
+    caption: "Made in Rajkot · Manufacturer direct 🇮🇳",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DPFuuTfiFJz/",
   },
   {
     id: "4",
-    caption: "Made in Rajkot · Manufacturer direct 🇮🇳",
-    url: "https://instagram.com/swashine_glowbox",
+    caption: "Made for India. Made in India. 🇮🇳",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DNWIzNmSv9K/",
   },
   {
     id: "5",
-    caption: "A4 / A5 battery table-top units for counters ☕",
-    url: "https://instagram.com/swashine_glowbox",
+    caption: "Get yours today! 🔥 Don’t miss the price drop! ❗💥",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DKWxOFDBZTs/",
   },
   {
     id: "6",
-    caption: "Custom sizes up to 2×6 ft 📐",
-    url: "https://instagram.com/swashine_glowbox",
+    caption: "Choose Premium. ✨ Don’t settle for ordinary.",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DLHdUr0hdpu/",
   },
+  {
+    id: "7",
+    caption: "🏇 7 Horses = 7 Guna Safalta! ✨",
+    url: "https://www.instagram.com/swashine_glowbox/reel/DWiNua1gfNN/",
+  }
 ];
 
 export const navLinks = [

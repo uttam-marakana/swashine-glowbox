@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -67,6 +67,8 @@ export default function ProductDetails() {
   const { slug } = useParams();
   const product = products.find((p) => p.slug === slug);
   const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -102,6 +104,25 @@ export default function ProductDetails() {
   const nextImage = () =>
     setActiveIndex((i) => (i === gallery.length - 1 ? 0 : i + 1));
 
+  const onTouchStart = (e) => {
+    const t = e.changedTouches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  };
+
+  const onTouchEnd = (e) => {
+    if (gallery.length < 2 || touchStartX.current == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+    // Horizontal swipe only (ignore vertical page scroll)
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) nextImage();
+    else prevImage();
+  };
+
   return (
     <div className="pt-28 pb-20 min-h-screen relative overflow-x-clip">
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -126,22 +147,33 @@ export default function ProductDetails() {
             className="w-full min-w-0 max-w-full"
           >
             <div
-              className={`relative w-full max-w-full ${glass} rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[5/4] flex items-center justify-center`}
+              className={`relative w-full max-w-full ${glass} rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[5/4] flex items-center justify-center touch-pan-y`}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
             >
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activeIndex + (mainSrc || "empty")}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
+                  initial={{ opacity: 0, x: 28 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -28 }}
+                  transition={{ duration: 0.22 }}
                   className="w-full h-full min-w-0 min-h-0 flex items-center justify-center"
+                  drag={gallery.length > 1 ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.14}
+                  onDragEnd={(_, info) => {
+                    if (gallery.length < 2) return;
+                    if (info.offset.x < -50) nextImage();
+                    if (info.offset.x > 50) prevImage();
+                  }}
                 >
                   {mainSrc ? (
                     <img
                       src={mainSrc}
                       alt={`${product.name} - view ${activeIndex + 1}`}
-                      className="block max-w-full max-h-full w-full h-full object-contain p-2 sm:p-3"
+                      className="block max-w-full max-h-full w-full h-full object-contain p-2 sm:p-3 pointer-events-none select-none"
+                      draggable={false}
                     />
                   ) : (
                     <div className="text-center p-6 sm:p-10 max-w-full min-w-0">
@@ -211,8 +243,12 @@ export default function ProductDetails() {
 
             {gallery.length > 1 && (
               <p className="px-2 text-xs text-zinc-500 mt-2 text-center break-words">
-                {activeIndex + 1} / {gallery.length} — click thumbnail to swap
-                main image
+                <span className="lg:hidden">Swipe image to change · </span>
+                {activeIndex + 1} / {gallery.length}
+                <span className="hidden lg:inline">
+                  {" "}
+                  — click thumbnail to swap main image
+                </span>
               </p>
             )}
           </motion.div>
@@ -241,7 +277,6 @@ export default function ProductDetails() {
               {product.priceLabel}
             </div>
 
-            {/* Rating 4.4–4.8 · 50+ reviews */}
             <div
               className="flex flex-wrap items-center gap-2 mb-6"
               aria-label={`Rated ${rating.toFixed(1)} out of 5 from ${reviews}+ reviews`}
@@ -350,7 +385,8 @@ export default function ProductDetails() {
         >
           <BeforeAfter
             title="Before & After"
-            description="Toggle OFF / ON, or upload your own photos to preview how this glowbox looks lit vs unlit."
+            description="Upload one photo, then toggle OFF / ON to preview unlit vs illuminated."
+            defaultSrc={mainSrc}
             defaultOffSrc={mainSrc}
             defaultOnSrc={mainSrc}
           />

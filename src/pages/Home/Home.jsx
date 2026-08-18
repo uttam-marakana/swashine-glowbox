@@ -13,17 +13,15 @@ import {
   sizeCompare,
   reviews,
   videoHighlights,
-  instagramFeed,
 } from "@/data/company";
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FaqList from "@/components/common/FaqList";
-import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 import InstagramFeed from "@/components/common/InstagramFeed";
+import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
 
-/** Shared glass panel classes (iOS-style frosted glass) */
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
 const glassHover =
@@ -34,6 +32,9 @@ export default function Home() {
   const heroProduct =
     products.find((p) => p.badge === "Popular" && p.image) ||
     products.find((p) => p.image);
+
+  const previewImage =
+    heroProduct?.image || products.find((p) => p.image)?.image || null;
 
   return (
     <>
@@ -107,7 +108,7 @@ export default function Home() {
             className="relative hidden md:flex items-center justify-center"
           >
             <div
-              className={`w-full max-w-md aspect-square ${glassCard} flex items-center justify-center overflow-hidden p-8 relative`}
+              className={`w-full max-w-md aspect-[4/3] ${glassCard} flex items-center justify-center overflow-hidden p-4 relative`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
               {heroProduct?.image ? (
@@ -250,12 +251,12 @@ export default function Home() {
                   to={`/products/${p.slug}`}
                   className={`${glassCard} overflow-hidden group`}
                 >
-                  <div className="h-44 bg-black/20 flex items-center justify-center">
+                  <div className="aspect-[4/3] bg-black/20 flex items-center justify-center overflow-hidden">
                     {p.image ? (
                       <img
                         src={p.image}
                         alt={p.name}
-                        className="w-full h-full object-contain p-3 group-hover:scale-105 transition duration-500"
+                        className="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"
                       />
                     ) : (
                       <span className="text-5xl">💡</span>
@@ -395,9 +396,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Before / After */}
+      {/* Before / After — uses previewImage (not mainSrc) */}
       <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -408,11 +409,19 @@ export default function Home() {
               See the Difference
             </span>
           </motion.div>
-          <div className={`${glass} rounded-[2rem] p-6 md:p-8`}>
-            <BeforeAfter
-              title="Before & After"
-              description="Upload OFF and ON photos of any glowbox or print to compare lighting side by side."
-            />
+
+          <div
+            className={`${glass} rounded-[2rem] p-6 md:p-8 flex justify-center`}
+          >
+            <div className="w-full max-w-6xl flex justify-center">
+              <BeforeAfter
+                title="Before & After"
+                description="Upload one photo, then toggle OFF / ON to preview unlit vs illuminated."
+                defaultSrc={previewImage}
+                defaultOffSrc={previewImage}
+                defaultOnSrc={previewImage}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -487,7 +496,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instafeeds */}
+      {/* Instagram */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <InstagramFeed />

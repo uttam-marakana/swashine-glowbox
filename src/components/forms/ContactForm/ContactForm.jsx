@@ -71,7 +71,7 @@ export default function ContactForm() {
                   <Input
                     {...field}
                     label="Full Name *"
-                    placeholder="Your name"
+                    placeholder="Your Name"
                     error={touched.name && errors.name}
                   />
                 )}
@@ -81,7 +81,7 @@ export default function ContactForm() {
                   <Input
                     {...field}
                     label="Phone / WhatsApp *"
-                    placeholder="+91 88663 67360"
+                    placeholder="+91 88xxxxxxxx"
                     error={touched.phone && errors.phone}
                   />
                 )}
@@ -94,7 +94,7 @@ export default function ContactForm() {
                   <Input
                     {...field}
                     type="email"
-                    label="Email (optional)"
+                    label="Email"
                     placeholder="you@example.com"
                     error={touched.email && errors.email}
                   />

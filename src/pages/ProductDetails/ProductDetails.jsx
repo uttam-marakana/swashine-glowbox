@@ -381,7 +381,7 @@ export default function ProductDetails() {
         </div>
 
         <div
-          className={`${glass} w-full min-w-0 max-w-full rounded-[2rem] p-4 sm:p-6 md:p-8 mt-20 sm:mt-24 overflow-hidden`}
+          className={`${glass} w-full min-w-0 max-w-6xl flex justify-center rounded-[2rem] p-4 sm:p-6 md:p-8 mt-20 sm:mt-24 overflow-hidden`}
         >
           <BeforeAfter
             title="Before & After"
@@ -447,7 +447,7 @@ export default function ProductDetails() {
 
         <div className="mt-20 sm:mt-24 w-full min-w-0 max-w-full">
           <h2 className="text-2xl font-bold mb-8">More Products</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 w-full min-w-0">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-5 w-full min-w-0">
             {products
               .filter((p) => p.id !== product.id)
               .slice(0, 4)

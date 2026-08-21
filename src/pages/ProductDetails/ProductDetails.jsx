@@ -447,7 +447,7 @@ export default function ProductDetails() {
 
         <div className="mt-20 sm:mt-24 w-full min-w-0 max-w-full">
           <h2 className="text-2xl font-bold mb-8">More Products</h2>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-5 w-full min-w-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 w-full min-w-0">
             {products
               .filter((p) => p.id !== product.id)
               .slice(0, 4)

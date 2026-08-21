@@ -6,6 +6,8 @@ import {
   seedProductsFromCompany,
 } from "@/services/productService";
 import { filterByQuery } from "@/utils/adminSearch";
+import { usePagination } from "..//hooks/usePagination";
+import Pagination from "@/components/admin/Pagination";
 import { Search } from "lucide-react";
 
 export default function ProductsAdmin() {
@@ -38,6 +40,11 @@ export default function ProductsAdmin() {
         "description",
       ]),
     [rows, q],
+  );
+
+  const { slice, page, setPage, pageCount, from, to, total } = usePagination(
+    filtered,
+    10,
   );
 
   const remove = async (p) => {
@@ -81,7 +88,6 @@ export default function ProductsAdmin() {
         </div>
       </div>
 
-      {/* Real-time search */}
       <div className="relative max-w-md mb-5">
         <Search
           size={16}
@@ -97,7 +103,7 @@ export default function ProductsAdmin() {
 
       {!loading && (
         <p className="text-xs text-zinc-500 mb-3">
-          Showing {filtered.length} of {rows.length} products
+          Showing {from}–{to} of {total} products
           {q.trim() ? ` for “${q.trim()}”` : ""}
         </p>
       )}
@@ -111,50 +117,61 @@ export default function ProductsAdmin() {
       ) : filtered.length === 0 ? (
         <p className="text-zinc-500">No products match your search.</p>
       ) : (
-        <div className="space-y-3">
-          {filtered.map((p) => (
-            <div
-              key={p.firestoreId || p.slug || p.id}
-              className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4"
-            >
-              <div className="w-16 h-16 rounded-xl bg-black/40 overflow-hidden shrink-0">
-                {p.image ? (
-                  <img
-                    src={p.image}
-                    alt=""
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-2xl">
-                    💡
-                  </div>
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="font-semibold truncate">{p.name}</div>
-                <div className="text-xs text-zinc-500">
-                  {p.size} · {p.priceLabel}
-                  <span className="ml-2 text-zinc-600">
-                    ({p.source || "company.js"})
-                  </span>
+        <>
+          <div className="space-y-3">
+            {slice.map((p) => (
+              <div
+                key={p.firestoreId || p.slug || p.id}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+              >
+                <div className="w-16 h-16 rounded-xl bg-black/40 overflow-hidden shrink-0">
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt=""
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-2xl">
+                      💡
+                    </div>
+                  )}
                 </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold truncate">{p.name}</div>
+                  <div className="text-xs text-zinc-500">
+                    {p.size} · {p.priceLabel}
+                    <span className="ml-2 text-zinc-600">
+                      ({p.source || "company.js"})
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  to={`/admin/products/${p.firestoreId || p.slug}`}
+                  className="text-brand-400 text-sm hover:underline"
+                >
+                  {p.firestoreId ? "Edit" : "View / Save"}
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => remove(p)}
+                  className="text-red-400 text-sm hover:underline"
+                >
+                  Delete
+                </button>
               </div>
-              <Link
-                to={`/admin/products/${p.firestoreId || p.slug}`}
-                className="text-brand-400 text-sm hover:underline"
-              >
-                {p.firestoreId ? "Edit" : "View"}
-              </Link>
-              <button
-                type="button"
-                onClick={() => remove(p)}
-                className="text-red-400 text-sm hover:underline"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+
+          <Pagination
+            page={page}
+            pageCount={pageCount}
+            from={from}
+            to={to}
+            total={total}
+            onPage={setPage}
+          />
+        </>
       )}
     </div>
   );

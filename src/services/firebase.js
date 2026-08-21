@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,24 +13,26 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || undefined,
 };
 
-const placeholders = ["", "YOUR_API_KEY", "your_api_key", undefined, null];
+const bad = ["", "YOUR_API_KEY", "your_api_key", undefined, null];
 
 export const isFirebaseConfigured = Boolean(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
-  !placeholders.includes(firebaseConfig.apiKey) &&
+  !bad.includes(firebaseConfig.apiKey) &&
   !String(firebaseConfig.projectId).includes("YOUR_PROJECT"),
 );
 
 let app = null;
 let auth = null;
 let db = null;
+let storage = null;
 
 if (isFirebaseConfigured) {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
+  storage = getStorage(app);
 }
 
-export { app, auth, db };
+export { app, auth, db, storage };
 export default app;

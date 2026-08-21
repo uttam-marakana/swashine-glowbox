@@ -1,12 +1,8 @@
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
 
-/**
- * Save contact / product / dealer inquiry to Firestore "inquiries"
- */
 export const submitInquiry = async (data) => {
   if (!isFirebaseConfigured || !db) {
-    console.warn("Firebase not configured. Set VITE_FIREBASE_* in .env");
     return {
       success: false,
       error:

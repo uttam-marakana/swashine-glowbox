@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -27,6 +28,191 @@ const glass =
 const glassHover =
   "hover:bg-white/[0.07] hover:border-brand-400/30 transition-all duration-300";
 const glassCard = `${glass} ${glassHover} rounded-3xl`;
+const cardInteractive = `${glassCard} transition duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:shadow-[0_0_40px_rgba(251,191,36,0.08)]`;
+
+function useInViewOnce(ref) {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [ref]);
+  return inView;
+}
+
+function useCountUp(target, enabled, duration = 1200) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!enabled) return;
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setValue(target);
+      return;
+    }
+    let start = null;
+    let frame;
+    const step = (ts) => {
+      if (start == null) start = ts;
+      const p = Math.min(1, (ts - start) / duration);
+      setValue(Math.round(target * p));
+      if (p < 1) frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [target, enabled, duration]);
+  return value;
+}
+
+function parseStatValue(raw) {
+  const s = String(raw);
+  if (s.includes("–") || s.includes("-")) {
+    return { kind: "range", num: 0, label: s };
+  }
+  const num = parseInt(s.replace(/[^\d]/g, ""), 10);
+  if (!Number.isFinite(num)) return { kind: "text", num: 0, label: s };
+  if (s.includes("%")) return { kind: "percent", num, label: s };
+  if (s.toLowerCase().includes("yr")) return { kind: "year", num, label: s };
+  if (s.includes("+")) return { kind: "plus", num, label: s };
+  return { kind: "num", num, label: s };
+}
+
+function formatStat(kind, n, fallback) {
+  if (kind === "text" || kind === "range") return fallback;
+  if (kind === "percent") return `${n}%`;
+  if (kind === "year") return `${n} Yr`;
+  if (kind === "plus") return `${n}+`;
+  return String(n);
+}
+
+function StatCell({ value, label }) {
+  const ref = useRef(null);
+  const inView = useInViewOnce(ref);
+  const parsed = parseStatValue(value);
+  const n = useCountUp(parsed.num, inView);
+  const display =
+    parsed.kind === "range" || parsed.kind === "text"
+      ? value
+      : formatStat(parsed.kind, n, value);
+
+  return (
+    <motion.div
+      ref={ref}
+      whileHover={{ y: -4, scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      className="cursor-default rounded-2xl px-2 py-2"
+    >
+      <div className="text-3xl md:text-4xl font-bold text-brand-400 tabular-nums">
+        {display}
+      </div>
+      <div className="text-sm text-zinc-500 mt-1">{label}</div>
+    </motion.div>
+  );
+}
+
+function HowItWorksSection() {
+  const [active, setActive] = useState(0);
+  const sectionRef = useRef(null);
+  const inView = useInViewOnce(sectionRef);
+  const hoverPause = useRef(false);
+
+  useEffect(() => {
+    if (!inView) return;
+    const id = setInterval(() => {
+      if (hoverPause.current) return;
+      setActive((a) => (a + 1) % howItWorks.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [inView]);
+
+  return (
+    <section className="py-12" ref={sectionRef}>
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-14">
+          <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
+            Process
+          </span>
+          <h2 className="text-4xl font-bold mt-2">How it works</h2>
+          <Link
+            to="/how-it-works"
+            className="text-brand-400 text-sm hover:underline mt-3 inline-block"
+          >
+            Installation & artwork guide →
+          </Link>
+        </div>
+
+        <div className="flex justify-center gap-2 mb-8">
+          {howItWorks.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Step ${i + 1}`}
+              onClick={() => setActive(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                active === i
+                  ? "w-8 bg-brand-400"
+                  : "w-3 bg-white/15 hover:bg-white/25"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-5"
+          onMouseEnter={() => {
+            hoverPause.current = true;
+          }}
+          onMouseLeave={() => {
+            hoverPause.current = false;
+          }}
+        >
+          {howItWorks.map((s, i) => (
+            <motion.button
+              type="button"
+              key={s.step}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
+              className={`text-left p-6 rounded-3xl border backdrop-blur-xl transition duration-300 ${
+                active === i
+                  ? "bg-white/[0.08] border-brand-400/50 shadow-[0_0_40px_rgba(251,191,36,0.12)] -translate-y-1"
+                  : "bg-white/[0.04] border-white/10 hover:border-brand-400/30"
+              }`}
+            >
+              <div
+                className={`font-bold text-sm mb-2 ${
+                  active === i ? "text-brand-300" : "text-brand-400"
+                }`}
+              >
+                {s.step}
+              </div>
+              <h3 className="font-semibold mb-2">{s.title}</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">{s.desc}</p>
+            </motion.button>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Button href="/custom">Start with size calculator</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const heroProduct =
@@ -38,7 +224,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Ambient background glow */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-[520px] h-[520px] rounded-full bg-brand-500/15 blur-[120px]" />
         <div className="absolute top-1/3 -left-32 w-[420px] h-[420px] rounded-full bg-amber-400/10 blur-[100px]" />
@@ -133,61 +318,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats — count-up + hover */}
       <section className="py-10 px-6">
         <div className={`max-w-6xl mx-auto ${glass} rounded-[2rem] px-6 py-10`}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-bold text-brand-400">
-                  {s.value}
-                </div>
-                <div className="text-sm text-zinc-500 mt-1">{s.label}</div>
-              </div>
+              <StatCell key={s.label} value={s.value} label={s.label} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-              Process
-            </span>
-            <h2 className="text-4xl font-bold mt-2">How it works</h2>
-            <Link
-              to="/how-it-works"
-              className="text-brand-400 text-sm hover:underline mt-3 inline-block"
-            >
-              Installation & artwork guide →
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {howItWorks.map((s, i) => (
-              <motion.div
-                key={s.step}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`${glassCard} p-6`}
-              >
-                <div className="text-brand-400 font-bold text-sm mb-2">
-                  {s.step}
-                </div>
-                <h3 className="font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">
-                  {s.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* How it works — active step + auto-rotate */}
+      <HowItWorksSection />
 
-      {/* Features */}
+      {/* Features — interactive hover */}
       <section className="py-12">
         <div className="max-w-6xl mx-auto px-6">
           <motion.h2
@@ -208,12 +353,15 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`${glassCard} p-8`}
+                  whileHover={{ y: -8 }}
+                  className={`${cardInteractive} p-8 group`}
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-500/15 border border-brand-400/20 flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6 text-brand-400" />
+                  <div className="w-12 h-12 rounded-2xl bg-brand-500/15 border border-brand-400/20 flex items-center justify-center mb-5 transition duration-300 group-hover:scale-110 group-hover:bg-brand-500/25 group-hover:shadow-[0_0_24px_rgba(251,191,36,0.25)]">
+                    <Icon className="w-6 h-6 text-brand-400 transition group-hover:text-brand-300" />
                   </div>
-                  <h4 className="text-xl font-semibold mb-3">{f.title}</h4>
+                  <h4 className="text-xl font-semibold mb-3 group-hover:text-brand-300 transition">
+                    {f.title}
+                  </h4>
                   <p className="text-zinc-400 text-sm leading-relaxed">
                     {f.desc}
                   </p>
@@ -396,7 +544,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Before / After — uses previewImage (not mainSrc) */}
+      {/* Before / After */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -409,7 +557,6 @@ export default function Home() {
               See the Difference
             </span>
           </motion.div>
-
           <div
             className={`${glass} rounded-[2rem] p-6 md:p-8 flex justify-center`}
           >

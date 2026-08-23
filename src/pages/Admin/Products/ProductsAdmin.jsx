@@ -6,7 +6,7 @@ import {
   seedProductsFromCompany,
 } from "@/services/productService";
 import { filterByQuery } from "@/utils/adminSearch";
-import { usePagination } from "..//hooks/usePagination";
+import { usePagination } from "@/hooks/usePagination";
 import Pagination from "@/components/admin/Pagination";
 import { Search } from "lucide-react";
 

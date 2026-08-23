@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -15,6 +16,17 @@ const glassHover =
 const glassCard = `${glass} ${glassHover} rounded-3xl`;
 
 export default function HowItWorks() {
+  const [active, setActive] = useState(0);
+  const hoverPause = useRef(false);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (hoverPause.current) return;
+      setActive((a) => (a + 1) % howItWorks.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <div className="pt-28 pb-20 min-h-screen relative">
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -40,21 +52,58 @@ export default function HowItWorks() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-5 mb-20">
+        {/* Progress dots */}
+        <div className="flex justify-center gap-2 mb-8">
+          {howItWorks.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Step ${i + 1}`}
+              onClick={() => setActive(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                active === i
+                  ? "w-8 bg-brand-400"
+                  : "w-3 bg-white/15 hover:bg-white/25"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Interactive steps */}
+        <div
+          className="grid md:grid-cols-2 gap-5 mb-20"
+          onMouseEnter={() => {
+            hoverPause.current = true;
+          }}
+          onMouseLeave={() => {
+            hoverPause.current = false;
+          }}
+        >
           {howItWorks.map((s, i) => (
-            <motion.div
+            <motion.button
+              type="button"
               key={s.step}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.08 }}
-              className={`${glassCard} p-8`}
+              onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
+              className={`text-left p-8 rounded-3xl border backdrop-blur-xl transition duration-300 ${
+                active === i
+                  ? "bg-white/[0.08] border-brand-400/50 shadow-[0_0_40px_rgba(251,191,36,0.12)] -translate-y-1"
+                  : "bg-white/[0.04] border-white/10 hover:border-brand-400/30"
+              }`}
             >
-              <div className="text-brand-400 font-bold text-sm mb-2">
+              <div
+                className={`font-bold text-sm mb-2 ${
+                  active === i ? "text-brand-300" : "text-brand-400"
+                }`}
+              >
                 STEP {s.step}
               </div>
               <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
               <p className="text-zinc-400 text-sm leading-relaxed">{s.desc}</p>
-            </motion.div>
+            </motion.button>
           ))}
         </div>
 

@@ -231,8 +231,8 @@ export default function Home() {
       </div>
 
       {/* Hero */}
-      <section className="min-h-screen flex items-center pt-24 pb-10 relative overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <section className="w-full min-h-[85vh] md:min-h-screen flex items-center pt-24 pb-10 relative overflow-hidden">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -319,31 +319,39 @@ export default function Home() {
       </section>
 
       {/* Stats — count-up + hover */}
-      <section className="py-10 px-6">
-        <div className={`max-w-6xl mx-auto ${glass} rounded-[2rem] px-6 py-10`}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((s) => (
-              <StatCell key={s.label} value={s.value} label={s.label} />
-            ))}
+      <section className="w-full py-8 md:py-10 border-y border-white/5 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div
+            className={`${glass} rounded-2xl md:rounded-[2rem] px-4 sm:px-6 py-8`}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+              {stats.map((s) => (
+                <StatCell key={s.label} value={s.value} label={s.label} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* How it works — active step + auto-rotate */}
-      <HowItWorksSection />
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <HowItWorksSection />
+        </div>
+      </section>
 
       {/* Features — interactive hover */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16"
+            className="text-3xl md:text-4xl font-bold text-center mb-8"
           >
             Why Swashine Glowbox?
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {features.map((f, i) => {
               const Icon = iconMap[f.icon] || Zap;
               return (
@@ -354,7 +362,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                   whileHover={{ y: -8 }}
-                  className={`${cardInteractive} p-8 group`}
+                  className={`${cardInteractive} p-6 md:p-8 group`}
                 >
                   <div className="w-12 h-12 rounded-2xl bg-brand-500/15 border border-brand-400/20 flex items-center justify-center mb-5 transition duration-300 group-hover:scale-110 group-hover:bg-brand-500/25 group-hover:shadow-[0_0_24px_rgba(251,191,36,0.25)]">
                     <Icon className="w-6 h-6 text-brand-400 transition group-hover:text-brand-300" />
@@ -373,8 +381,8 @@ export default function Home() {
       </section>
 
       {/* Featured products */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div>
               <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
@@ -431,10 +439,12 @@ export default function Home() {
       </section>
 
       {/* Size compare */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4">Compare sizes</h2>
-          <p className="text-zinc-400 text-center text-sm mb-10">
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Compare sizes
+          </h2>
+          <p className="text-zinc-400 text-center text-sm mb-8">
             Quick guide to pick the right format for your space.
           </p>
           <div className={`${glass} rounded-3xl overflow-hidden`}>
@@ -476,9 +486,9 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Industries we serve
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -494,7 +504,7 @@ export default function Home() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${glassCard} p-6 block`}
+                className={`${glassCard} p-6 gap-4 block`}
               >
                 <div className="text-3xl mb-3">{ind.emoji}</div>
                 <h3 className="font-semibold text-lg mb-1">{ind.title}</h3>
@@ -506,13 +516,15 @@ export default function Home() {
       </section>
 
       {/* Video highlights */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8">
             <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
               Watch
             </span>
-            <h2 className="text-4xl font-bold mt-2">See Swashine in action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-1">
+              See Swashine in action
+            </h2>
             <p className="text-zinc-400 mt-3 text-sm">
               Replace placeholders with your YouTube / Instagram embeds when
               ready.
@@ -545,8 +557,8 @@ export default function Home() {
       </section>
 
       {/* Before / After */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -558,7 +570,7 @@ export default function Home() {
             </span>
           </motion.div>
           <div
-            className={`${glass} rounded-[2rem] p-6 md:p-8 flex justify-center`}
+            className={`${glass} rounded-2xl md:rounded-[2rem] p-4 sm:p-6 md:p-8`}
           >
             <div className="w-full max-w-6xl flex justify-center">
               <BeforeAfter
@@ -574,9 +586,11 @@ export default function Home() {
       </section>
 
       {/* Case studies */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">Client work</h2>
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+            Client work
+          </h2>
           <div className="grid md:grid-cols-2 gap-5">
             {caseStudies.map((c, i) => (
               <motion.div
@@ -599,9 +613,9 @@ export default function Home() {
       </section>
 
       {/* Warranty */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">
+      <section className="py-10 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Quality & warranty
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -616,10 +630,10 @@ export default function Home() {
       </section>
 
       {/* Reviews */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-            <h2 className="text-4xl font-bold">Customer reviews</h2>
+      <section className="py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold">Customer reviews</h2>
             <Link
               to="/reviews"
               className="text-brand-400 text-sm hover:underline"
@@ -644,17 +658,17 @@ export default function Home() {
       </section>
 
       {/* Instagram */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <InstagramFeed />
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-12">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="flex justify-between text-center mb-10">
-            <h2 className="text-4xl font-bold">FAQs</h2>
+      <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold">FAQs</h2>
             <Link
               to="/faq"
               className="text-brand-400 text-sm hover:underline mt-2 inline-block"
@@ -669,10 +683,10 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-12">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="w-full py-12 md:py-14">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div
-            className={`${glass} rounded-[2rem] p-10 md:p-14 text-center relative overflow-hidden`}
+            className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
             <h2 className="relative text-3xl font-bold mb-3">

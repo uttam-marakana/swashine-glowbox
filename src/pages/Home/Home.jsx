@@ -653,7 +653,7 @@ export default function Home() {
       {/* FAQ */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-10">
+          <div className="flex justify-between text-center mb-10">
             <h2 className="text-4xl font-bold">FAQs</h2>
             <Link
               to="/faq"
@@ -668,7 +668,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dealer CTA */}
+      {/* CTA */}
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-6">
           <div
@@ -676,46 +676,24 @@ export default function Home() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
             <h2 className="relative text-3xl font-bold mb-3">
-              Become a dealer
+              Ready to light up your space?
             </h2>
             <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
-              Trade pricing and bulk supply across India. Partner with a
-              Gujarat-based manufacturer.
+              Get a custom quote on WhatsApp or explore our full product range.
             </p>
             <div className="relative flex flex-wrap justify-center gap-4">
-              <Button href="/dealers">Dealer enquiry</Button>
+              <Button href="/products" className="text-lg px-10 py-4">
+                View all products
+              </Button>
               <Button
                 variant="whatsapp"
-                href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-                  "Hi, I want dealer / distributor pricing.",
-                )}`}
+                href={`https://wa.me/${company.whatsapp}`}
+                className="text-lg px-10 py-4"
               >
-                WhatsApp trade
+                WhatsApp us
               </Button>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-12 text-center px-6">
-        <h2 className="text-4xl font-bold mb-4">
-          Ready to light up your space?
-        </h2>
-        <p className="text-zinc-400 mb-8 max-w-md mx-auto">
-          Get a custom quote on WhatsApp or explore our full product range.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button href="/products" className="text-lg px-10 py-4">
-            View all products
-          </Button>
-          <Button
-            variant="whatsapp"
-            href={`https://wa.me/${company.whatsapp}`}
-            className="text-lg px-10 py-4"
-          >
-            WhatsApp us
-          </Button>
         </div>
       </section>
     </>

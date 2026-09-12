@@ -11,7 +11,7 @@ import {
 import { products, company, orderNotes, warrantyPoints } from "@/data/company";
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
-import Product360Viewer from "@/components/common/Product360Viewer";
+import FrameExplorer from "@/components/common/FrameExplorer";
 
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
@@ -93,6 +93,16 @@ export default function ProductDetails() {
         : [];
 
   const mainSrc = gallery.length > 0 ? gallery[activeIndex] : null;
+
+  // Prefer gallery angles if you name them later; for now use main / first images
+  const frameViews = {
+    front: product.image || gallery[0] || null,
+    back: gallery[1] || null,
+    top: gallery[2] || null,
+    bottom: gallery[3] || null,
+    side: gallery[4] || null,
+  };
+
   const { rating, reviews } = getProductRating(product);
 
   const quoteUrl = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
@@ -372,12 +382,13 @@ export default function ProductDetails() {
           </motion.div>
         </div>
 
-        <div className="w-full min-w-0 max-w-full overflow-hidden">
-          <Product360Viewer
-            className="mt-20 sm:mt-24"
-            frames={gallery}
-            productName={product.name}
-          />
+        <div className="w-full min-w-0 max-w-full overflow-hidden mt-20 sm:mt-24">
+          <div className={`${glass} rounded-[2rem] p-4 sm:p-6 md:p-8`}>
+            <FrameExplorer
+              productName={product.name}
+              defaultViews={frameViews}
+            />
+          </div>
         </div>
 
         <div

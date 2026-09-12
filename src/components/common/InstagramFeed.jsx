@@ -148,7 +148,7 @@ export default function InstagramFeed({ className = "" }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: Math.min(i * 0.05, 0.25) }}
-              className={`snap-center shrink-0 w-[min(86vw,300px)] ${glass} rounded-2xl overflow-hidden`}
+              className={`snap-center shrink-0 w-[min(86vw,280px)] ${glass} rounded-2xl overflow-hidden`}
             >
               {/*
                 MEDIA-ONLY WINDOW

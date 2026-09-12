@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { X} from "lucide-react";
+import { RiImageUploadLine } from "react-icons/ri";
+import { BsImage as ImageIcon } from "react-icons/bs";
 
 /**
  * Before & After — single image upload.
@@ -89,7 +91,7 @@ export default function BeforeAfter({
             onClick={() => inputRef.current?.click()}
             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-zinc-600 hover:border-brand-400/60 text-sm text-zinc-400 hover:text-brand-300 transition"
           >
-            <Upload size={16} />
+            <RiImageUploadLine size={16} />
             {src ? "Change photo" : "Upload photo"}
           </button>
         </div>
@@ -122,12 +124,12 @@ export default function BeforeAfter({
       </div>
 
       {/* Preview — one image, brightness for OFF vs ON */}
-      <div className="max-w-3xl mx-auto">
+      <div className="w-full max-w-3xl mx-auto">
         <motion.div
           key={showOn ? "on" : "off"}
           initial={{ opacity: 0.6 }}
           animate={{ opacity: 1 }}
-          className={`rounded-3xl border overflow-hidden aspect-[4/3] max-h-[min(65vh,480px)] flex items-center justify-center ${
+          className={`w-full rounded-3xl border overflow-hidden aspect-[4/3] max-h-[min(65vh,480px)] flex items-center justify-center ${
             showOn
               ? "bg-zinc-800/80 border-green-500/30"
               : "bg-zinc-900/80 border-zinc-700"
@@ -137,7 +139,7 @@ export default function BeforeAfter({
             <img
               src={src}
               alt={showOn ? "ON — illuminated" : "OFF — unlit"}
-              className={`max-h-full max-w-full object-contain p-2 transition duration-300 ${
+              className={`h-full w-full object-contain p-4 transition duration-300 ${
                 showOn
                   ? "brightness-110 contrast-105"
                   : "brightness-50 saturate-50 opacity-90"

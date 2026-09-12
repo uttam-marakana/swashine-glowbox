@@ -21,7 +21,7 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Swashine Glowbox"
-                className="h-24 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </Link>
 

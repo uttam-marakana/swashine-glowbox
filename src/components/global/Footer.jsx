@@ -274,7 +274,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-zinc-800 mt-10 pt-6">
           <ul className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-x-6 text-center text-xs text-zinc-600">
-            <li>© {new Date().getFullYear()} Swastik Industries</li>
+            <li>© {new Date().getFullYear()} <b>Swastik Industries</b></li>
 
             <li className="hidden sm:block" aria-hidden="true">
               •
@@ -285,6 +285,11 @@ export default function Footer() {
               •
             </li>
             <li>Made with ❤️ in Gujarat</li>
+
+            <li className="hidden sm:block" aria-hidden="true">
+              •
+            </li>
+            <li>Developed By <b>Uttam Marakana</b></li>
           </ul>
         </div>
       </div>

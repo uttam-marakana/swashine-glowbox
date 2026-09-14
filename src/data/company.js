@@ -141,6 +141,12 @@ export const products = [
     badge: "Popular",
     image: img.p1[0],
     gallery: img.p1,
+    frameViews: {
+      front: img.p1[0] || null,
+      back: img.p1[1] || null,
+      top: img.p1[2] || null,
+      bottom: img.p1[3] || null,
+    },
     type: "wall",
   },
   {
@@ -165,6 +171,12 @@ export const products = [
     badge: null,
     image: img.p2[0],
     gallery: img.p2,
+    frameViews: {
+      front: img.p2[0] || null,
+      back: img.p2[1] || null,
+      top: img.p2[2] || null,
+      bottom: img.p2[3] || null,
+    },
     type: "wall",
   },
   {
@@ -188,6 +200,12 @@ export const products = [
     badge: "Large",
     image: img.p3[0],
     gallery: img.p3,
+    frameViews: {
+      front: img.p3[0] || null,
+      back: img.p3[1] || null,
+      top: img.p3[2] || null,
+      bottom: img.p3[3] || null,
+    },
     type: "wall",
   },
   {
@@ -211,6 +229,12 @@ export const products = [
     badge: null,
     image: img.p4[0],
     gallery: img.p4,
+    frameViews: {
+      front: img.p4[0] || null,
+      back: img.p4[1] || null,
+      top: img.p4[2] || null,
+      bottom: img.p4[3] || null,
+    },
     type: "wall",
   },
   {
@@ -235,6 +259,12 @@ export const products = [
     badge: "Battery operated Table",
     image: img.p5[0],
     gallery: img.p5,
+    frameViews: {
+      front: img.p5[0] || null,
+      back: img.p5[1] || null,
+      top: img.p5[2] || null,
+      bottom: img.p5[3] || null,
+    },
     type: "desktop",
   },
   {
@@ -259,6 +289,12 @@ export const products = [
     badge: "Bestseller",
     image: img.p6[0],
     gallery: img.p6,
+    frameViews: {
+      front: img.p6[0] || null,
+      back: img.p6[1] || null,
+      top: img.p6[2] || null,
+      bottom: img.p6[3] || null,
+    },
     type: "arch",
     note: "Excluding GST",
   },
@@ -284,6 +320,12 @@ export const products = [
     badge: "Battery operated Table",
     image: img.p7[0],
     gallery: img.p7,
+    frameViews: {
+      front: img.p7[0] || null,
+      back: img.p7[1] || null,
+      top: img.p7[2] || null,
+      bottom: img.p7[3] || null,
+    },
     type: "desktop",
   },
   {
@@ -307,6 +349,12 @@ export const products = [
     badge: "Custom Frame",
     image: img.p8[0],
     gallery: img.p8,
+    frameViews: {
+      front: img.p8[0] || null,
+      back: img.p8[1] || null,
+      top: img.p8[2] || null,
+      bottom: img.p8[3] || null,
+    },
     type: "custom",
     note: "Print, shipping and GST not included",
   },
@@ -741,7 +789,7 @@ export const instagramFeed = [
     id: "7",
     caption: "🏇 7 Horses = 7 Guna Safalta! ✨",
     url: "https://www.instagram.com/swashine_glowbox/reel/DWiNua1gfNN/",
-  }
+  },
 ];
 
 export const navLinks = [

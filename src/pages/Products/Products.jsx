@@ -1,13 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  products,
-  company,
-  orderNotes,
-  sizeFilters,
-  priceFilters,
-} from "@/data/company";
+import { company, orderNotes, sizeFilters, priceFilters } from "@/data/company";
+import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
 
 const glass =
@@ -17,8 +12,16 @@ const glassHover =
 const glassCard = `${glass} ${glassHover} rounded-3xl`;
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [sizeFilter, setSizeFilter] = useState("all");
   const [priceFilter, setPriceFilter] = useState("all");
+
+  useEffect(() => {
+    listProductsPublic()
+      .then(setProducts)
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -26,7 +29,7 @@ export default function Products() {
       const matchPrice = priceFilter === "all" || p.priceRange === priceFilter;
       return matchSize && matchPrice;
     });
-  }, [sizeFilter, priceFilter]);
+  }, [products, sizeFilter, priceFilter]);
 
   const getQuoteUrl = (name) =>
     `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(

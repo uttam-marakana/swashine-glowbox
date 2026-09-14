@@ -155,16 +155,47 @@ export async function seedProductsFromCompany() {
   }
   const existing = await getDocs(collection(db, COL));
   if (!existing.empty) {
-    return { seeded: 0, message: "Firestore already has products. Skip seed." };
+    return {
+      seeded: 0,
+      message:
+        "Firestore already has products. Edit in Admin — seed only runs on an empty collection.",
+    };
   }
   let count = 0;
   for (const p of staticProducts) {
+    const { frameViews, ...rest } = p; // don't require per-product frames
     await addDoc(collection(db, COL), {
-      ...p,
+      ...rest,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
     count += 1;
   }
   return { seeded: count, message: `Seeded ${count} products from company.js` };
+}
+
+/**
+ * Public site: Firestore products if any exist, else company.js
+ */
+export async function listProductsPublic() {
+  if (isFirebaseConfigured && db) {
+    try {
+      const q = query(collection(db, COL), orderBy("id", "asc"));
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        return snap.docs.map((d) => ({
+          firestoreId: d.id,
+          ...d.data(),
+        }));
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+  return staticProducts || [];
+}
+
+export async function getProductBySlug(slug) {
+  const list = await listProductsPublic();
+  return list.find((p) => p.slug === slug) || null;
 }

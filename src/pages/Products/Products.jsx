@@ -20,6 +20,7 @@ export default function Products() {
   useEffect(() => {
     listProductsPublic()
       .then(setProducts)
+      .catch(() => setProducts([]))
       .finally(() => setLoading(false));
   }, []);
 
@@ -40,6 +41,14 @@ export default function Products() {
     active
       ? "bg-brand-500 text-black"
       : `${glass} text-zinc-300 hover:bg-white/[0.08]`;
+
+  if (loading) {
+    return (
+      <div className="pt-28 pb-20 min-h-screen flex items-center justify-center text-zinc-500">
+        Loading products…
+      </div>
+    );
+  }
 
   return (
     <div className="pt-28 pb-20 min-h-screen relative">
@@ -130,27 +139,33 @@ export default function Products() {
           <div
             className={`${glass} rounded-3xl py-20 text-center text-zinc-400`}
           >
-            <p className="text-lg mb-4">No products match your filters.</p>
-            <button
-              type="button"
-              onClick={() => {
-                setSizeFilter("all");
-                setPriceFilter("all");
-              }}
-              className="text-brand-400 hover:underline"
-            >
-              Clear filters
-            </button>
+            <p className="text-lg mb-4">
+              {products.length === 0
+                ? "No products available yet."
+                : "No products match your filters."}
+            </p>
+            {products.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSizeFilter("all");
+                  setPriceFilter("all");
+                }}
+                className="text-brand-400 hover:underline"
+              >
+                Clear filters
+              </button>
+            )}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((p, i) => (
               <motion.div
-                key={p.id}
+                key={p.firestoreId || p.slug || p.id || i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className={`${glassCard} overflow-hidden flex flex-col`}
+                transition={{ delay: Math.min(i * 0.05, 0.4) }}
+                className={`${glassCard} overflow-hidden flex flex-col group`}
               >
                 <Link to={`/products/${p.slug}`} className="block">
                   <div className="h-52 bg-black/20 flex items-center justify-center relative overflow-hidden">
@@ -194,7 +209,7 @@ export default function Products() {
                     </div>
                   )}
                   <div className="mt-auto flex gap-2">
-                    <Link to={`/products/${p.slug}`} className="">
+                    <Link to={`/products/${p.slug}`} className="flex-1">
                       <Button
                         variant="secondary"
                         className="w-full text-sm py-2.5"

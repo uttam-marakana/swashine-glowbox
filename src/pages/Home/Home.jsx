@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
   company,
   features,
-  products,
   stats,
   howItWorks,
   industries,
@@ -15,6 +14,7 @@ import {
   reviews,
   videoHighlights,
 } from "@/data/company";
+import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FaqList from "@/components/common/FaqList";
@@ -215,6 +215,12 @@ function HowItWorksSection() {
 }
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    listProductsPublic().then(setProducts);
+  }, []);
+
   const heroProduct =
     products.find((p) => p.badge === "Popular" && p.image) ||
     products.find((p) => p.image);

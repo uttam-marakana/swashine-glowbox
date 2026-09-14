@@ -47,7 +47,6 @@ export async function listProductsAdmin() {
 }
 
 export async function getProductAdmin(firestoreIdOrSlug) {
-  // Firestore doc id
   if (
     isFirebaseConfigured &&
     db &&
@@ -64,7 +63,6 @@ export async function getProductAdmin(firestoreIdOrSlug) {
     }
   }
 
-  // Fallback: company.js by slug or numeric id
   const staticList = getStaticProducts();
   const found =
     staticList.find((p) => p.slug === firestoreIdOrSlug) ||
@@ -78,8 +76,12 @@ export async function createProduct(data) {
       "Firebase not configured — cannot save. Products are read from company.js.",
     );
   }
+  const payload = { ...data };
+  delete payload.firestoreId;
+  delete payload.source;
+
   const ref = await addDoc(collection(db, COL), {
-    ...data,
+    ...payload,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
@@ -94,13 +96,47 @@ export async function updateProduct(firestoreId, data) {
   }
   if (!firestoreId) {
     throw new Error(
-      "This product is from company.js. Seed it to Firestore first to edit online.",
+      "This product is from company.js. Use Save (upsert) or Seed first.",
     );
   }
+  const payload = { ...data };
+  delete payload.firestoreId;
+  delete payload.source;
+
   await updateDoc(doc(db, COL, firestoreId), {
-    ...data,
+    ...payload,
     updatedAt: serverTimestamp(),
   });
+}
+
+/**
+ * Create or update — allows editing company.js items without seed first.
+ * Keeps frameViews, gallery, etc. on the document.
+ */
+export async function upsertProduct(form) {
+  if (!isFirebaseConfigured || !db) {
+    throw new Error("Firebase not configured");
+  }
+
+  const payload = { ...form };
+  const firestoreId = payload.firestoreId || null;
+  delete payload.firestoreId;
+  delete payload.source;
+
+  if (firestoreId) {
+    await updateDoc(doc(db, COL, firestoreId), {
+      ...payload,
+      updatedAt: serverTimestamp(),
+    });
+    return firestoreId;
+  }
+
+  const ref = await addDoc(collection(db, COL), {
+    ...payload,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  return ref.id;
 }
 
 export async function deleteProduct(firestoreId) {

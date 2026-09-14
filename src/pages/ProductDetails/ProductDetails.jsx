@@ -384,10 +384,7 @@ export default function ProductDetails() {
 
         <div className="w-full min-w-0 max-w-full overflow-hidden mt-20 sm:mt-24">
           <div className={`${glass} rounded-[2rem] p-4 sm:p-6 md:p-8`}>
-            <FrameExplorer
-              productName={product.name}
-              defaultViews={frameViews}
-            />
+            <FrameExplorer productName={product.name} />
           </div>
         </div>
 

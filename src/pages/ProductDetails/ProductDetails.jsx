@@ -8,10 +8,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { products, company, orderNotes, warrantyPoints } from "@/data/company";
+import { company, orderNotes, warrantyPoints } from "@/data/company";
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FrameExplorer from "@/components/common/FrameExplorer";
+import {
+  getProductBySlug,
+  listProductsPublic,
+} from "@/services/productService";
 
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
@@ -65,18 +69,45 @@ function Stars({ rating, size = 16 }) {
 
 export default function ProductDetails() {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const [product, setProduct] = useState(null);
+  const [related, setRelated] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
 
   useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
     setActiveIndex(0);
+
+    (async () => {
+      const [p, all] = await Promise.all([
+        getProductBySlug(slug),
+        listProductsPublic(),
+      ]);
+      if (cancelled) return;
+      setProduct(p);
+      setRelated((all || []).filter((x) => x.slug !== slug).slice(0, 4));
+      setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-20 text-center text-zinc-500 min-h-screen">
+        Loading…
+      </div>
+    );
+  }
 
   if (!product) {
     return (
-      <div className="pt-32 pb-20 px-4 text-center min-h-screen relative overflow-x-hidden">
+      <div className="pt-32 pb-20 px-4 text-center min-h-screen">
         <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
         <Link to="/products" className="text-brand-400 hover:underline">
           ← Back to Products
@@ -93,15 +124,6 @@ export default function ProductDetails() {
         : [];
 
   const mainSrc = gallery.length > 0 ? gallery[activeIndex] : null;
-
-  // Admin frameViews only (no gallery fallback)
-  const fv = product.frameViews || {};
-  const frameViews = {
-    front: fv.front || null,
-    back: fv.back || null,
-    top: fv.top || null,
-    bottom: fv.bottom || null,
-  };
 
   const { rating, reviews } = getProductRating(product);
 

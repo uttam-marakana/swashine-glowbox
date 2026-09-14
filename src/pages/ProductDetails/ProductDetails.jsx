@@ -9,13 +9,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { company, orderNotes, warrantyPoints } from "@/data/company";
-import Button from "@/components/common/Button";
-import BeforeAfter from "@/components/common/BeforeAfter";
-import FrameExplorer from "@/components/common/FrameExplorer";
 import {
   getProductBySlug,
   listProductsPublic,
 } from "@/services/productService";
+import Button from "@/components/common/Button";
+import BeforeAfter from "@/components/common/BeforeAfter";
+import FrameExplorer from "@/components/common/FrameExplorer";
 
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
@@ -23,7 +23,6 @@ const glassHover =
   "hover:bg-white/[0.07] hover:border-brand-400/30 transition-all duration-300";
 const glassCard = `${glass} ${glassHover} rounded-3xl`;
 
-/** Rating 4.4–4.8 and review count 50–120 (stable per product id) */
 function getProductRating(product) {
   if (product?.rating != null && product?.reviewCount != null) {
     return {
@@ -82,14 +81,20 @@ export default function ProductDetails() {
     setActiveIndex(0);
 
     (async () => {
-      const [p, all] = await Promise.all([
-        getProductBySlug(slug),
-        listProductsPublic(),
-      ]);
-      if (cancelled) return;
-      setProduct(p);
-      setRelated((all || []).filter((x) => x.slug !== slug).slice(0, 4));
-      setLoading(false);
+      try {
+        const [p, all] = await Promise.all([
+          getProductBySlug(slug),
+          listProductsPublic(),
+        ]);
+        if (cancelled) return;
+        setProduct(p);
+        setRelated((all || []).filter((x) => x.slug !== slug).slice(0, 4));
+      } catch (e) {
+        console.warn(e);
+        if (!cancelled) setProduct(null);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     })();
 
     return () => {
@@ -99,7 +104,7 @@ export default function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="pt-32 pb-20 text-center text-zinc-500 min-h-screen">
+      <div className="pt-32 pb-20 min-h-screen flex items-center justify-center text-zinc-500">
         Loading…
       </div>
     );
@@ -124,7 +129,6 @@ export default function ProductDetails() {
         : [];
 
   const mainSrc = gallery.length > 0 ? gallery[activeIndex] : null;
-
   const { rating, reviews } = getProductRating(product);
 
   const quoteUrl = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
@@ -149,7 +153,6 @@ export default function ProductDetails() {
     const dy = t.clientY - touchStartY.current;
     touchStartX.current = null;
     touchStartY.current = null;
-    // Horizontal swipe only (ignore vertical page scroll)
     if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
     if (dx < 0) nextImage();
     else prevImage();
@@ -172,7 +175,7 @@ export default function ProductDetails() {
         </Link>
 
         <div className="grid w-full min-w-0 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* LEFT: Gallery */}
+          {/* Gallery */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -285,7 +288,7 @@ export default function ProductDetails() {
             )}
           </motion.div>
 
-          {/* RIGHT: Details */}
+          {/* Details */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -326,29 +329,31 @@ export default function ProductDetails() {
               {product.description}
             </p>
 
-            <div
-              className={`${glassCard} w-full min-w-0 max-w-full p-5 sm:p-6 mb-8`}
-            >
-              <h3 className="text-sm font-semibold text-zinc-300 mb-4 uppercase tracking-wider">
-                Key Features
-              </h3>
-              <ul className="space-y-3">
-                {product.features.map((f, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-zinc-300 min-w-0"
-                  >
-                    <Check
-                      size={18}
-                      className="text-brand-400 mt-0.5 shrink-0"
-                    />
-                    <span className="min-w-0 break-words [overflow-wrap:anywhere]">
-                      {f}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {Array.isArray(product.features) && product.features.length > 0 && (
+              <div
+                className={`${glassCard} w-full min-w-0 max-w-full p-5 sm:p-6 mb-8`}
+              >
+                <h3 className="text-sm font-semibold text-zinc-300 mb-4 uppercase tracking-wider">
+                  Key Features
+                </h3>
+                <ul className="space-y-3">
+                  {product.features.map((f, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-zinc-300 min-w-0"
+                    >
+                      <Check
+                        size={18}
+                        className="text-brand-400 mt-0.5 shrink-0"
+                      />
+                      <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                        {f}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {product.includes && (
               <div
@@ -404,6 +409,7 @@ export default function ProductDetails() {
           </motion.div>
         </div>
 
+        {/* Global frame explorer */}
         <div className="w-full min-w-0 max-w-full overflow-hidden mt-20 sm:mt-24">
           <div className={`${glass} rounded-[2rem] p-4 sm:p-6 md:p-8`}>
             <FrameExplorer productName={product.name} />
@@ -475,57 +481,55 @@ export default function ProductDetails() {
           </div>
         </section>
 
+        {/* Related — from listProductsPublic, not static products */}
         <div className="mt-20 sm:mt-24 w-full min-w-0 max-w-full">
           <h2 className="text-2xl font-bold mb-8">More Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 w-full min-w-0">
-            {products
-              .filter((p) => p.id !== product.id)
-              .slice(0, 4)
-              .map((p) => {
-                const r = getProductRating(p);
-                return (
-                  <Link
-                    key={p.id}
-                    to={`/products/${p.slug}`}
-                    className={`${glassCard} min-w-0 max-w-full overflow-hidden group`}
-                  >
-                    <div className="aspect-[4/3] bg-black/25 flex items-center justify-center relative overflow-hidden">
-                      {p.image ? (
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          className="w-full h-full object-contain p-1.5 md:p-2 group-hover:scale-[1.03] transition duration-500"
-                        />
-                      ) : (
-                        <span className="text-5xl">💡</span>
-                      )}
-                      {p.badge && (
-                        <span className="absolute top-2 right-2 sm:top-3 sm:right-3 max-w-[calc(100%-1rem)] bg-brand-500 text-black text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full z-10 truncate">
-                          {p.badge}
-                        </span>
-                      )}
+            {related.map((p) => {
+              const r = getProductRating(p);
+              return (
+                <Link
+                  key={p.firestoreId || p.slug || p.id}
+                  to={`/products/${p.slug}`}
+                  className={`${glassCard} min-w-0 max-w-full overflow-hidden group`}
+                >
+                  <div className="aspect-[4/3] bg-black/25 flex items-center justify-center relative overflow-hidden">
+                    {p.image ? (
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain p-1.5 md:p-2 group-hover:scale-[1.03] transition duration-500"
+                      />
+                    ) : (
+                      <span className="text-5xl">💡</span>
+                    )}
+                    {p.badge && (
+                      <span className="absolute top-2 right-2 sm:top-3 sm:right-3 max-w-[calc(100%-1rem)] bg-brand-500 text-black text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full z-10 truncate">
+                        {p.badge}
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-3 sm:p-4 min-w-0">
+                    <div className="text-xs text-brand-400 truncate">
+                      {p.category}
                     </div>
-                    <div className="p-3 sm:p-4 min-w-0">
-                      <div className="text-xs text-brand-400 truncate">
-                        {p.category}
-                      </div>
-                      <div className="font-medium text-sm mt-1 line-clamp-2 break-words group-hover:text-brand-400 transition">
-                        {p.name}
-                      </div>
-                      <div className="text-xs text-zinc-500 mt-1 break-words">
-                        {p.size}
-                      </div>
-                      <div className="flex items-center gap-1.5 mt-2 text-xs text-zinc-400">
-                        <Stars rating={r.rating} size={12} />
-                        <span className="text-white font-medium">
-                          {r.rating.toFixed(1)}
-                        </span>
-                        <span>({r.reviews}+)</span>
-                      </div>
+                    <div className="font-medium text-sm mt-1 line-clamp-2 break-words group-hover:text-brand-400 transition">
+                      {p.name}
                     </div>
-                  </Link>
-                );
-              })}
+                    <div className="text-xs text-zinc-500 mt-1 break-words">
+                      {p.size}
+                    </div>
+                    <div className="flex items-center gap-1.5 mt-2 text-xs text-zinc-400">
+                      <Stars rating={r.rating} size={12} />
+                      <span className="text-white font-medium">
+                        {r.rating.toFixed(1)}
+                      </span>
+                      <span>({r.reviews}+)</span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

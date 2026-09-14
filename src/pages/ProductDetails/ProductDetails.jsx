@@ -94,13 +94,13 @@ export default function ProductDetails() {
 
   const mainSrc = gallery.length > 0 ? gallery[activeIndex] : null;
 
-  // Prefer gallery angles if you name them later; for now use main / first images
+  // Admin frameViews only (no gallery fallback)
+  const fv = product.frameViews || {};
   const frameViews = {
-    front: product.image || gallery[0] || null,
-    back: gallery[1] || null,
-    top: gallery[2] || null,
-    bottom: gallery[3] || null,
-    side: gallery[4] || null,
+    front: fv.front || null,
+    back: fv.back || null,
+    top: fv.top || null,
+    bottom: fv.bottom || null,
   };
 
   const { rating, reviews } = getProductRating(product);

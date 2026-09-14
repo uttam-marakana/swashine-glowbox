@@ -26,7 +26,6 @@ const empty = {
   badge: "",
   image: "",
   gallery: [],
-  frameViews: { front: "", back: "", top: "", bottom: "" },
   type: "wall",
   note: "",
 };
@@ -35,13 +34,6 @@ const field =
   "mt-1.5 w-full rounded-xl bg-zinc-900/80 border border-zinc-700 px-3.5 py-2.5 text-sm outline-none focus:border-brand-400/50 transition";
 const labelCls =
   "block text-xs font-medium text-zinc-400 uppercase tracking-wider";
-
-const FRAME_KEYS = [
-  { key: "front", label: "Front" },
-  { key: "back", label: "Back" },
-  { key: "top", label: "Top (insert)" },
-  { key: "bottom", label: "Bottom" },
-];
 
 export default function ProductEdit() {
   const { id } = useParams();
@@ -60,24 +52,12 @@ export default function ProductEdit() {
         ...empty,
         ...p,
         gallery: p.gallery || [],
-        frameViews: {
-          front: p.frameViews?.front || "",
-          back: p.frameViews?.back || "",
-          top: p.frameViews?.top || "",
-          bottom: p.frameViews?.bottom || "",
-        },
       });
       setFeaturesText((p.features || []).join("\n"));
     });
   }, [id, isNew]);
 
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
-
-  const setFrameView = (key, value) =>
-    setForm((f) => ({
-      ...f,
-      frameViews: { ...(f.frameViews || {}), [key]: value },
-    }));
 
   const onUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -95,24 +75,6 @@ export default function ProductEdit() {
       setMsg("Gallery image uploaded");
     } catch (err) {
       setMsg(err.message || "Upload failed — check Firebase Storage");
-    } finally {
-      setBusy(false);
-      e.target.value = "";
-    }
-  };
-
-  const onUploadFrame = async (frameKey, e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setBusy(true);
-    setMsg("");
-    try {
-      const key = `${form.slug || form.id || "temp"}-frame-${frameKey}`;
-      const { url } = await uploadProductImage(String(key), file);
-      setFrameView(frameKey, url);
-      setMsg(`${frameKey} frame image uploaded`);
-    } catch (err) {
-      setMsg(err.message || "Frame upload failed");
     } finally {
       setBusy(false);
       e.target.value = "";
@@ -145,12 +107,6 @@ export default function ProductEdit() {
         .split("\n")
         .map((s) => s.trim())
         .filter(Boolean),
-      frameViews: {
-        front: form.frameViews?.front || "",
-        back: form.frameViews?.back || "",
-        top: form.frameViews?.top || "",
-        bottom: form.frameViews?.bottom || "",
-      },
       firestoreId: form.firestoreId || null,
     };
 
@@ -417,51 +373,6 @@ export default function ProductEdit() {
               ))}
             </div>
           )}
-        </section>
-
-        <section className={`${glass} p-5 md:p-6 space-y-4`}>
-          <h2 className="text-sm font-semibold text-brand-400 uppercase tracking-wider">
-            Frame views (Front / Back / Top / Bottom)
-          </h2>
-          <p className="text-xs text-zinc-500">
-            Shown only on the product page Frame design section. Upload to
-            Storage or paste an https URL.
-          </p>
-          {FRAME_KEYS.map(({ key, label }) => (
-            <div
-              key={key}
-              className="space-y-2 border-b border-white/5 pb-4 last:border-0 last:pb-0"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs uppercase text-zinc-400 w-24 shrink-0">
-                  {label}
-                </span>
-                <input
-                  className={`${field} mt-0 flex-1 min-w-[12rem]`}
-                  value={form.frameViews?.[key] || ""}
-                  onChange={(e) => setFrameView(key, e.target.value)}
-                  placeholder="https://… or upload →"
-                />
-                <label className="text-xs font-semibold text-brand-400 cursor-pointer px-3 py-2 rounded-lg border border-brand-400/30 hover:bg-brand-500/10 whitespace-nowrap">
-                  Upload
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    disabled={busy}
-                    onChange={(e) => onUploadFrame(key, e)}
-                  />
-                </label>
-              </div>
-              {form.frameViews?.[key] ? (
-                <img
-                  src={form.frameViews[key]}
-                  alt={label}
-                  className="h-24 object-contain rounded-lg border border-white/10 bg-black/30"
-                />
-              ) : null}
-            </div>
-          ))}
         </section>
 
         {msg && (

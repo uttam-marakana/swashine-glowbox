@@ -808,5 +808,13 @@ export const footerLinks = [
   { path: "/reviews", label: "Reviews" },
   { path: "/custom", label: "Custom Order" },
   { path: "/products", label: "Products" },
-  { path: "/faq", label: "FAQ" },
 ];
+
+export const footerSupport_Services = [
+  { path: "/privacy-policy", label: "Privacy Policy" },
+  { path: "/return-policy", label: "Return & Refund Policy" },
+  { path: "/terms-condition", label: "Terms & Conditions" },
+  { path: "/faq", label: "FAQs" },
+  { path: "/how-it-works", label: "How it works" },
+
+]

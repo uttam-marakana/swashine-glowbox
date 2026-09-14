@@ -74,7 +74,7 @@ export default function Custom() {
         <div className="absolute bottom-20 left-0 w-[360px] h-[360px] rounded-full bg-amber-400/8 blur-[100px]" />
       </div>
 
-      <div className="max-w-2xl mx-auto px-6">
+      <div className="max-w-7xl sm:max-w-auto mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -169,7 +169,7 @@ export default function Custom() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-8 rounded-2xl bg-green-500/10 border border-green-500/30 backdrop-blur-md p-8 text-center"
+              className="mt-8 rounded-2xl max-w-5xl bg-green-500/10 border border-green-500/30 backdrop-blur-md p-8 text-center"
             >
               <div className="text-brand-400 text-sm mb-1">ESTIMATED PRICE</div>
               <div className="text-xl font-medium text-zinc-300 mb-1">

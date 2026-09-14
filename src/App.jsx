@@ -18,6 +18,7 @@ import RequireAdmin from "./components/admin/RequireAdmin";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminLogin from "./pages/Admin/Login/Login";
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
+import FrameViewsAdmin from "./pages/Admin/FrameViews/FrameViewsAdmin";
 import Inquiries from "./pages/Admin/Inquiries/Inquiries";
 import ProductsAdmin from "./pages/Admin/Products/ProductsAdmin";
 import ProductEdit from "./pages/Admin/ProductEdit/ProductEdit";
@@ -56,6 +57,7 @@ export default function App() {
           }
         >
           <Route index element={<Dashboard />} />
+          <Route path="frame-views" element={<FrameViewsAdmin />} />
           <Route path="inquiries" element={<Inquiries />} />
           <Route path="products" element={<ProductsAdmin />} />
           <Route path="products/:id" element={<ProductEdit />} />

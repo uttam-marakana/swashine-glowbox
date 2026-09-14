@@ -175,27 +175,31 @@ export async function seedProductsFromCompany() {
 }
 
 /**
- * Public site: Firestore products if any exist, else company.js
+ * Public site: Firestore if any docs exist, else company.js
+ * Avoid orderBy("id") — missing id fields can fail the whole query.
  */
-export async function listProductsPublic() {
+export async function listProductsAdmin() {
   if (isFirebaseConfigured && db) {
     try {
-      const q = query(collection(db, COL), orderBy("id", "asc"));
-      const snap = await getDocs(q);
+      const snap = await getDocs(collection(db, COL));
       if (!snap.empty) {
-        return snap.docs.map((d) => ({
+        const list = snap.docs.map((d) => ({
           firestoreId: d.id,
+          source: "firestore",
           ...d.data(),
         }));
+        list.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
+        return list;
       }
     } catch (e) {
-      console.warn(e);
+      console.warn("Firestore products failed, using company.js", e);
     }
   }
-  return staticProducts || [];
+  return getStaticProducts();
 }
 
 export async function getProductBySlug(slug) {
+  if (!slug) return null;
   const list = await listProductsPublic();
   return list.find((p) => p.slug === slug) || null;
 }

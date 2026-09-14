@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { company, footerLinks } from "@/data/company";
+import { company, footerLinks, footerSupport_Services } from "@/data/company";
 import logo from "@/assets/images/logo-swashine.png";
 
 export default function Footer() {
@@ -17,21 +17,36 @@ export default function Footer() {
         <div className="grid lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-1">
               <img
                 src={logo}
                 alt="Swashine Glowbox"
-                className="h-32 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
             </Link>
 
-            <p className="text-sm text-zinc-500">
-              Premium LED Illuminated Displays
-              <br />
-              Made in Rajkot, Gujarat
-            </p>
+            <div className="overflow-hidden">
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href={`https://wa.me/${company.whatsapp}`}
+                    className="text-lg hover:text-brand-400 transition-colors"
+                  >
+                    {company.phone}
+                  </a>
+                </li>
 
-            <p className="text-xs text-zinc-600 mt-3">Swastik Industries</p>
+                <li>
+                  <p className="text-sm">{company.email}</p>
+                </li>
+
+                <li>
+                  <p className="text-xs leading-relaxed">{company.address}</p>
+                </li>
+              </ul>
+            </div>
+
+            <p className="text-xs mt-3">Swastik Industries</p>
           </div>
 
           {/* Desktop Footer Menus */}
@@ -58,40 +73,23 @@ export default function Footer() {
                   Dealers
                 </Link>
               </li>
-
-              <li>
-                <Link
-                  to="/how-it-works"
-                  className="block hover:text-white transition-colors"
-                >
-                  How it works
-                </Link>
-              </li>
             </ul>
           </div>
 
           <div className="hidden lg:block">
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4">Support & Services</h4>
 
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href={`https://wa.me/${company.whatsapp}`}
-                  className="text-lg hover:text-brand-400 transition-colors"
-                >
-                  {company.phone}
-                </a>
-              </li>
-
-              <li>
-                <p className="text-sm text-zinc-500">{company.email}</p>
-              </li>
-
-              <li>
-                <p className="text-xs text-zinc-600 leading-relaxed">
-                  {company.address}
-                </p>
-              </li>
+            <ul className="space-y-2 text-sm text-zinc-400">
+              {footerSupport_Services.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="block hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -274,7 +272,9 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-zinc-800 mt-10 pt-6">
           <ul className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-x-6 text-center text-xs text-zinc-600">
-            <li>© {new Date().getFullYear()} <b>Swastik Industries</b></li>
+            <li>
+              © {new Date().getFullYear()} <b>Swastik Industries</b>
+            </li>
 
             <li className="hidden sm:block" aria-hidden="true">
               •
@@ -289,7 +289,9 @@ export default function Footer() {
             <li className="hidden sm:block" aria-hidden="true">
               •
             </li>
-            <li>Developed By <b>Uttam Marakana</b></li>
+            <li>
+              Developed By <b>Uttam Marakana</b>
+            </li>
           </ul>
         </div>
       </div>

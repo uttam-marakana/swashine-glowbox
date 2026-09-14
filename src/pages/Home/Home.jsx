@@ -21,8 +21,8 @@ import FaqList from "@/components/common/FaqList";
 import InstagramFeed from "@/components/common/InstagramFeed";
 import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
-import Slider_img1 from "@/assets/images/Hero Section/slider_img1.png"
-import Slider_img2 from "@/assets/images/Hero Section/slider_img2.png"
+import Slider_img1 from "@/assets/images/Hero Section/slider_img1.png";
+import Slider_img2 from "@/assets/images/Hero Section/slider_img2.png";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
 
@@ -142,7 +142,7 @@ function HowItWorksSection() {
   return (
     <section className="py-12" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="text-center mb-4">
           <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
             Process
           </span>
@@ -155,24 +155,8 @@ function HowItWorksSection() {
           </Link>
         </div>
 
-        <div className="flex justify-center gap-2 mb-8">
-          {howItWorks.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Step ${i + 1}`}
-              onClick={() => setActive(i)}
-              className={`h-1.5 rounded-full transition-all ${
-                active === i
-                  ? "w-8 bg-brand-400"
-                  : "w-3 bg-white/15 hover:bg-white/25"
-              }`}
-            />
-          ))}
-        </div>
-
         <div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12"
           onMouseEnter={() => {
             hoverPause.current = true;
           }}
@@ -206,6 +190,22 @@ function HowItWorksSection() {
               <h3 className="font-semibold mb-2">{s.title}</h3>
               <p className="text-sm text-zinc-400 leading-relaxed">{s.desc}</p>
             </motion.button>
+          ))}
+        </div>
+
+        <div className="flex justify-center gap-2 mb-8">
+          {howItWorks.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Step ${i + 1}`}
+              onClick={() => setActive(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                active === i
+                  ? "w-8 bg-brand-400"
+                  : "w-3 bg-white/15 hover:bg-white/25"
+              }`}
+            />
           ))}
         </div>
 
@@ -350,7 +350,7 @@ export default function Home() {
                 <img
                   src={s.image}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-scale-down object-center"
                 />
               ) : (
                 <div className="absolute inset-0 bg-zinc-900" />

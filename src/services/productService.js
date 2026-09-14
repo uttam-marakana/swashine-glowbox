@@ -7,8 +7,6 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
-  query,
-  orderBy,
 } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
 import { products as staticProducts } from "@/data/company";
@@ -24,26 +22,53 @@ export function getStaticProducts() {
   }));
 }
 
-/**
- * Prefer Firestore if it has docs; otherwise fall back to company.js
- */
+/** Admin list: Firestore if docs exist, else company.js */
 export async function listProductsAdmin() {
   if (isFirebaseConfigured && db) {
     try {
-      const q = query(collection(db, COL), orderBy("id", "asc"));
-      const snap = await getDocs(q);
+      const snap = await getDocs(collection(db, COL));
       if (!snap.empty) {
-        return snap.docs.map((d) => ({
+        const list = snap.docs.map((d) => ({
           firestoreId: d.id,
           source: "firestore",
           ...d.data(),
         }));
+        list.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
+        return list;
       }
     } catch (e) {
       console.warn("Firestore products failed, using company.js", e);
     }
   }
   return getStaticProducts();
+}
+
+/**
+ * Public site: Firestore if any docs exist, else company.js
+ */
+export async function listProductsPublic() {
+  if (isFirebaseConfigured && db) {
+    try {
+      const snap = await getDocs(collection(db, COL));
+      if (!snap.empty) {
+        const list = snap.docs.map((d) => ({
+          firestoreId: d.id,
+          ...d.data(),
+        }));
+        list.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
+        return list;
+      }
+    } catch (e) {
+      console.warn("listProductsPublic failed, using company.js", e);
+    }
+  }
+  return staticProducts || [];
+}
+
+export async function getProductBySlug(slug) {
+  if (!slug) return null;
+  const list = await listProductsPublic();
+  return list.find((p) => p.slug === slug) || null;
 }
 
 export async function getProductAdmin(firestoreIdOrSlug) {
@@ -109,10 +134,6 @@ export async function updateProduct(firestoreId, data) {
   });
 }
 
-/**
- * Create or update — allows editing company.js items without seed first.
- * Keeps frameViews, gallery, etc. on the document.
- */
 export async function upsertProduct(form) {
   if (!isFirebaseConfigured || !db) {
     throw new Error("Firebase not configured");
@@ -148,7 +169,6 @@ export async function deleteProduct(firestoreId) {
   await deleteDoc(doc(db, COL, firestoreId));
 }
 
-/** One-time: copy all company.js products into Firestore */
 export async function seedProductsFromCompany() {
   if (!isFirebaseConfigured || !db) {
     throw new Error("Firebase not configured");
@@ -163,7 +183,7 @@ export async function seedProductsFromCompany() {
   }
   let count = 0;
   for (const p of staticProducts) {
-    const { frameViews, ...rest } = p; // don't require per-product frames
+    const { frameViews, ...rest } = p;
     await addDoc(collection(db, COL), {
       ...rest,
       createdAt: serverTimestamp(),
@@ -172,34 +192,4 @@ export async function seedProductsFromCompany() {
     count += 1;
   }
   return { seeded: count, message: `Seeded ${count} products from company.js` };
-}
-
-/**
- * Public site: Firestore if any docs exist, else company.js
- * Avoid orderBy("id") — missing id fields can fail the whole query.
- */
-export async function listProductsAdmin() {
-  if (isFirebaseConfigured && db) {
-    try {
-      const snap = await getDocs(collection(db, COL));
-      if (!snap.empty) {
-        const list = snap.docs.map((d) => ({
-          firestoreId: d.id,
-          source: "firestore",
-          ...d.data(),
-        }));
-        list.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
-        return list;
-      }
-    } catch (e) {
-      console.warn("Firestore products failed, using company.js", e);
-    }
-  }
-  return getStaticProducts();
-}
-
-export async function getProductBySlug(slug) {
-  if (!slug) return null;
-  const list = await listProductsPublic();
-  return list.find((p) => p.slug === slug) || null;
 }

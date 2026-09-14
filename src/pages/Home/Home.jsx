@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   company,
   features,
@@ -214,12 +214,98 @@ function HowItWorksSection() {
   );
 }
 
+const HERO_SLIDES = [
+  {
+    id: 1,
+    title: (
+      <>
+        LIGHT UP
+        <br />
+        YOUR{" "}
+        <span className="text-brand-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.35)]">
+          BRAND
+        </span>
+      </>
+    ),
+    description:
+      "Premium LED Glowboxes with tool-free poster change. Perfect for retail, temples, restaurants & exhibitions.",
+    ctaLabel: "Explore Products",
+    ctaTo: "/products",
+    secondaryLabel: "Get Quote on WhatsApp",
+    secondaryHref: `https://wa.me/${company.whatsapp}?text=Hi%20Swashine%2C%20I%20want%20a%20quote`,
+    image: null, // filled from products at runtime
+    badge: "Made in Gujarat • Manufacturer Direct",
+  },
+  {
+    id: 2,
+    title: (
+      <>
+        CUSTOM SIZES
+        <br />
+        UP TO{" "}
+        <span className="text-brand-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.35)]">
+          2 × 6 FT
+        </span>
+      </>
+    ),
+    description:
+      "Order exact dimensions for your space. Aluminium frames, bright LED panels, and fast 5–6 day delivery.",
+    ctaLabel: "Custom calculator",
+    ctaTo: "/custom",
+    secondaryLabel: "WhatsApp us",
+    secondaryHref: `https://wa.me/${company.whatsapp}`,
+    image: null,
+    badge: "Custom manufacturing",
+  },
+  {
+    id: 3,
+    title: (
+      <>
+        TOOL-FREE
+        <br />
+        POSTER{" "}
+        <span className="text-brand-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.35)]">
+          CHANGE
+        </span>
+      </>
+    ),
+    description:
+      "Swap graphics in seconds with the top-slot system. Ideal for menus, offers, and seasonal campaigns.",
+    ctaLabel: "How it works",
+    ctaTo: "/how-it-works",
+    secondaryLabel: "View products",
+    secondaryHref: null,
+    secondaryTo: "/products",
+    image: null,
+    badge: "1 Year SMPS warranty",
+  },
+];
+
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [slide, setSlide] = useState(0);
+  const pauseRef = useRef(false);
 
   useEffect(() => {
     listProductsPublic().then(setProducts);
   }, []);
+
+  // Attach product images to slides when loaded
+  const slides = HERO_SLIDES.map((s, i) => {
+    const img =
+      products[i]?.image || products.find((p) => p.image)?.image || null;
+    return { ...s, image: s.image || img };
+  });
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (pauseRef.current) return;
+      setSlide((s) => (s + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [slides.length]);
+
+  const current = slides[slide] || slides[0];
 
   const heroProduct =
     products.find((p) => p.badge === "Popular" && p.image) ||
@@ -236,91 +322,186 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-[380px] h-[380px] rounded-full bg-brand-600/10 blur-[110px]" />
       </div>
 
-      {/* Hero */}
-      <section className="w-full min-h-[85vh] md:min-h-screen flex items-center pt-24 pb-10 relative overflow-hidden">
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 lg:gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="space-y-8"
-          >
+      {/* Hero Slider */}
+      <section
+        className="w-full relative overflow-hidden pt-20 md:pt-0"
+        onMouseEnter={() => {
+          pauseRef.current = true;
+        }}
+        onMouseLeave={() => {
+          pauseRef.current = false;
+        }}
+      >
+        {/* Desktop / laptop: full-bleed background image + left content */}
+        <div className="hidden md:block relative min-h-[85vh] lg:min-h-screen">
+          {slides.map((s, i) => (
             <div
-              className={`inline-flex items-center gap-2 ${glass} px-5 py-2 rounded-full text-sm`}
+              key={s.id}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                i === slide
+                  ? "opacity-100 z-[1]"
+                  : "opacity-0 z-0 pointer-events-none"
+              }`}
             >
-              <span>🇮🇳</span>
-              <span className="text-zinc-200">
-                Made in Gujarat • Manufacturer Direct
-              </span>
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold leading-[0.95] tracking-tighter">
-              LIGHT UP
-              <br />
-              YOUR{" "}
-              <span className="text-brand-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.35)]">
-                BRAND
-              </span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-zinc-400 max-w-lg leading-relaxed">
-              Premium LED Glowboxes with tool-free poster change. Perfect for
-              retail, temples, restaurants & exhibitions.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <Button href="/products">Explore Products</Button>
-              <Button
-                variant="whatsapp"
-                href={`https://wa.me/${company.whatsapp}?text=Hi%20Swashine%2C%20I%20want%20a%20quote`}
-              >
-                Get Quote on WhatsApp
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap gap-3 text-sm pt-1">
-              {["Custom Sizes", "1 Year Warranty", "5–6 Days Delivery"].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className={`${glass} px-3 py-1.5 rounded-full text-green-400/90 text-xs font-medium`}
-                  >
-                    ✔ {t}
-                  </span>
-                ),
-              )}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.75, delay: 0.12 }}
-            className="relative hidden md:flex items-center justify-center"
-          >
-            <div
-              className={`w-full max-w-md aspect-[4/3] ${glassCard} flex items-center justify-center overflow-hidden p-4 relative`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
-              {heroProduct?.image ? (
+              {s.image ? (
                 <img
-                  src={heroProduct.image}
-                  alt={heroProduct.name}
-                  className="relative w-full h-full object-contain drop-shadow-2xl"
+                  src={s.image}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-center"
                 />
               ) : (
-                <div className="text-center p-8 relative">
-                  <div className="text-7xl mb-4">💡</div>
-                  <div className="text-brand-400 font-semibold text-lg">
-                    Swashine Glowbox
-                  </div>
-                  <div className="text-zinc-500 text-sm mt-1">
-                    Premium LED Displays
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-zinc-900" />
               )}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
             </div>
-          </motion.div>
+          ))}
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 min-h-[85vh] lg:min-h-screen flex items-center">
+            <div className="max-w-xl space-y-6 py-16">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.4 }}
+                  className="space-y-6"
+                >
+                  <div
+                    className={`inline-flex items-center gap-2 ${glass} px-5 py-2 rounded-full text-sm`}
+                  >
+                    <span>🇮🇳</span>
+                    <span className="text-zinc-200">{current.badge}</span>
+                  </div>
+                  <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.95] tracking-tighter text-left">
+                    {current.title}
+                  </h1>
+                  <p className="text-lg lg:text-xl text-zinc-300 max-w-lg leading-relaxed text-left">
+                    {current.description}
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Button href={current.ctaTo}>{current.ctaLabel}</Button>
+                    {current.secondaryHref ? (
+                      <Button variant="whatsapp" href={current.secondaryHref}>
+                        {current.secondaryLabel}
+                      </Button>
+                    ) : (
+                      <Button variant="secondary" href={current.secondaryTo}>
+                        {current.secondaryLabel}
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Dots */}
+              <div className="flex gap-2 pt-4">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-label={`Slide ${i + 1}`}
+                    onClick={() => setSlide(i)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === slide
+                        ? "w-8 bg-brand-400"
+                        : "w-3 bg-white/30 hover:bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile / tablet: image on top, content below */}
+        <div className="md:hidden">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-zinc-900">
+            {slides.map((s, i) => (
+              <div
+                key={s.id}
+                className={`absolute inset-0 transition-opacity duration-700 ${
+                  i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {s.image ? (
+                  <img
+                    src={s.image}
+                    alt=""
+                    className="w-full h-full object-cover object-center"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-6xl bg-zinc-900">
+                    💡
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+            ))}
+          </div>
+
+          <div className="px-4 sm:px-6 py-8 space-y-5 bg-zinc-950">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-5"
+              >
+                <div
+                  className={`inline-flex items-center gap-2 ${glass} px-4 py-1.5 rounded-full text-xs`}
+                >
+                  <span>🇮🇳</span>
+                  <span className="text-zinc-200">{current.badge}</span>
+                </div>
+                <h1 className="text-3xl sm:text-4xl font-bold leading-[1.05] tracking-tight">
+                  {current.title}
+                </h1>
+                <p className="text-base text-zinc-400 leading-relaxed">
+                  {current.description}
+                </p>
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                  <Button href={current.ctaTo} className="w-full sm:w-auto">
+                    {current.ctaLabel}
+                  </Button>
+                  {current.secondaryHref ? (
+                    <Button
+                      variant="whatsapp"
+                      href={current.secondaryHref}
+                      className="w-full sm:w-auto"
+                    >
+                      {current.secondaryLabel}
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      href={current.secondaryTo}
+                      className="w-full sm:w-auto"
+                    >
+                      {current.secondaryLabel}
+                    </Button>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex justify-center gap-2 pt-2">
+              {slides.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  aria-label={`Slide ${i + 1}`}
+                  onClick={() => setSlide(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === slide ? "w-8 bg-brand-400" : "w-3 bg-white/25"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

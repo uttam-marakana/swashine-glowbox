@@ -350,7 +350,7 @@ export default function Home() {
                 <img
                   src={s.image}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-scale-down object-center"
+                  className="absolute inset-0 w-full h-full object-contain object-right-center scale-95"
                 />
               ) : (
                 <div className="absolute inset-0 bg-zinc-900" />
@@ -361,7 +361,7 @@ export default function Home() {
           ))}
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 min-h-[85vh] lg:min-h-screen flex items-center">
-            <div className="max-w-xl space-y-6 py-16">
+            <div className="max-w-xl space-y-6 w-full pt-28 lg:pt-32 pb-16">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current.id}

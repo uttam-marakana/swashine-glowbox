@@ -212,14 +212,14 @@ export default function Products() {
                     <Link to={`/products/${p.slug}`} className="flex-1">
                       <Button
                         variant="secondary"
-                        className="w-full text-sm py-2.5"
+                        className="w-full text-sm !px-2 py-2.5"
                       >
                         View Details
                       </Button>
                     </Link>
                     <Button
                       href={getQuoteUrl(p.name)}
-                      className="flex-1 text-sm py-2.5"
+                      className="flex-1 text-sm !px-2 py-2.5"
                     >
                       Quote
                     </Button>

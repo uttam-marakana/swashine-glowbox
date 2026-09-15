@@ -57,7 +57,7 @@ export default function Header() {
           visible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 md:px-6 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 flex items-center justify-between gap-4 min-h-16 md:min-h-[4.5rem] lg:min-h-[5rem]">
           <Link
             to="/"
             className="flex items-center gap-2 shrink-0"
@@ -66,7 +66,7 @@ export default function Header() {
             <img
               src={logo}
               alt="Swashine Glowbox"
-              className="h-14 sm:h-16 md:h-24 w-auto object-contain"
+              className="h-12 sm:h-14 md:h-16 lg:h-[4.5rem] w-auto object-contain"
             />
           </Link>
 

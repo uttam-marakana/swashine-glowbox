@@ -201,7 +201,7 @@ export default function Products() {
                     Size: <span className="text-white">{p.size}</span>
                   </div>
                   <div className="text-sm text-brand-400/90 mb-3">
-                    {p.priceLabel}
+                    ₹{p.priceLabel}
                   </div>
                   {p.note && (
                     <div className="text-xs text-amber-500/80 mb-3">

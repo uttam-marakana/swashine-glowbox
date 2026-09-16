@@ -66,6 +66,76 @@ function Stars({ rating, size = 16 }) {
   );
 }
 
+/** With Print / Without Print — display only, no cart */
+function PrintPriceToggle({
+  priceWithoutPrint,
+  priceWithPrint,
+  fallback,
+  defaultWithPrint = true,
+}) {
+  const [withPrint, setWithPrint] = useState(defaultWithPrint);
+
+  const without = priceWithoutPrint || fallback || "—";
+  const withP = priceWithPrint || fallback || "—";
+  const activePrice = withPrint ? withP : without;
+
+  const btn = (active) =>
+    `flex-1 min-w-0 rounded-2xl border px-3 sm:px-4 py-3 text-center transition ${
+      active
+        ? "bg-brand-500/15 border-brand-400 text-white shadow-[0_0_24px_rgba(251,191,36,0.12)]"
+        : "bg-white/[0.03] border-white/10 text-zinc-400 hover:border-white/20"
+    }`;
+
+  return (
+    <div className="mb-6 space-y-3">
+      <div className="text-xs font-semibold tracking-wider uppercase text-zinc-500">
+        Print option
+      </div>
+      <div className="grid grid-cols-2 gap-2 sm:gap-3">
+        <button
+          type="button"
+          className={btn(!withPrint)}
+          onClick={() => setWithPrint(false)}
+        >
+          <div className="text-xs sm:text-sm font-medium mb-1">
+            Without Print
+          </div>
+          <div
+            className={`text-base sm:text-lg font-bold tabular-nums break-words ${
+              !withPrint ? "text-brand-400" : "text-zinc-500"
+            }`}
+          >
+            ₹{without}
+          </div>
+        </button>
+        <button
+          type="button"
+          className={btn(withPrint)}
+          onClick={() => setWithPrint(true)}
+        >
+          <div className="text-xs sm:text-sm font-medium mb-1">With Print</div>
+          <div
+            className={`text-base sm:text-lg font-bold tabular-nums break-words ${
+              withPrint ? "text-brand-400" : "text-zinc-500"
+            }`}
+          >
+            ₹{withP}
+          </div>
+        </button>
+      </div>
+      <div className="text-sm text-zinc-400">
+        Selected:{" "}
+        <span className="text-white font-medium">
+          {withPrint ? "With Print" : "Without Print"}
+        </span>
+        <span className="text-brand-400 font-bold ml-2 text-lg tabular-nums">
+          ₹{activePrice}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductDetails() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
@@ -175,7 +245,6 @@ export default function ProductDetails() {
         </Link>
 
         <div className="grid w-full min-w-0 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Gallery */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -288,7 +357,6 @@ export default function ProductDetails() {
             )}
           </motion.div>
 
-          {/* Details */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -308,9 +376,18 @@ export default function ProductDetails() {
               <span className="text-white font-medium">{product.size}</span>
             </div>
 
-            <div className="text-lg text-brand-400 mb-3 break-words">
-              {product.priceLabel}
-            </div>
+            {product.enablePrintPricing ? (
+              <PrintPriceToggle
+                priceWithoutPrint={product.priceWithoutPrint}
+                priceWithPrint={product.priceWithPrint}
+                fallback={product.priceLabel}
+                defaultWithPrint
+              />
+            ) : (
+              <div className="text-lg text-brand-400 mb-3 break-words">
+                {product.priceLabel}
+              </div>
+            )}
 
             <div
               className="flex flex-wrap items-center gap-2 mb-6"
@@ -409,7 +486,6 @@ export default function ProductDetails() {
           </motion.div>
         </div>
 
-        {/* Global frame explorer */}
         <div className="w-full min-w-0 max-w-full overflow-hidden mt-20 sm:mt-24">
           <div className={`${glass} rounded-[2rem] p-4 sm:p-6 md:p-8`}>
             <FrameExplorer productName={product.name} />
@@ -481,7 +557,6 @@ export default function ProductDetails() {
           </div>
         </section>
 
-        {/* Related — from listProductsPublic, not static products */}
         <div className="mt-20 sm:mt-24 w-full min-w-0 max-w-full">
           <h2 className="text-2xl font-bold mb-8">More Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 w-full min-w-0">

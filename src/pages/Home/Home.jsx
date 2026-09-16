@@ -293,7 +293,6 @@ export default function Home() {
     listProductsPublic().then(setProducts);
   }, []);
 
-  // Attach product images to slides when loaded
   const slides = HERO_SLIDES.map((s, i) => {
     const img =
       products[i]?.image || products.find((p) => p.image)?.image || null;

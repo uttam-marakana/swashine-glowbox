@@ -55,7 +55,7 @@ const defaultFrameViews = {
   front: frontImg,
   back: backImg,
   top: topImg,
-  bottom: "bottomImg",
+  bottom: bottomImg,
 };
 
 export async function getFrameViewsAdmin() {

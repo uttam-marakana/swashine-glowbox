@@ -6,8 +6,7 @@ import {
   updateProduct,
   upsertProduct,
 } from "@/services/productService";
-import { uploadProductImage } from "@/services/storageService";
-import { ArrowLeft, Upload, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Image as ImageIcon } from "lucide-react";
 
 const glass = "bg-white/[0.04] border border-white/10 rounded-2xl";
 
@@ -59,41 +58,6 @@ export default function ProductEdit() {
 
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
 
-  const onUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setBusy(true);
-    setMsg("");
-    try {
-      const key = form.slug || form.id || "temp";
-      const { url } = await uploadProductImage(String(key), file);
-      setForm((f) => ({
-        ...f,
-        image: f.image || url,
-        gallery: [...(f.gallery || []), url],
-      }));
-      setMsg("Gallery image uploaded");
-    } catch (err) {
-      setMsg(err.message || "Upload failed — check Firebase Storage");
-    } finally {
-      setBusy(false);
-      e.target.value = "";
-    }
-  };
-
-  const removeGalleryImage = (url) => {
-    setForm((f) => {
-      const gallery = (f.gallery || []).filter((u) => u !== url);
-      return {
-        ...f,
-        gallery,
-        image: f.image === url ? gallery[0] || "" : f.image,
-      };
-    });
-  };
-
-  const setPrimary = (url) => setForm((f) => ({ ...f, image: url }));
-
   const onSave = async (e) => {
     e.preventDefault();
     setBusy(true);
@@ -111,7 +75,6 @@ export default function ProductEdit() {
     };
 
     try {
-      // Prefer upsert if available
       if (typeof upsertProduct === "function") {
         const newId = await upsertProduct(payload);
         setMsg("Saved successfully");
@@ -141,6 +104,9 @@ export default function ProductEdit() {
       setBusy(false);
     }
   };
+
+  const previewImages =
+    form.gallery?.length > 0 ? form.gallery : form.image ? [form.image] : [];
 
   return (
     <div className="max-w-4xl">
@@ -315,33 +281,25 @@ export default function ProductEdit() {
 
         <section className={`${glass} p-5 md:p-6 space-y-4`}>
           <h2 className="text-sm font-semibold text-brand-400 uppercase tracking-wider">
-            Gallery images
+            Product images (local)
           </h2>
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="inline-flex items-center gap-2 rounded-xl bg-brand-500 text-black font-semibold text-sm px-4 py-2.5 cursor-pointer">
-              <Upload size={16} />
-              Upload image
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={onUpload}
-                disabled={busy}
-              />
-            </label>
-            <span className="text-xs text-zinc-500">
-              Used on product gallery · set primary below
-            </span>
-          </div>
+          <p className="text-xs text-zinc-500">
+            Photos come from the project folder via{" "}
+            <code className="text-zinc-400">company.js</code> for slug{" "}
+            <span className="text-brand-400">{form.slug || "—"}</span>. They are
+            not uploaded or saved to Firebase. Change files under{" "}
+            <code className="text-zinc-400">src/assets/images/products/</code>{" "}
+            and keep the same slug.
+          </p>
 
-          {(form.gallery || []).length === 0 ? (
+          {previewImages.length === 0 ? (
             <div className="rounded-xl border border-dashed border-zinc-700 py-12 text-center text-zinc-500">
               <ImageIcon className="mx-auto mb-2 opacity-40" size={32} />
-              No gallery images yet
+              No local images for this slug. Add them in company.js / assets.
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {(form.gallery || []).map((url) => (
+              {previewImages.map((url) => (
                 <div
                   key={url}
                   className={`relative rounded-xl border overflow-hidden bg-black/30 aspect-square ${
@@ -353,22 +311,11 @@ export default function ProductEdit() {
                     alt=""
                     className="w-full h-full object-contain p-1"
                   />
-                  <div className="absolute inset-x-0 bottom-0 flex gap-1 p-1 bg-black/70">
-                    <button
-                      type="button"
-                      onClick={() => setPrimary(url)}
-                      className="flex-1 text-[10px] py-1 rounded bg-white/10 hover:bg-brand-500/30"
-                    >
-                      {form.image === url ? "Primary" : "Set primary"}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => removeGalleryImage(url)}
-                      className="px-2 text-[10px] py-1 rounded bg-red-500/20 text-red-300"
-                    >
-                      ✕
-                    </button>
-                  </div>
+                  {form.image === url && (
+                    <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] py-0.5 rounded bg-brand-500/90 text-black font-semibold">
+                      Primary
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

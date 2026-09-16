@@ -7,11 +7,11 @@ import {
 } from "@/data/company";
 
 // Local frame images (project folder — no Firebase Storage)
-import frontImg from "@/assets/images/Frame Editor/frame_front.png";
-import backImg from "@/assets/images/Frame Editor/frame_back.png";
-import topImg from "@/assets/images/Frame Editor/frame_top.png";
+import frontImg from "@/assets/images/frame-editor/frame_front.png";
+import backImg from "@/assets/images/frame-editor/frame_back.png";
+import topImg from "@/assets/images/frame-editor/frame_top.png";
 // Uncomment when you add the file:
-// import bottomImg from "@/assets/images/Frame Editor/frame_bottom.png";
+// import bottomImg from "@/assets/images/frame-editor/frame_bottom.png";
 
 async function getSettings(key, fallbackItems) {
   if (!isFirebaseConfigured || !db) {

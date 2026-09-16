@@ -39,7 +39,6 @@ export default function AdminLayout() {
     const pages = [
       { type: "Page", title: "Dashboard", path: "/admin" },
       { type: "Page", title: "Inquiries", path: "/admin/inquiries" },
-      { type: "Page", title: "Frame views", path: "/admin/frame-views" },
       { type: "Page", title: "Products", path: "/admin/products" },
       { type: "Page", title: "Add product", path: "/admin/products/new" },
       { type: "Page", title: "Instagram feed", path: "/admin/instagram" },
@@ -101,11 +100,6 @@ export default function AdminLayout() {
           <NavLink to="/admin" end className={linkClass}>
             <LayoutDashboard size={18} />
             Dashboard
-          </NavLink>
-
-          <NavLink to="/admin/frame-views" className={linkClass}>
-            <Images size={18} />
-            Frame views
           </NavLink>
 
           <NavLink to="/admin/inquiries" className={linkClass}>
@@ -182,15 +176,6 @@ export default function AdminLayout() {
               >
                 <LayoutDashboard size={17} />
                 Dashboard
-              </NavLink>
-
-              <NavLink
-                to="/admin/frame-views"
-                className={linkClass}
-                onClick={closeMobileMenu}
-              >
-                <Images size={17} />
-                Frame views
               </NavLink>
 
               <NavLink

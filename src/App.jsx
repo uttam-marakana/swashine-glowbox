@@ -57,7 +57,6 @@ export default function App() {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="frame-views" element={<FrameViewsAdmin />} />
           <Route path="inquiries" element={<Inquiries />} />
           <Route path="products" element={<ProductsAdmin />} />
           <Route path="products/:id" element={<ProductEdit />} />

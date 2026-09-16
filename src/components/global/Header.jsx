@@ -66,7 +66,7 @@ export default function Header() {
             <img
               src={logo}
               alt="Swashine Glowbox"
-              className="h-12 sm:h-14 md:h-16 lg:h-[4.5rem] w-auto object-contain"
+              className="h-14 sm:h-16 md:h-18 lg:h-[4.5rem] w-auto object-contain"
             />
           </Link>
 

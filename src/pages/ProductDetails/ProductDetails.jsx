@@ -367,7 +367,7 @@ export default function ProductDetails() {
               {product.category}
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 break-words [overflow-wrap:anywhere]">
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 [overflow-wrap:anywhere]">
               {product.name}
             </h1>
 
@@ -402,7 +402,7 @@ export default function ProductDetails() {
               </span>
             </div>
 
-            <p className="text-zinc-400 text-lg leading-relaxed mb-8 break-words [overflow-wrap:anywhere]">
+            <p className="text-zinc-400 text-lg leading-relaxed mb-8 [overflow-wrap:anywhere]">
               {product.description}
             </p>
 
@@ -423,7 +423,7 @@ export default function ProductDetails() {
                         size={18}
                         className="text-brand-400 mt-0.5 shrink-0"
                       />
-                      <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                      <span className="min-w-0  [overflow-wrap:anywhere]">
                         {f}
                       </span>
                     </li>
@@ -437,11 +437,11 @@ export default function ProductDetails() {
                 className={`${glassCard} w-full min-w-0 max-w-full p-5 mb-8`}
               >
                 <div className="text-sm text-zinc-500 mb-1">Includes</div>
-                <div className="font-medium break-words [overflow-wrap:anywhere]">
+                <div className="font-medium [overflow-wrap:anywhere]">
                   {product.includes}
                 </div>
                 {product.note && (
-                  <div className="text-sm text-amber-500/90 mt-2 break-words [overflow-wrap:anywhere]">
+                  <div className="text-sm text-amber-500/90 mt-2 [overflow-wrap:anywhere]">
                     {product.note}
                   </div>
                 )}
@@ -476,7 +476,7 @@ export default function ProductDetails() {
                 {orderNotes.map((note, i) => (
                   <li key={i} className="flex items-start gap-2 min-w-0">
                     <span className="text-brand-400 shrink-0">~</span>
-                    <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                    <span className="min-w-0 [overflow-wrap:anywhere]">
                       {note}
                     </span>
                   </li>
@@ -515,7 +515,7 @@ export default function ProductDetails() {
                   <h3 className="font-semibold text-brand-400 text-sm mb-1 break-words">
                     {w.title}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed break-words [overflow-wrap:anywhere]">
+                  <p className="text-xs text-zinc-400 leading-relaxed [overflow-wrap:anywhere]">
                     {w.desc}
                   </p>
                 </div>
@@ -549,7 +549,7 @@ export default function ProductDetails() {
                 }`}
               >
                 <span className="text-zinc-500 min-w-0">{label}</span>
-                <span className="text-white font-medium text-right min-w-0 break-words [overflow-wrap:anywhere]">
+                <span className="text-white font-medium text-right min-w-0 [overflow-wrap:anywhere]">
                   {value}
                 </span>
               </div>

@@ -97,10 +97,9 @@ export default function FrameExplorer({
                 <div className="text-center text-zinc-500 p-6">
                   <ImageIcon size={40} className="mx-auto mb-2 opacity-40" />
                   <p className="text-sm capitalize">{active} view</p>
-                  <p className="text-xs text-zinc-600 mt-1">
-                    {hasAny
-                      ? "No image for this angle — set it in Admin → Frame views"
-                      : "Upload images in Admin → Frame views"}
+                  <p className="text-zinc-400 text-sm mt-2 max-w-lg mx-auto">
+                    Front, back, top insert slot and bottom — same photos on
+                    every product.
                   </p>
                 </div>
               )}

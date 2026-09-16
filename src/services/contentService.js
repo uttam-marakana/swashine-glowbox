@@ -10,8 +10,7 @@ import {
 import frontImg from "@/assets/images/frame-editor/frame_front.png";
 import backImg from "@/assets/images/frame-editor/frame_back.png";
 import topImg from "@/assets/images/frame-editor/frame_top.png";
-// Uncomment when you add the file:
-// import bottomImg from "@/assets/images/frame-editor/frame_bottom.png";
+import bottomImg from "@/assets/images/frame-editor/frame_bottom.png";
 
 async function getSettings(key, fallbackItems) {
   if (!isFirebaseConfigured || !db) {
@@ -56,7 +55,7 @@ const defaultFrameViews = {
   front: frontImg,
   back: backImg,
   top: topImg,
-  bottom: "", // set to bottomImg when frame_bottom.png exists
+  bottom: "bottomImg",
 };
 
 export async function getFrameViewsAdmin() {

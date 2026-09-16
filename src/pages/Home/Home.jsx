@@ -21,8 +21,8 @@ import FaqList from "@/components/common/FaqList";
 import InstagramFeed from "@/components/common/InstagramFeed";
 import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
-import Slider_img1 from "@/assets/images/Hero Section/slider_img1.png";
-import Slider_img2 from "@/assets/images/Hero Section/slider_img2.png";
+import Slider_img1 from "@/assets/images/hero-section/slider_img1.png";
+import Slider_img2 from "@/assets/images/hero-section/slider_img2.png";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
 

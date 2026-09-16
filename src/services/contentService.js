@@ -6,6 +6,13 @@ import {
   catalogs as staticCatalogs,
 } from "@/data/company";
 
+// Local frame images (project folder — no Firebase Storage)
+import frontImg from "@/assets/images/Frame Editor/frame_front.png";
+import backImg from "@/assets/images/Frame Editor/frame_back.png";
+import topImg from "@/assets/images/Frame Editor/frame_top.png";
+// Uncomment when you add the file:
+// import bottomImg from "@/assets/images/Frame Editor/frame_bottom.png";
+
 async function getSettings(key, fallbackItems) {
   if (!isFirebaseConfigured || !db) {
     return { items: fallbackItems || [], source: "company.js" };
@@ -28,7 +35,7 @@ async function saveSettings(key, items) {
   await setDoc(
     doc(db, "settings", key),
     { items, updatedAt: serverTimestamp() },
-    { merge: true }
+    { merge: true },
   );
 }
 
@@ -43,35 +50,34 @@ export const getCatalogsAdmin = () =>
   getSettings("catalogs", staticCatalogs || []);
 export const saveCatalogs = (items) => saveSettings("catalogs", items);
 
-// ——— Global FrameExplorer images (same on all products) ———
+// ——— Global FrameExplorer images (local assets) ———
 
 const defaultFrameViews = {
-  front: "",
-  back: "",
-  top: "",
-  bottom: "",
+  front: frontImg,
+  back: backImg,
+  top: topImg,
+  bottom: "", // set to bottomImg when frame_bottom.png exists
 };
 
 export async function getFrameViewsAdmin() {
-  if (!isFirebaseConfigured || !db) {
-    return { ...defaultFrameViews, source: "empty" };
-  }
-  try {
-    const snap = await getDoc(doc(db, "settings", "frameViews"));
-    if (snap.exists()) {
-      const d = snap.data();
-      return {
-        front: d.front || "",
-        back: d.back || "",
-        top: d.top || "",
-        bottom: d.bottom || "",
-        source: "firestore",
-      };
+  if (isFirebaseConfigured && db) {
+    try {
+      const snap = await getDoc(doc(db, "settings", "frameViews"));
+      if (snap.exists()) {
+        const d = snap.data();
+        return {
+          front: d.front || defaultFrameViews.front,
+          back: d.back || defaultFrameViews.back,
+          top: d.top || defaultFrameViews.top,
+          bottom: d.bottom || defaultFrameViews.bottom,
+          source: "firestore",
+        };
+      }
+    } catch (e) {
+      console.warn(e);
     }
-  } catch (e) {
-    console.warn(e);
   }
-  return { ...defaultFrameViews, source: "empty" };
+  return { ...defaultFrameViews, source: "local" };
 }
 
 export async function getFrameViewsPublic() {
@@ -82,7 +88,9 @@ export async function getFrameViewsPublic() {
 
 export async function saveFrameViews(frameViews) {
   if (!isFirebaseConfigured || !db) {
-    throw new Error("Firebase not configured");
+    throw new Error(
+      "Frame images are local. Replace files in src/assets/images/Frame Editor/",
+    );
   }
   await setDoc(
     doc(db, "settings", "frameViews"),
@@ -93,6 +101,6 @@ export async function saveFrameViews(frameViews) {
       bottom: frameViews.bottom || "",
       updatedAt: serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
 }

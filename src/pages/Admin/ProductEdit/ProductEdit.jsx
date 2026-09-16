@@ -19,6 +19,9 @@ const empty = {
   sizeKey: "18x24",
   priceRange: "mid",
   priceLabel: "",
+  enablePrintPricing: false,
+  priceWithoutPrint: "",
+  priceWithPrint: "",
   description: "",
   features: [],
   includes: "",
@@ -51,6 +54,9 @@ export default function ProductEdit() {
         ...empty,
         ...p,
         gallery: p.gallery || [],
+        enablePrintPricing: !!p.enablePrintPricing,
+        priceWithoutPrint: p.priceWithoutPrint || "",
+        priceWithPrint: p.priceWithPrint || "",
       });
       setFeaturesText((p.features || []).join("\n"));
     });
@@ -67,6 +73,9 @@ export default function ProductEdit() {
       ...form,
       id: Number(form.id) || 1,
       badge: form.badge || null,
+      enablePrintPricing: !!form.enablePrintPricing,
+      priceWithoutPrint: form.priceWithoutPrint || "",
+      priceWithPrint: form.priceWithPrint || "",
       features: featuresText
         .split("\n")
         .map((s) => s.trim())
@@ -222,7 +231,7 @@ export default function ProductEdit() {
               />
             </label>
             <label className={labelCls}>
-              Price label
+              Price label (when print pricing is off)
               <input
                 className={field}
                 value={form.priceLabel}
@@ -242,6 +251,46 @@ export default function ProductEdit() {
                 <option value="high">high</option>
               </select>
             </label>
+          </div>
+
+          <div className="pt-4 border-t border-white/10 space-y-4">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={!!form.enablePrintPricing}
+                onChange={(e) => set("enablePrintPricing", e.target.checked)}
+                className="w-4 h-4 rounded border-zinc-600 text-brand-500 focus:ring-brand-400"
+              />
+              <span className="text-sm text-zinc-200">
+                Enable Print Pricing
+              </span>
+            </label>
+            <p className="text-xs text-zinc-500">
+              When enabled, the product page shows Without Print / With Print
+              options. When disabled, only the price label is shown.
+            </p>
+            {form.enablePrintPricing && (
+              <div className="grid sm:grid-cols-2 gap-4">
+                <label className={labelCls}>
+                  Without Print Price
+                  <input
+                    className={field}
+                    value={form.priceWithoutPrint || ""}
+                    onChange={(e) => set("priceWithoutPrint", e.target.value)}
+                    placeholder="₹2,000"
+                  />
+                </label>
+                <label className={labelCls}>
+                  With Print Price
+                  <input
+                    className={field}
+                    value={form.priceWithPrint || ""}
+                    onChange={(e) => set("priceWithPrint", e.target.value)}
+                    placeholder="₹2,500"
+                  />
+                </label>
+              </div>
+            )}
           </div>
         </section>
 

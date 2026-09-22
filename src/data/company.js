@@ -439,7 +439,7 @@ export const features = [
   {
     icon: "Ruler",
     title: "Any Size Possible",
-    desc: "Expert custom manufacturing from A5 to 2 × 6 ft jumbo formats.",
+    desc: "Expert custom manufacturing from A3 to 2 × 6 ft jumbo formats.",
   },
 ];
 
@@ -577,7 +577,7 @@ export const warrantyPoints = [
   },
   {
     title: "Made in Gujarat",
-    desc: "Manufactured in Rajkot under Swastik Industries.",
+    desc: "Manufactured in Rajkot under Shreeji Industries.",
   },
   {
     title: "What is not covered",
@@ -594,7 +594,7 @@ export const caseStudies = [
   {
     title: "Machine tools branding",
     place: "Industrial client",
-    result: "Multiple illuminated boards for brand + GST contact panels.",
+    result: "Multiple illuminated boards for GST + Legal certification Dispaly.",
   },
   {
     title: "Café menu boards",

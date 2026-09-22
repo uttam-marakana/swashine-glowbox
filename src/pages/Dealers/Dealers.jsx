@@ -172,21 +172,12 @@ export default function Dealers() {
                     </Field>
                   </div>
                   <Field name="email">
-                      {({ field }) => (
-                        <Input
-                          {...field}
-                          type="email"
-                          label="Email *"
-                          error={touched.email && errors.email}
-                        />
-                      )}
-                    </Field>
-                  <Field name="volume">
                     {({ field }) => (
                       <Input
                         {...field}
-                        label="Expected monthly volume"
-                        placeholder="e.g. 20–50 units"
+                        type="email"
+                        label="Email *"
+                        error={touched.email && errors.email}
                       />
                     )}
                   </Field>

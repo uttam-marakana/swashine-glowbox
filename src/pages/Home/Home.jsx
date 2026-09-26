@@ -443,65 +443,67 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="px-4 sm:px-6 py-8 space-y-5 bg-zinc-950">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35 }}
-                className="space-y-5"
-              >
-                <div
-                  className={`inline-flex items-center gap-2 ${glass} px-4 py-1.5 rounded-full text-xs`}
+          <div className="py-8 bg-zinc-950">
+            <div className="page-container space-y-5">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35 }}
+                  className="space-y-5"
                 >
-                  <span>🇮🇳</span>
-                  <span className="text-zinc-200">{current.badge}</span>
-                </div>
-                <h1 className="text-3xl sm:text-4xl font-bold leading-[1.05] tracking-tight">
-                  {current.title}
-                </h1>
-                <p className="text-base text-zinc-400 leading-relaxed">
-                  {current.description}
-                </p>
-                <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                  <Button href={current.ctaTo} className="w-full sm:w-auto">
-                    {current.ctaLabel}
-                  </Button>
-                  {current.secondaryHref ? (
-                    <Button
-                      variant="whatsapp"
-                      href={current.secondaryHref}
-                      className="w-full sm:w-auto"
-                    >
-                      {current.secondaryLabel}
+                  <div
+                    className={`inline-flex items-center gap-2 ${glass} px-4 py-1.5 rounded-full text-xs`}
+                  >
+                    <span>🇮🇳</span>
+                    <span className="text-zinc-200">{current.badge}</span>
+                  </div>
+                  <h1 className="text-3xl sm:text-4xl font-bold leading-[1.05] tracking-tight">
+                    {current.title}
+                  </h1>
+                  <p className="text-base text-zinc-400 leading-relaxed">
+                    {current.description}
+                  </p>
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                    <Button href={current.ctaTo} className="w-full sm:w-auto">
+                      {current.ctaLabel}
                     </Button>
-                  ) : (
-                    <Button
-                      variant="secondary"
-                      href={current.secondaryTo}
-                      className="w-full sm:w-auto"
-                    >
-                      {current.secondaryLabel}
-                    </Button>
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                    {current.secondaryHref ? (
+                      <Button
+                        variant="whatsapp"
+                        href={current.secondaryHref}
+                        className="w-full sm:w-auto"
+                      >
+                        {current.secondaryLabel}
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="secondary"
+                        href={current.secondaryTo}
+                        className="w-full sm:w-auto"
+                      >
+                        {current.secondaryLabel}
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
-            <div className="flex justify-center gap-2 pt-2">
-              {slides.map((s, i) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  aria-label={`Slide ${i + 1}`}
-                  onClick={() => setSlide(i)}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === slide ? "w-8 bg-brand-400" : "w-3 bg-white/25"
-                  }`}
-                />
-              ))}
+              <div className="flex justify-center gap-2 pt-2">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-label={`Slide ${i + 1}`}
+                    onClick={() => setSlide(i)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === slide ? "w-8 bg-brand-400" : "w-3 bg-white/25"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -523,11 +525,7 @@ export default function Home() {
       </section>
 
       {/* How it works — active step + auto-rotate */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <HowItWorksSection />
-        </div>
-      </section>
+      <HowItWorksSection />
 
       {/* Features — interactive hover */}
       <section className="py-10 md:py-12">

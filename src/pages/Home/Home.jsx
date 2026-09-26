@@ -141,7 +141,7 @@ function HowItWorksSection() {
 
   return (
     <section className="py-12" ref={sectionRef}>
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="page-container">
         <div className="text-center mb-4">
           <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
             Process
@@ -359,7 +359,7 @@ export default function Home() {
             </div>
           ))}
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 min-h-[85vh] lg:min-h-screen flex items-center">
+          <div className="page-container relative z-10 min-h-[85vh] lg:min-h-screen flex items-center">
             <div className="max-w-xl space-y-6 w-full pt-28 lg:pt-32 pb-16">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -509,7 +509,7 @@ export default function Home() {
 
       {/* Stats — count-up + hover */}
       <section className="w-full py-8 md:py-10 border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <div
             className={`${glass} rounded-2xl md:rounded-[2rem] px-4 sm:px-6 py-8`}
           >
@@ -524,14 +524,14 @@ export default function Home() {
 
       {/* How it works — active step + auto-rotate */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <HowItWorksSection />
         </div>
       </section>
 
       {/* Features — interactive hover */}
       <section className="py-10 md:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -571,7 +571,7 @@ export default function Home() {
 
       {/* Featured products */}
       <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div>
               <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
@@ -629,7 +629,7 @@ export default function Home() {
 
       {/* Size compare */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             Compare sizes
           </h2>
@@ -676,7 +676,7 @@ export default function Home() {
 
       {/* Industries */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Industries we serve
           </h2>
@@ -706,7 +706,7 @@ export default function Home() {
 
       {/* Video highlights */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <div className="text-center mb-8">
             <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
               Watch
@@ -747,7 +747,7 @@ export default function Home() {
 
       {/* Before / After */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -761,7 +761,7 @@ export default function Home() {
           <div
             className={`${glass} rounded-2xl md:rounded-[2rem] p-4 sm:p-6 md:p-8`}
           >
-            <div className="w-full max-w-6xl flex justify-center">
+            <div className="w-full flex justify-center">
               <BeforeAfter
                 title="Before & After"
                 description="Upload one photo, then toggle OFF / ON to preview unlit vs illuminated."
@@ -776,7 +776,7 @@ export default function Home() {
 
       {/* Case studies */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Client work
           </h2>
@@ -803,7 +803,7 @@ export default function Home() {
 
       {/* Warranty */}
       <section className="py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Quality & warranty
           </h2>
@@ -820,7 +820,7 @@ export default function Home() {
 
       {/* Reviews */}
       <section className="py-10 md:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-8">
             <h2 className="text-3xl md:text-4xl font-bold">Customer reviews</h2>
             <Link
@@ -848,53 +848,57 @@ export default function Home() {
 
       {/* Instagram */}
       <section className="py-10 md:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="page-container">
           <InstagramFeed />
         </div>
       </section>
 
       {/* FAQ */}
       <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold">FAQs</h2>
-            <Link
-              to="/faq"
-              className="text-brand-400 text-sm hover:underline mt-2 inline-block"
-            >
-              View all FAQs →
-            </Link>
-          </div>
-          <div className={`${glass} rounded-3xl p-4 md:p-6`}>
-            <FaqList items={faqs.slice(0, 5)} />
+        <div className="page-container">
+          <div className="mx-auto max-w-3xl">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold">FAQs</h2>
+              <Link
+                to="/faq"
+                className="text-brand-400 text-sm hover:underline mt-2 inline-block"
+              >
+                View all FAQs →
+              </Link>
+            </div>
+            <div className={`${glass} rounded-3xl p-4 md:p-6`}>
+              <FaqList items={faqs.slice(0, 5)} />
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="w-full py-12 md:py-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div
-            className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
-            <h2 className="relative text-3xl font-bold mb-3">
-              Ready to light up your space?
-            </h2>
-            <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
-              Get a custom quote on WhatsApp or explore our full product range.
-            </p>
-            <div className="relative flex flex-wrap justify-center gap-4">
-              <Button href="/products" className="text-lg px-10 py-4">
-                View all products
-              </Button>
-              <Button
-                variant="whatsapp"
-                href={`https://wa.me/${company.whatsapp}`}
-                className="text-lg px-10 py-4"
-              >
-                WhatsApp us
-              </Button>
+        <div className="page-container">
+          <div className="mx-auto max-w-4xl">
+            <div
+              className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
+              <h2 className="relative text-3xl font-bold mb-3">
+                Ready to light up your space?
+              </h2>
+              <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
+                Get a custom quote on WhatsApp or explore our full product range.
+              </p>
+              <div className="relative flex flex-wrap justify-center gap-4">
+                <Button href="/products" className="text-lg px-10 py-4">
+                  View all products
+                </Button>
+                <Button
+                  variant="whatsapp"
+                  href={`https://wa.me/${company.whatsapp}`}
+                  className="text-lg px-10 py-4"
+                >
+                  WhatsApp us
+                </Button>
+              </div>
             </div>
           </div>
         </div>

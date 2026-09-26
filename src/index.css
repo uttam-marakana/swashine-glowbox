@@ -12,6 +12,20 @@
 }
 
 @layer utilities {
+  .page-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 640px) {
+    .page-container {
+      padding-inline: 1.5rem;
+    }
+  }
+
   .glow {
     box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
   }

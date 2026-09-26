@@ -235,7 +235,7 @@ export default function ProductDetails() {
         <div className="absolute bottom-20 left-0 w-[360px] h-[360px] max-w-[65vw] max-h-[65vw] rounded-full bg-amber-400/8 blur-[100px]" />
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 min-w-0">
+      <div className="page-container min-w-0">
         <Link
           to="/products"
           className={`inline-flex max-w-full items-center gap-2 text-sm text-zinc-400 hover:text-brand-400 mb-8 transition ${glass} px-4 py-2 rounded-full`}

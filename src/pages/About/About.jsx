@@ -19,7 +19,7 @@ export default function About() {
         <div className="absolute bottom-20 left-0 w-[360px] h-[360px] rounded-full bg-amber-400/8 blur-[100px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="page-container">
         {/* Hero row */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <motion.div

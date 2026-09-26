@@ -11,7 +11,7 @@ const glassCard = `${glass} ${glassHover} rounded-3xl`;
 export default function Reviews() {
   return (
     <div className="pt-28 pb-20 min-h-screen">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="page-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

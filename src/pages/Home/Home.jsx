@@ -188,7 +188,7 @@ function HowItWorksSection() {
           ))}
         </div>
 
-        <div className="flex justify-center gap-2 mb-8">
+        {/* <div className="flex justify-center gap-2 mb-8">
           {howItWorks.map((_, i) => (
             <button
               key={i}
@@ -202,7 +202,7 @@ function HowItWorksSection() {
               }`}
             />
           ))}
-        </div>
+        </div> */}
 
         <div className="text-center mt-10">
           <Button href="/custom">Start with size calculator</Button>

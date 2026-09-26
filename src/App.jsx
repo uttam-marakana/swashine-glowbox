@@ -13,6 +13,7 @@ import HowItWorks from "./pages/HowItWorks/HowItWorks";
 import Faq from "./pages/Faq/Faq";
 import Dealers from "./pages/Dealers/Dealers";
 import Reviews from "./pages/Reviews/Reviews";
+import SEO from "./components/common/SEO";
 
 import RequireAdmin from "./components/admin/RequireAdmin";
 import AdminLayout from "./layouts/AdminLayout";
@@ -29,6 +30,7 @@ import CatalogsAdmin from "./pages/Admin/Catalogs/CatalogsAdmin";
 export default function App() {
   return (
     <AuthProvider>
+      <SEO />
       <Routes>
         {/* Public site */}
         <Route element={<MainLayout />}>

@@ -105,6 +105,8 @@ export default function FrameViewsAdmin() {
                   src={form[key]}
                   alt={label}
                   className="h-20 object-contain rounded-lg border border-white/10 bg-black/40"
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : null}
             </div>

@@ -704,7 +704,7 @@ export default function Home() {
       {/* 10. CTA */}
       <section className="w-full py-12 md:py-14">
         {/* <div className="page-container"> */}
-          <div className="mx-auto">
+          <div className="mx-auto max-w-7xl">
             <div
               className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
             >

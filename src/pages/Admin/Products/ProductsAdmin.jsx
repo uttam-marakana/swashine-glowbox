@@ -131,6 +131,8 @@ export default function ProductsAdmin() {
                       src={p.image}
                       alt=""
                       className="w-full h-full object-contain"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-2xl">

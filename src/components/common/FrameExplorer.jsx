@@ -92,6 +92,8 @@ export default function FrameExplorer({
                   src={shellSrc}
                   alt={`${productName} — ${active}`}
                   className="max-w-full max-h-full w-full h-full object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div className="text-center text-zinc-500 p-6">
@@ -124,6 +126,8 @@ export default function FrameExplorer({
                   src={views[v.id]}
                   alt=""
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </button>
             ) : null,

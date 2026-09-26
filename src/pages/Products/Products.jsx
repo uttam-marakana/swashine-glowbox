@@ -225,6 +225,8 @@ export default function Products() {
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span className="text-6xl">💡</span>

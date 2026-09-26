@@ -188,22 +188,6 @@ function HowItWorksSection() {
           ))}
         </div>
 
-        {/* <div className="flex justify-center gap-2 mb-8">
-          {howItWorks.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Step ${i + 1}`}
-              onClick={() => setActive(i)}
-              className={`h-1.5 rounded-full transition-all ${
-                active === i
-                  ? "w-8 bg-brand-400"
-                  : "w-3 bg-white/15 hover:bg-white/25"
-              }`}
-            />
-          ))}
-        </div> */}
-
         <div className="text-center mt-10">
           <Button href="/custom">Start with size calculator</Button>
         </div>

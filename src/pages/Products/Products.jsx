@@ -1,7 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { company, orderNotes, sizeFilters, priceFilters } from "@/data/company";
+import {
+  company,
+  orderNotes,
+  sizeFilters,
+  priceFilters,
+  sizeCompare,
+} from "@/data/company";
 import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
 
@@ -134,6 +140,51 @@ export default function Products() {
           </div>
         </div>
 
+        {/* Compare sizes (moved from Home) */}
+        <section className="mb-14">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2">
+            Compare sizes
+          </h2>
+          <p className="text-zinc-400 text-center text-sm mb-6">
+            Quick guide to pick the right format for your space.
+          </p>
+          <div className={`${glass} rounded-3xl overflow-hidden`}>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left min-w-[640px]">
+                <thead className="bg-white/[0.04] text-zinc-400 border-b border-white/10">
+                  <tr>
+                    <th className="px-5 py-4 font-medium">Size</th>
+                    <th className="px-5 py-4 font-medium">Best for</th>
+                    <th className="px-5 py-4 font-medium">Type</th>
+                    <th className="px-5 py-4 font-medium">Price range</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sizeCompare.map((row, i) => (
+                    <tr
+                      key={row.size}
+                      className={`border-b border-white/5 ${
+                        i % 2 === 0 ? "bg-transparent" : "bg-white/[0.02]"
+                      }`}
+                    >
+                      <td className="px-5 py-3.5 font-medium text-white">
+                        {row.size}
+                      </td>
+                      <td className="px-5 py-3.5 text-zinc-400">
+                        {row.bestFor}
+                      </td>
+                      <td className="px-5 py-3.5 text-zinc-400">{row.type}</td>
+                      <td className="px-5 py-3.5 text-brand-400">
+                        {row.price}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         {/* Grid */}
         {filtered.length === 0 ? (
           <div
@@ -201,7 +252,7 @@ export default function Products() {
                     Size: <span className="text-white">{p.size}</span>
                   </div>
                   <div className="text-sm text-brand-400/90 mb-3">
-                    ₹{p.priceLabel}
+                    {p.priceLabel}
                   </div>
                   {p.note && (
                     <div className="text-xs text-amber-500/80 mb-3">

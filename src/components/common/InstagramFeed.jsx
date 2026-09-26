@@ -339,15 +339,10 @@ export default function InstagramFeed({ className = "" }) {
               {/* =================================================
                   MEDIA WINDOW
               ================================================= */}
-              <button
-                type="button"
-                onClick={() => setSelectedPost(post)}
-                className={`block relative w-full ${
+              <div
+                className={`relative w-full ${
                   post.reel ? "aspect-[9/16]" : "aspect-[4/5]"
                 } overflow-hidden bg-black`}
-                aria-label={`Play Instagram ${post.reel ? "reel" : "post"} from ${
-                  post.profileName
-                }`}
               >
                 <iframe
                   title={`Instagram ${post.reel ? "reel" : "post"} ${post.id}`}
@@ -359,84 +354,15 @@ export default function InstagramFeed({ className = "" }) {
                   allowFullScreen
                   scrolling="no"
                 />
-
-                {/* -------------------------------------------------
-                    MEDIA OVERLAY
-                ------------------------------------------------- */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    pointer-events-none
-                    bg-black/5
-                    group-hover:bg-transparent
-                    transition
-                    duration-300
-                  "
+                <button
+                  type="button"
+                  onClick={() => setSelectedPost(post)}
+                  className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-brand-400"
+                  aria-label={`Show Instagram ${post.reel ? "reel" : "post"} from ${
+                    post.profileName
+                  }`}
                 />
-
-                {/* -------------------------------------------------
-                    REEL PLAY ICON
-                ------------------------------------------------- */}
-                {post.reel && (
-                  <div
-                    className="
-                      absolute
-                      inset-0
-                      flex
-                      items-center
-                      justify-center
-                      pointer-events-none
-                    "
-                  >
-                    <div
-                      className="
-                        w-14
-                        h-14
-                        rounded-full
-                        bg-white/90
-                        backdrop-blur-sm
-                        flex
-                        items-center
-                        justify-center
-                        shadow-2xl
-                        opacity-90
-                        group-hover:scale-110
-                        transition-transform
-                        duration-300
-                      "
-                    >
-                      <span
-                        className="
-                          text-black
-                          text-xl
-                          ml-1
-                        "
-                      >
-                        ▶
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {/* -------------------------------------------------
-                    HOVER BORDER
-                ------------------------------------------------- */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    pointer-events-none
-                    rounded-none
-                    ring-1
-                    ring-inset
-                    ring-transparent
-                    group-hover:ring-brand-400/30
-                    transition
-                    duration-300
-                  "
-                />
-              </button>
+              </div>
 
               {/* =================================================
                   CUSTOM CARD FOOTER

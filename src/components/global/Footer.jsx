@@ -22,6 +22,8 @@ export default function Footer() {
                 src={logo}
                 alt="Swashine Glowbox"
                 className="h-20 md:h-24 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </Link>
 

@@ -277,6 +277,9 @@ export default function ProductDetails() {
                       src={mainSrc}
                       alt={`${product.name} - view ${activeIndex + 1}`}
                       className="block max-w-full max-h-full w-full h-full object-contain p-2 sm:p-3 pointer-events-none select-none"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
                       draggable={false}
                     />
                   ) : (
@@ -339,6 +342,8 @@ export default function ProductDetails() {
                       src={thumb}
                       alt=""
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </button>
                 ))}
@@ -574,6 +579,8 @@ export default function ProductDetails() {
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-1.5 md:p-2 group-hover:scale-[1.03] transition duration-500"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span className="text-5xl">💡</span>

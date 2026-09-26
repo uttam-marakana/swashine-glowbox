@@ -359,6 +359,8 @@ export default function ProductEdit() {
                     src={url}
                     alt=""
                     className="w-full h-full object-contain p-1"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {form.image === url && (
                     <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] py-0.5 rounded bg-brand-500/90 text-black font-semibold">

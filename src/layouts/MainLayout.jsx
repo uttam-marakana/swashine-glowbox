@@ -9,7 +9,7 @@ export default function MainLayout() {
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Header />
-      <main className="flex-1">
+      <main className="w-full min-w-0 flex-1">
         <Outlet />
       </main>
       <Footer />

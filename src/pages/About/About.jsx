@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
-import { company, warrantyPoints, features } from "@/data/company";
+import {
+  company,
+  warrantyPoints,
+  features,
+  industries,
+  caseStudies,
+} from "@/data/company";
 import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
 const iconMap = { Zap, RefreshCw, Shield, Ruler };
@@ -13,14 +19,12 @@ const glassCard = `${glass} ${glassHover} rounded-3xl`;
 export default function About() {
   return (
     <div className="pt-28 pb-20 relative">
-      {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         <div className="absolute -top-32 right-0 w-[420px] h-[420px] rounded-full bg-brand-500/12 blur-[110px]" />
         <div className="absolute bottom-20 left-0 w-[360px] h-[360px] rounded-full bg-amber-400/8 blur-[100px]" />
       </div>
 
       <div className="page-container">
-        {/* Hero row */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <motion.div
             initial={{ opacity: 0, x: -28 }}
@@ -93,7 +97,6 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Features strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +107,7 @@ export default function About() {
             What we stand for
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {features.map((f, i) => {
+            {features.map((f) => {
               const Icon = iconMap[f.icon] || Zap;
               return (
                 <div key={f.title} className={`${glassCard} p-6`}>
@@ -121,7 +124,65 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Warranty / quality */}
+        {/* Industries (moved from Home) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Industries we serve
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {industries.map((ind, i) => (
+              <motion.a
+                key={ind.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
+                  `Hi, I need a glowbox for: ${ind.query}`,
+                )}`}
+                className={`${glassCard} p-6 gap-4 block`}
+              >
+                <div className="text-3xl mb-3">{ind.emoji}</div>
+                <h3 className="font-semibold text-lg mb-1">{ind.title}</h3>
+                <p className="text-sm text-zinc-400">{ind.desc}</p>
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Client work (moved from Home) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl font-bold text-center mb-10">Client work</h2>
+          <div className="grid md:grid-cols-2 gap-5">
+            {caseStudies.map((c, i) => (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className={`${glassCard} p-8`}
+              >
+                <div className="text-xs text-brand-400 font-semibold uppercase mb-2">
+                  {c.place}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
+                <p className="text-sm text-zinc-400">{c.result}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -142,7 +203,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Brand line */}
         <div
           className={`${glass} rounded-[2rem] mt-20 p-8 md:p-12 text-center`}
         >

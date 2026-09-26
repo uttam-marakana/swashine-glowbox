@@ -684,7 +684,7 @@ export default function Home() {
       {/* 9. FAQ */}
       <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
         <div className="page-container">
-          <div className="mx-auto max-w-3xl">
+          <div className="max-w-7xl">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
               <h2 className="text-3xl md:text-4xl font-bold">FAQs</h2>
               <Link

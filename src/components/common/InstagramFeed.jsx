@@ -127,15 +127,28 @@ export default function InstagramFeed({ className = "" }) {
   if (!items.length) {
     return (
       <section className={className}>
-        <div
-          className={`${glass} rounded-3xl p-10 text-center max-w-lg mx-auto`}
-        >
-          <Instagram className="mx-auto mb-3 text-brand-400" size={28} />
+        <div className={`${glass} w-full rounded-3xl p-5 sm:p-8`}>
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
+              Follow the Glow with Swashine Glowbox
+            </h2>
+            <a
+              href={company.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-brand-400 hover:underline shrink-0"
+            >
+              Visit Instagram →
+            </a>
+          </div>
 
-          <p className="text-zinc-400 text-sm">
-            Add <strong className="text-zinc-300">post or reel</strong> links in{" "}
-            <code className="text-brand-400">instagramFeed</code>.
-          </p>
+          <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-8 text-center">
+            <Instagram className="mx-auto mb-3 text-brand-400" size={28} />
+            <p className="text-zinc-400 text-sm">
+              Add <strong className="text-zinc-300">post or reel</strong> links
+              in <code className="text-brand-400">instagramFeed</code>.
+            </p>
+          </div>
         </div>
       </section>
     );
@@ -143,38 +156,38 @@ export default function InstagramFeed({ className = "" }) {
 
   return (
     <section className={className}>
-      {/* =========================================================
-          SECTION HEADER
-      ========================================================= */}
-      <div className="text-center mb-10">
-        <span
-          className={`inline-flex items-center gap-2 ${glass} px-4 py-1.5 rounded-full text-brand-400 text-sm font-semibold tracking-widest uppercase`}
-        >
-          <Instagram size={14} />
-          Instagram
-        </span>
+      <div className={`${glass} min-w-0 rounded-3xl p-4 sm:p-6 lg:p-8`}>
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <span
+              className={`inline-flex items-center gap-2 ${glass} px-4 py-1.5 rounded-full text-brand-400 text-sm font-semibold tracking-widest uppercase`}
+            >
+              <Instagram size={14} />
+              Instagram
+            </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold mt-4">
-          Follow the Glow with Swashine Glowbox
-        </h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-4 leading-tight">
+              Follow the Glow with Swashine Glowbox
+            </h2>
+          </div>
 
-        <p className="text-zinc-400 mt-3 text-sm max-w-md mx-auto">
-          Posts &amp; reels from{" "}
-          <a
-            href={company.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-400 hover:underline"
-          >
-            Instagram
-          </a>
-        </p>
-      </div>
+          <p className="text-zinc-400 text-sm shrink-0">
+            Posts &amp; reels from{" "}
+            <a
+              href={company.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-400 hover:underline"
+            >
+              Instagram
+            </a>
+          </p>
+        </div>
 
       {/* =========================================================
           CAROUSEL
       ========================================================= */}
-      <div className="relative">
+      <div className="relative min-w-0">
         {/* -------------------------------------------------------
             PREVIOUS BUTTON
         ------------------------------------------------------- */}
@@ -182,7 +195,7 @@ export default function InstagramFeed({ className = "" }) {
           type="button"
           onClick={() => scrollByCard(-1)}
           disabled={!canLeft}
-          className={`hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-20
+          className={`hidden sm:flex absolute left-1 top-1/2 -translate-y-1/2 z-20
             w-10 h-10 rounded-full
             items-center justify-center
             border border-white/10
@@ -207,7 +220,7 @@ export default function InstagramFeed({ className = "" }) {
           type="button"
           onClick={() => scrollByCard(1)}
           disabled={!canRight}
-          className={`hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-20
+          className={`hidden sm:flex absolute right-1 top-1/2 -translate-y-1/2 z-20
             w-10 h-10 rounded-full
             items-center justify-center
             border border-white/10
@@ -232,6 +245,7 @@ export default function InstagramFeed({ className = "" }) {
           ref={trackRef}
           className="
             flex
+            min-w-0
             gap-4
             overflow-x-auto
             scroll-smooth
@@ -239,7 +253,7 @@ export default function InstagramFeed({ className = "" }) {
             snap-mandatory
             pb-2
             px-1
-            sm:px-12
+            sm:px-14
             [-ms-overflow-style:none]
             [scrollbar-width:none]
             [&::-webkit-scrollbar]:hidden
@@ -479,6 +493,7 @@ export default function InstagramFeed({ className = "" }) {
               </div>
             </motion.div>
           ))}
+        </div>
         </div>
       </div>
     </section>

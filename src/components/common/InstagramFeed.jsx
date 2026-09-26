@@ -1,6 +1,5 @@
-import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Instagram } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { company, instagramFeed } from "@/data/company";
 
 const glass =
@@ -61,65 +60,6 @@ export default function InstagramFeed({ className = "" }) {
       reel: isReel(item.url),
     }))
     .filter((item) => item.embedSrc);
-
-  const trackRef = useRef(null);
-
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
-
-  /**
-   * Update carousel arrow states.
-   */
-  const updateArrows = () => {
-    const el = trackRef.current;
-
-    if (!el) return;
-
-    setCanLeft(el.scrollLeft > 8);
-
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
-  };
-
-  /**
-   * Attach carousel scroll/resize listeners.
-   */
-  useEffect(() => {
-    const el = trackRef.current;
-
-    if (!el) return;
-
-    updateArrows();
-
-    el.addEventListener("scroll", updateArrows, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", updateArrows);
-
-    return () => {
-      el.removeEventListener("scroll", updateArrows);
-
-      window.removeEventListener("resize", updateArrows);
-    };
-  }, [items.length]);
-
-  /**
-   * Scroll one card at a time.
-   */
-  const scrollByCard = (direction) => {
-    const el = trackRef.current;
-
-    if (!el) return;
-
-    const card = el.querySelector("[data-ig-card]");
-
-    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.85;
-
-    el.scrollBy({
-      left: direction * step,
-      behavior: "smooth",
-    });
-  };
 
   /**
    * Empty state.
@@ -184,111 +124,15 @@ export default function InstagramFeed({ className = "" }) {
           </p>
         </div>
 
-      {/* =========================================================
-          CAROUSEL
-      ========================================================= */}
-      <div className="relative min-w-0">
-        {/* -------------------------------------------------------
-            PREVIOUS BUTTON
-        ------------------------------------------------------- */}
-        <button
-          type="button"
-          onClick={() => scrollByCard(-1)}
-          disabled={!canLeft}
-          className={`hidden sm:flex absolute left-1 top-1/2 -translate-y-1/2 z-20
-            w-10 h-10 rounded-full
-            items-center justify-center
-            border border-white/10
-            bg-black/60
-            backdrop-blur-md
-            text-white
-            transition
-            ${
-              canLeft
-                ? "opacity-100 hover:bg-black/80"
-                : "opacity-30 pointer-events-none"
-            }`}
-          aria-label="Previous Instagram post"
-        >
-          <ChevronLeft size={20} />
-        </button>
-
-        {/* -------------------------------------------------------
-            NEXT BUTTON
-        ------------------------------------------------------- */}
-        <button
-          type="button"
-          onClick={() => scrollByCard(1)}
-          disabled={!canRight}
-          className={`hidden sm:flex absolute right-1 top-1/2 -translate-y-1/2 z-20
-            w-10 h-10 rounded-full
-            items-center justify-center
-            border border-white/10
-            bg-black/60
-            backdrop-blur-md
-            text-white
-            transition
-            ${
-              canRight
-                ? "opacity-100 hover:bg-black/80"
-                : "opacity-30 pointer-events-none"
-            }`}
-          aria-label="Next Instagram post"
-        >
-          <ChevronRight size={20} />
-        </button>
-
-        {/* -------------------------------------------------------
-            SCROLL TRACK
-        ------------------------------------------------------- */}
-        <div
-          ref={trackRef}
-          className="
-            flex
-            min-w-0
-            gap-4
-            overflow-x-auto
-            scroll-smooth
-            snap-x
-            snap-mandatory
-            pb-2
-            px-1
-            sm:px-14
-            [-ms-overflow-style:none]
-            [scrollbar-width:none]
-            [&::-webkit-scrollbar]:hidden
-          "
-        >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {items.map((post, i) => (
             <motion.div
               key={post.id}
-              data-ig-card
-              initial={{
-                opacity: 0,
-                y: 12,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: Math.min(i * 0.05, 0.25),
-              }}
-              className="
-                snap-center
-                shrink-0
-                w-[min(86vw,280px)]
-                sm:w-[280px]
-                rounded-2xl
-                overflow-hidden
-                bg-black
-                border border-white/10
-                shadow-[0_8px_32px_rgba(0,0,0,0.35)]
-                group
-              "
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: Math.min(i * 0.05, 0.25) }}
+              className={`${glass} group flex min-w-0 flex-col overflow-hidden rounded-2xl`}
             >
               {/* =================================================
                   CUSTOM CARD HEADER
@@ -393,9 +237,7 @@ export default function InstagramFeed({ className = "" }) {
             </motion.div>
           ))}
         </div>
-        </div>
       </div>
-
     </section>
   );
 }

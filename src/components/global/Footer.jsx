@@ -11,26 +11,26 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black border-t border-zinc-800 py-10">
+    <footer className="bg-black border-t border-zinc-800 py-12 md:py-14">
       <div className="page-container">
         {/* Main Footer */}
-        <div className="grid lg:grid-cols-4 gap-10">
+        <div className="grid gap-y-10 lg:grid-cols-[1.35fr_1fr_1fr_0.8fr] lg:gap-x-10">
           {/* Brand */}
-          <div>
-            <Link to="/" className="inline-block mb-1">
+          <div className="min-w-0 lg:pr-6">
+            <Link to="/" className="inline-block mb-3">
               <img
                 src={logo}
                 alt="Swashine Glowbox"
-                className="h-24 w-auto object-contain"
+                className="h-20 md:h-24 w-auto object-contain"
               />
             </Link>
 
-            <div className="overflow-hidden">
-              <ul className="space-y-3">
+            <div>
+              <ul className="space-y-2.5">
                 <li>
                   <a
                     href={`https://wa.me/${company.whatsapp}`}
-                    className="text-lg hover:text-brand-400 transition-colors"
+                    className="text-base sm:text-lg hover:text-brand-400 transition-colors"
                   >
                     {company.phone}
                   </a>
@@ -41,17 +41,19 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <p className="text-xs leading-relaxed">{company.address}</p>
+                  <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
+                    {company.address}
+                  </p>
                 </li>
               </ul>
             </div>
 
-            <p className="text-xs mt-3">Swastik Industries</p>
+            <p className="text-xs text-zinc-500 mt-4">Swastik Industries</p>
           </div>
 
           {/* Desktop Footer Menus */}
           <div className="hidden lg:block">
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-5">Quick Links</h4>
 
             <ul className="space-y-2 text-sm text-zinc-400">
               {footerLinks.map((link) => (
@@ -77,7 +79,7 @@ export default function Footer() {
           </div>
 
           <div className="hidden lg:block">
-            <h4 className="font-semibold mb-4">Support & Services</h4>
+            <h4 className="font-semibold mb-5">Support & Services</h4>
 
             <ul className="space-y-2 text-sm text-zinc-400">
               {footerSupport_Services.map((link) => (
@@ -94,7 +96,7 @@ export default function Footer() {
           </div>
 
           <div className="hidden lg:block">
-            <h4 className="font-semibold mb-4">Follow Us</h4>
+            <h4 className="font-semibold mb-5">Follow Us</h4>
 
             <ul>
               <li>
@@ -111,7 +113,7 @@ export default function Footer() {
           </div>
 
           {/* Mobile & Tablet Accordion */}
-          <div className="lg:hidden col-span-full divide-y divide-zinc-800">
+          <div className="lg:hidden col-span-full divide-y divide-zinc-800 border-t border-zinc-800">
             {/* Quick Links */}
             <div>
               <button
@@ -270,7 +272,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-zinc-800 mt-10 pt-6">
+        <div className="border-t border-zinc-800 mt-12 pt-6 md:mt-14">
           <ul className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-x-6 text-center text-xs text-zinc-600">
             <li>
               © {new Date().getFullYear()} <b>Swastik Industries</b>

@@ -53,7 +53,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Progress dots */}
-        <div className="flex justify-center gap-2 mb-8">
+        {/* <div className="flex justify-center gap-2 mb-8">
           {howItWorks.map((_, i) => (
             <button
               key={i}
@@ -67,7 +67,7 @@ export default function HowItWorks() {
               }`}
             />
           ))}
-        </div>
+        </div> */}
 
         {/* Interactive steps */}
         <div

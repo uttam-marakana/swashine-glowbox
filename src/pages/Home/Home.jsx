@@ -703,29 +703,34 @@ export default function Home() {
 
       {/* 10. CTA */}
       <section className="w-full py-12 md:py-14">
-        <div
-          className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
-          <h2 className="relative text-3xl font-bold mb-3">
-            Ready to light up your space?
-          </h2>
-          <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
-            Get a custom quote on WhatsApp or explore our full product range.
-          </p>
-          <div className="relative flex flex-wrap justify-center gap-4">
-            <Button href="/products" className="text-lg px-10 py-4">
-              View all products
-            </Button>
-            <Button
-              variant="whatsapp"
-              href={`https://wa.me/${company.whatsapp}`}
-              className="text-lg px-10 py-4"
+        {/* <div className="page-container"> */}
+          <div className="mx-auto">
+            <div
+              className={`${glass} rounded-2xl md:rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden`}
             >
-              WhatsApp us
-            </Button>
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-transparent pointer-events-none" />
+              <h2 className="relative text-3xl font-bold mb-3">
+                Ready to light up your space?
+              </h2>
+              <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
+                Get a custom quote on WhatsApp or explore our full product
+                range.
+              </p>
+              <div className="relative flex flex-wrap justify-center gap-4">
+                <Button href="/products" className="text-lg px-10 py-4">
+                  View all products
+                </Button>
+                <Button
+                  variant="whatsapp"
+                  href={`https://wa.me/${company.whatsapp}`}
+                  className="text-lg px-10 py-4"
+                >
+                  WhatsApp us
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </>
   );

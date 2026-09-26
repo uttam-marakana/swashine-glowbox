@@ -328,6 +328,9 @@ export default function Home() {
                   src={s.image}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain object-right-center scale-95"
+                  loading={i === slide ? "eager" : "lazy"}
+                  fetchPriority={i === slide ? "high" : "auto"}
+                  decoding="async"
                 />
               ) : (
                 <div className="absolute inset-0 bg-zinc-900" />
@@ -408,6 +411,9 @@ export default function Home() {
                     src={s.image}
                     alt=""
                     className="w-full h-full object-cover object-center"
+                    loading={i === slide ? "eager" : "lazy"}
+                    fetchPriority={i === slide ? "high" : "auto"}
+                    decoding="async"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-6xl bg-zinc-900">
@@ -576,6 +582,8 @@ export default function Home() {
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span className="text-5xl">💡</span>

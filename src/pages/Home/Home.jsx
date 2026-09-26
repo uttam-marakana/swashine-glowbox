@@ -6,13 +6,8 @@ import {
   features,
   stats,
   howItWorks,
-  industries,
-  warrantyPoints,
-  caseStudies,
   faqs,
-  sizeCompare,
   reviews,
-  videoHighlights,
 } from "@/data/company";
 import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
@@ -236,7 +231,7 @@ const HERO_SLIDES = [
     ctaTo: "/products",
     secondaryLabel: "Get Quote on WhatsApp",
     secondaryHref: `https://wa.me/${company.whatsapp}?text=Hi%20Swashine%2C%20I%20want%20a%20quote`,
-    image: Slider_img1, // filled from products at runtime
+    image: Slider_img1,
     badge: "Made in Gujarat • Manufacturer Direct",
   },
   {
@@ -324,7 +319,7 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-[380px] h-[380px] rounded-full bg-brand-600/10 blur-[110px]" />
       </div>
 
-      {/* Hero Slider */}
+      {/* 1. Hero Slider */}
       <section
         className="w-full relative overflow-hidden pt-20 md:pt-0"
         onMouseEnter={() => {
@@ -334,7 +329,6 @@ export default function Home() {
           pauseRef.current = false;
         }}
       >
-        {/* Desktop / laptop: full-bleed background image + left content */}
         <div className="hidden md:block relative min-h-[85vh] lg:min-h-screen">
           {slides.map((s, i) => (
             <div
@@ -397,7 +391,6 @@ export default function Home() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Dots */}
               <div className="flex gap-2 pt-4">
                 {slides.map((s, i) => (
                   <button
@@ -417,7 +410,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile / tablet: image on top, content below */}
         <div className="md:hidden">
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-zinc-900">
             {slides.map((s, i) => (
@@ -509,7 +501,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats — count-up + hover */}
+      {/* 2. Stats */}
       <section className="w-full py-8 md:py-10 border-y border-white/5 bg-white/[0.02]">
         <div className="page-container">
           <div
@@ -524,10 +516,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it works — active step + auto-rotate */}
+      {/* 3. How it works */}
       <HowItWorksSection />
 
-      {/* Features — interactive hover */}
+      {/* 4. Features */}
       <section className="py-10 md:py-12">
         <div className="page-container">
           <motion.h2
@@ -557,7 +549,7 @@ export default function Home() {
                   <h4 className="text-xl font-semibold mb-3 group-hover:text-brand-300 transition">
                     {f.title}
                   </h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-sm text-zinc-400 leading-relaxed">
                     {f.desc}
                   </p>
                 </motion.div>
@@ -567,7 +559,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured products */}
+      {/* 5. Featured products */}
       <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
         <div className="page-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
@@ -590,7 +582,7 @@ export default function Home() {
               .slice(0, 4)
               .map((p) => (
                 <Link
-                  key={p.id}
+                  key={p.id || p.slug}
                   to={`/products/${p.slug}`}
                   className={`${glassCard} overflow-hidden group`}
                 >
@@ -625,125 +617,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Size compare */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-            Compare sizes
-          </h2>
-          <p className="text-zinc-400 text-center text-sm mb-8">
-            Quick guide to pick the right format for your space.
-          </p>
-          <div className={`${glass} rounded-3xl overflow-hidden`}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left min-w-[640px]">
-                <thead className="bg-white/[0.04] text-zinc-400 border-b border-white/10">
-                  <tr>
-                    <th className="px-5 py-4 font-medium">Size</th>
-                    <th className="px-5 py-4 font-medium">Best for</th>
-                    <th className="px-5 py-4 font-medium">Type</th>
-                    <th className="px-5 py-4 font-medium">Price range</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sizeCompare.map((row, i) => (
-                    <tr
-                      key={row.size}
-                      className={`border-b border-white/5 ${
-                        i % 2 === 0 ? "bg-transparent" : "bg-white/[0.02]"
-                      }`}
-                    >
-                      <td className="px-5 py-3.5 font-medium text-white">
-                        {row.size}
-                      </td>
-                      <td className="px-5 py-3.5 text-zinc-400">
-                        {row.bestFor}
-                      </td>
-                      <td className="px-5 py-3.5 text-zinc-400">{row.type}</td>
-                      <td className="px-5 py-3.5 text-brand-400">
-                        {row.price}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Industries we serve
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {industries.map((ind, i) => (
-              <motion.a
-                key={ind.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-                  `Hi, I need a glowbox for: ${ind.query}`,
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${glassCard} p-6 gap-4 block`}
-              >
-                <div className="text-3xl mb-3">{ind.emoji}</div>
-                <h3 className="font-semibold text-lg mb-1">{ind.title}</h3>
-                <p className="text-sm text-zinc-400">{ind.desc}</p>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Video highlights */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <div className="text-center mb-8">
-            <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-              Watch
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-1">
-              See Swashine in action
-            </h2>
-            <p className="text-zinc-400 mt-3 text-sm">
-              Replace placeholders with your YouTube / Instagram embeds when
-              ready.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {videoHighlights.map((v, i) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`${glassCard} overflow-hidden`}
-              >
-                <div className="aspect-video bg-black/30 flex items-center justify-center text-4xl">
-                  ▶️
-                </div>
-                <div className="p-5">
-                  <span className="text-xs text-brand-400 font-semibold uppercase">
-                    {v.tag}
-                  </span>
-                  <h3 className="font-semibold mt-1">{v.title}</h3>
-                  <p className="text-sm text-zinc-400 mt-1">{v.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before / After */}
+      {/* 6. Before / After */}
       <section className="py-10 md:py-12">
         <div className="page-container">
           <motion.div
@@ -772,51 +646,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Case studies */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Client work
-          </h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            {caseStudies.map((c, i) => (
-              <motion.div
-                key={c.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`${glassCard} p-8`}
-              >
-                <div className="text-xs text-brand-400 font-semibold uppercase mb-2">
-                  {c.place}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
-                <p className="text-sm text-zinc-400">{c.result}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Warranty */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Quality & warranty
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {warrantyPoints.map((w) => (
-              <div key={w.title} className={`${glassCard} p-6`}>
-                <h3 className="font-semibold mb-2 text-brand-400">{w.title}</h3>
-                <p className="text-sm text-zinc-400">{w.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
+      {/* 7. Reviews */}
       <section className="py-10 md:py-12">
         <div className="page-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-8">
@@ -844,14 +674,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instagram */}
+      {/* 8. Instagram */}
       <section className="py-10 md:py-12">
         <div className="page-container">
           <InstagramFeed />
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* 9. FAQ */}
       <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
         <div className="page-container">
           <div className="mx-auto max-w-3xl">
@@ -871,7 +701,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* 10. CTA */}
       <section className="w-full py-12 md:py-14">
         <div className="page-container">
           <div className="mx-auto max-w-4xl">
@@ -883,7 +713,8 @@ export default function Home() {
                 Ready to light up your space?
               </h2>
               <p className="relative text-zinc-400 mb-8 max-w-md mx-auto">
-                Get a custom quote on WhatsApp or explore our full product range.
+                Get a custom quote on WhatsApp or explore our full product
+                range.
               </p>
               <div className="relative flex flex-wrap justify-center gap-4">
                 <Button href="/products" className="text-lg px-10 py-4">

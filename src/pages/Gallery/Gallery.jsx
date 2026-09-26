@@ -72,6 +72,7 @@ export default function Gallery() {
                     alt={item.title}
                     className="w-full h-full object-contain p-3 group-hover:scale-105 transition duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[2px]">
                     <div className="font-semibold text-sm line-clamp-1">

@@ -144,6 +144,8 @@ export default function BeforeAfter({
                   ? "brightness-110 contrast-105"
                   : "brightness-50 saturate-50 opacity-90"
               }`}
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="text-center text-zinc-500 p-8">

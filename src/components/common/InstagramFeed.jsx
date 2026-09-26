@@ -66,6 +66,7 @@ export default function InstagramFeed({ className = "" }) {
 
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   /**
    * Update carousel arrow states.
@@ -102,6 +103,23 @@ export default function InstagramFeed({ className = "" }) {
       window.removeEventListener("resize", updateArrows);
     };
   }, [items.length]);
+
+  useEffect(() => {
+    if (!selectedPost) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setSelectedPost(null);
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedPost]);
 
   /**
    * Scroll one card at a time.
@@ -321,48 +339,21 @@ export default function InstagramFeed({ className = "" }) {
               {/* =================================================
                   MEDIA WINDOW
               ================================================= */}
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  block
-                  relative
-                  w-full
-                  aspect-[4/5]
-                  overflow-hidden
-                  bg-black
-                "
-                aria-label={`Open ${post.reel ? "reel" : "post"} on Instagram`}
+              <button
+                type="button"
+                onClick={() => setSelectedPost(post)}
+                className={`block relative w-full ${
+                  post.reel ? "aspect-[9/16]" : "aspect-[4/5]"
+                } overflow-hidden bg-black`}
+                aria-label={`Play Instagram ${post.reel ? "reel" : "post"} from ${
+                  post.profileName
+                }`}
               >
-                {/*
-                  The iframe contains Instagram's native UI.
-
-                  Because Instagram is loaded inside a
-                  cross-origin iframe, we cannot directly
-                  hide its internal buttons with CSS.
-
-                  Instead, we create a controlled viewport
-                  and crop the iframe so the card primarily
-                  displays the media.
-                */}
                 <iframe
                   title={`Instagram ${post.reel ? "reel" : "post"} ${post.id}`}
                   src={post.embedSrc}
-                  className="
-                    absolute
-                    left-0
-                    w-full
-                    border-0
-                    pointer-events-none
-                  "
-                  style={{
-                    top: post.reel ? "-58px" : "-64px",
-
-                    height: post.reel
-                      ? "calc(100% + 120px)"
-                      : "calc(100% + 130px)",
-                  }}
+                  className="absolute inset-0 h-full w-full border-0 pointer-events-none"
+                  style={{ objectFit: "contain" }}
                   loading="lazy"
                   allow="autoplay; encrypted-media; picture-in-picture"
                   allowFullScreen
@@ -445,7 +436,7 @@ export default function InstagramFeed({ className = "" }) {
                     duration-300
                   "
                 />
-              </a>
+              </button>
 
               {/* =================================================
                   CUSTOM CARD FOOTER
@@ -496,6 +487,65 @@ export default function InstagramFeed({ className = "" }) {
         </div>
         </div>
       </div>
+
+      {selectedPost && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-3 backdrop-blur-sm sm:p-6"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setSelectedPost(null);
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Instagram ${selectedPost.reel ? "reel" : "post"} from ${
+              selectedPost.profileName
+            }`}
+            className="relative flex max-h-[calc(100dvh-1.5rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-2xl sm:max-h-[calc(100dvh-3rem)]"
+          >
+            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
+              <span className="min-w-0 truncate text-sm font-semibold text-zinc-100">
+                {selectedPost.profileName}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedPost(null)}
+                className="shrink-0 rounded-lg px-3 py-1.5 text-sm text-zinc-300 transition hover:bg-white/10 hover:text-white"
+                aria-label="Close Instagram post"
+                autoFocus
+              >
+                Close
+              </button>
+            </div>
+            <div
+              className={`relative mx-auto w-full max-w-[420px] flex-1 overflow-hidden bg-black ${
+                selectedPost.reel ? "aspect-[9/16]" : "aspect-[4/5]"
+              }`}
+            >
+              <iframe
+                key={selectedPost.id}
+                title={`Instagram ${selectedPost.reel ? "reel" : "post"} ${
+                  selectedPost.id
+                }`}
+                src={selectedPost.embedSrc}
+                className="absolute inset-0 h-full w-full border-0"
+                style={{ objectFit: "contain" }}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                scrolling="no"
+              />
+            </div>
+            <a
+              href={selectedPost.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 border-t border-white/10 px-4 py-3 text-center text-sm text-brand-400 transition hover:bg-white/5 hover:text-brand-300"
+            >
+              Open on Instagram
+            </a>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

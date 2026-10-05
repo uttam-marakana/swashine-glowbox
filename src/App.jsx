@@ -13,6 +13,7 @@ import HowItWorks from "./pages/HowItWorks/HowItWorks";
 import Faq from "./pages/Faq/Faq";
 import Dealers from "./pages/Dealers/Dealers";
 import Reviews from "./pages/Reviews/Reviews";
+import Reviews from "./pages/NotFound/NotFound";
 import SEO from "./components/common/SEO";
 
 import RequireAdmin from "./components/admin/RequireAdmin";

@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -24,12 +30,18 @@ export function AuthProvider({ children }) {
     return unsub;
   }, []);
 
-  const login = (email, password) => {
+  const login = useCallback((email, password) => {
     if (!auth) return Promise.reject(new Error("Firebase Auth not configured"));
     return signInWithEmailAndPassword(auth, email, password);
-  };
+  }, []);
 
-  const logout = () => (auth ? signOut(auth) : Promise.resolve());
+  const logout = useCallback(() => {
+    if (!auth) {
+      setUser(null);
+      return Promise.resolve();
+    }
+    return signOut(auth);
+  }, []);
 
   return (
     <AuthContext.Provider

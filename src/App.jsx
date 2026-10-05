@@ -45,6 +45,8 @@ export default function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/dealers" element={<Dealers />} />
           <Route path="/reviews" element={<Reviews />} />
+
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Admin — no MainLayout (header/footer) */}

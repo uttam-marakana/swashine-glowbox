@@ -5,16 +5,7 @@ import { company, instagramFeed } from "@/data/company";
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
 
-/**
- * Convert an Instagram post/reel URL into
- * an official Instagram embed URL.
- *
- * Supported:
- * /p/CODE
- * /reel/CODE
- *
- * Profile URLs are intentionally ignored.
- */
+/* Convert an Instagram post/reel URL into */
 function toEmbedSrc(url) {
   if (!url) return null;
 
@@ -34,23 +25,13 @@ function toEmbedSrc(url) {
   }
 }
 
-/**
- * Detect whether an Instagram URL is a reel.
- */
+/* Detect whether an Instagram URL is a reel. */
 function isReel(url) {
   return /\/reel\//i.test(url || "");
 }
 
 export default function InstagramFeed({ className = "" }) {
-  /**
-   * Prepare Instagram posts.
-   *
-   * profileName:
-   * Custom name displayed in our own card header.
-   *
-   * url:
-   * Original Instagram post/reel URL.
-   */
+  /* Prepare Instagram posts. */
   const items = (instagramFeed || [])
     .map((item) => ({
       id: item.id,
@@ -134,9 +115,7 @@ export default function InstagramFeed({ className = "" }) {
               transition={{ delay: Math.min(i * 0.05, 0.25) }}
               className={`${glass} group flex min-w-0 flex-col overflow-hidden rounded-2xl`}
             >
-              {/* =================================================
-                  CUSTOM CARD HEADER
-              ================================================= */}
+              {/* ====== CUSTOM CARD HEADER =================================================== */}
               <div
                 className="
                   h-12
@@ -162,9 +141,7 @@ export default function InstagramFeed({ className = "" }) {
                 </div>
               </div>
 
-              {/* =================================================
-                  MEDIA WINDOW
-              ================================================= */}
+              {/* ====== MEDIA WINDOW =================================================== */}
               <a
                 href={post.url}
                 target="_blank"
@@ -190,9 +167,7 @@ export default function InstagramFeed({ className = "" }) {
                 <div className="absolute inset-0 pointer-events-none bg-black/5 group-hover:bg-transparent transition duration-300" />
               </a>
 
-              {/* =================================================
-                  CUSTOM CARD FOOTER
-              ================================================= */}
+              {/* ====== CUSTOM CARD FOOTER =================================================== */}
               <div
                 className="
                   h-10

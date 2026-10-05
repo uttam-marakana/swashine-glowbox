@@ -83,10 +83,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* =========================================================
-          DESKTOP SIDEBAR
-          Visible from lg and above
-      ========================================================== */}
+      {/* ====== DESKTOP SIDEBAR =================================================== */}
       <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-60 xl:w-64 shrink-0 border-r border-white/10 bg-zinc-950 p-4 flex-col gap-2">
         <div className="px-2 py-3 mb-2">
           <div className="font-bold text-brand-400">Swashine Admin</div>
@@ -138,10 +135,7 @@ export default function AdminLayout() {
         </button>
       </aside>
 
-      {/* =========================================================
-          MOBILE / TABLET TOP BAR
-          Visible below lg
-      ========================================================== */}
+      {/* ====== MOBILE / TABLET TOP BAR =================================================== */}
       <header className="lg:hidden sticky top-0 z-50 border-b border-white/10 bg-zinc-950/95 backdrop-blur-xl">
         <div className="h-16 px-4 sm:px-6 flex items-center justify-between gap-3">
           <div className="min-w-0">
@@ -236,9 +230,7 @@ export default function AdminLayout() {
         )}
       </header>
 
-      {/* =========================================================
-          MAIN CONTENT
-      ========================================================== */}
+      {/* ====== MAIN CONTENT =================================================== */}
       <div className="lg:ml-60 xl:ml-64 min-w-0 min-h-screen flex flex-col">
         {/* Global Search */}
         <header className="sticky top-16 lg:top-0 z-30 border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl px-4 sm:px-6 md:px-8 py-3">

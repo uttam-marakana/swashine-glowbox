@@ -10,10 +10,6 @@ const VIEWS = [
   { id: "bottom", label: "Bottom", hint: "Base & finish" },
 ];
 
-/**
- * Global frame angles from Admin → Frame views (settings/frameViews).
- * Same images on every product page.
- */
 export default function FrameExplorer({
   productName = "Glowbox",
   className = "",

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { X} from "lucide-react";
+import { X } from "lucide-react";
 import { RiImageUploadLine } from "react-icons/ri";
 import { BsImage as ImageIcon } from "react-icons/bs";
 

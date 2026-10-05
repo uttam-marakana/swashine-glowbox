@@ -6,10 +6,8 @@ function isAdminPath(pathname) {
   return pathname === "/admin" || pathname.startsWith("/admin/");
 }
 
-/**
- * If Firebase admin is logged in and the user opens any public route,
- * force signOut so /admin cannot be opened again without login.
- */
+/* If Firebase admin is logged in and the user opens any public route,
+  force signOut so /admin cannot be opened again without login. */
 export function useAdminRouteGuard() {
   const { user, loading, logout } = useAuth();
   const location = useLocation();

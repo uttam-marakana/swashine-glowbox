@@ -594,7 +594,8 @@ export const caseStudies = [
   {
     title: "Machine tools branding",
     place: "Industrial client",
-    result: "Multiple illuminated boards for GST + Legal certification Dispaly.",
+    result:
+      "Multiple illuminated boards for GST + Legal certification Dispaly.",
   },
   {
     title: "Café menu boards",
@@ -816,5 +817,4 @@ export const footerSupport_Services = [
   { path: "/terms-condition", label: "Terms & Conditions" },
   { path: "/faq", label: "FAQs" },
   { path: "/how-it-works", label: "How it works" },
-
-]
+];

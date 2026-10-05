@@ -13,7 +13,7 @@ import HowItWorks from "./pages/HowItWorks/HowItWorks";
 import Faq from "./pages/Faq/Faq";
 import Dealers from "./pages/Dealers/Dealers";
 import Reviews from "./pages/Reviews/Reviews";
-import Reviews from "./pages/NotFound/NotFound";
+import NotFound from "./pages/NotFound/NotFound";
 import SEO from "./components/common/SEO";
 
 import RequireAdmin from "./components/admin/RequireAdmin";
@@ -25,7 +25,7 @@ import ProductsAdmin from "./pages/Admin/Products/ProductsAdmin";
 import ProductEdit from "./pages/Admin/ProductEdit/ProductEdit";
 import InstagramAdmin from "./pages/Admin/Instagram/InstagramAdmin";
 import FaqsAdmin from "./pages/Admin/Faqs/FaqsAdmin";
-import CatalogsAdmin from "./pages/Admin/Catalogs/CatalogsAdmin";
+// import CatalogsAdmin from "./pages/Admin/Catalogs/CatalogsAdmin";
 
 export default function App() {
   return (
@@ -47,10 +47,11 @@ export default function App() {
           <Route path="/dealers" element={<Dealers />} />
           <Route path="/reviews" element={<Reviews />} />
 
+          {/* Catch-all 404 — must be last inside MainLayout */}
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        {/* Admin — no MainLayout (header/footer) */}
+        {/* Admin — no MainLayout */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin"

@@ -46,6 +46,8 @@ export default function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/dealers" element={<Dealers />} />
           <Route path="/reviews" element={<Reviews />} />
+
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Admin — no MainLayout (header/footer) */}
@@ -66,7 +68,6 @@ export default function App() {
           <Route path="faqs" element={<FaqsAdmin />} />
           {/* <Route path="catalogs" element={<CatalogsAdmin />} /> */}
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );

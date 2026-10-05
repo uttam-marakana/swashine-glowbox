@@ -63,7 +63,7 @@ export default function App() {
           <Route path="products/:id" element={<ProductEdit />} />
           <Route path="instagram" element={<InstagramAdmin />} />
           <Route path="faqs" element={<FaqsAdmin />} />
-          <Route path="catalogs" element={<CatalogsAdmin />} />
+          {/* <Route path="catalogs" element={<CatalogsAdmin />} /> */}
         </Route>
       </Routes>
     </AuthProvider>

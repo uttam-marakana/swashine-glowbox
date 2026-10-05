@@ -43,7 +43,7 @@ export default function AdminLayout() {
       { type: "Page", title: "Add product", path: "/admin/products/new" },
       { type: "Page", title: "Instagram feed", path: "/admin/instagram" },
       { type: "Page", title: "FAQs", path: "/admin/faqs" },
-      { type: "Page", title: "Catalogs", path: "/admin/catalogs" },
+      // { type: "Page", title: "Catalogs", path: "/admin/catalogs" },
     ].filter((p) => p.title.toLowerCase().includes(term));
 
     const prods = (staticProducts || [])

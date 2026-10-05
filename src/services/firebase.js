@@ -13,7 +13,7 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || undefined,
 };
 
-const bad = ["", "YOUR_API_KEY", "your_api_key", undefined, null];
+const bad = ["", "VITE_FIREBASE_API_KEY", "apiKey", undefined, null];
 
 export const isFirebaseConfigured = Boolean(
   firebaseConfig.apiKey &&

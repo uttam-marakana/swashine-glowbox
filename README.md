@@ -3,6 +3,7 @@
 Production-ready React website for Swashine Glowbox (Swastik Industries), Rajkot.
 
 ## Tech Stack
+
 - React 18 + Vite
 - React Router DOM
 - Framer Motion (animations)
@@ -12,6 +13,7 @@ Production-ready React website for Swashine Glowbox (Swastik Industries), Rajkot
 - Lucide React (icons)
 
 ## Folder Structure
+
 ```
 src/
 ├── components/
@@ -27,13 +29,16 @@ src/
 ```
 
 ## Getting Started
+
 ```bash
 npm install
 npm run dev
 ```
 
 ## Environment
+
 Create `.env` with your Firebase keys:
+
 ```
 VITE_FIREBASE_API_KEY=...
 VITE_FIREBASE_AUTH_DOMAIN=...
@@ -67,4 +72,5 @@ current hostname for canonical and sitemap URLs. Configure the purchased
 production origin before submitting the site to Google.
 
 ## Content Source
+
 All business content is from the Swashine Glowbox Business Profile Report.

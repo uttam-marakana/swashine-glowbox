@@ -20,7 +20,6 @@ export default function ProductsAdmin() {
     setLoading(true);
     setRows(await listProductsAdmin());
     setLoading(false);
-    
   };
 
   useEffect(() => {

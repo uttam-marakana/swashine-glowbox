@@ -30,10 +30,8 @@ function getLocalMediaBySlug() {
   return map;
 }
 
-/**
- * Firebase/static details + local images only.
- * Images never come from Firestore paths (those break on Vercel).
- */
+/* Firebase/static details + local images only.
+  Images never come from Firestore paths (those break on Vercel). */
 function mergeWithLocalImages(data, firestoreId = null, source = "firestore") {
   const local = getLocalMediaBySlug()[data.slug] || {
     image: "",

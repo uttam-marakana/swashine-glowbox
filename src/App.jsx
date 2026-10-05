@@ -14,6 +14,11 @@ import Faq from "./pages/Faq/Faq";
 import Dealers from "./pages/Dealers/Dealers";
 import Reviews from "./pages/Reviews/Reviews";
 import NotFound from "./pages/NotFound/NotFound";
+
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import ReturnPolicy from "./pages/ReturnPolicy/ReturnPolicy";
+import TermsCondition from "./pages/TermsCondition/TermsCondition";
+
 import SEO from "./components/common/SEO";
 
 import RequireAdmin from "./components/admin/RequireAdmin";
@@ -47,7 +52,12 @@ export default function App() {
           <Route path="/dealers" element={<Dealers />} />
           <Route path="/reviews" element={<Reviews />} />
 
-          {/* Catch-all 404 — must be last inside MainLayout */}
+          {/* Policies Pages */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
+          <Route path="/terms-condition" element={<TermsCondition />} />
+
+          {/* Catch-all 404 Pages */}
           <Route path="*" element={<NotFound />} />
         </Route>
 

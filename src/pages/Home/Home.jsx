@@ -8,6 +8,7 @@ import {
   howItWorks,
   faqs,
   reviews,
+  industries,
 } from "@/data/company";
 import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
@@ -455,50 +456,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. How it works */}
-      <HowItWorksSection />
-
-      {/* 4. Features */}
-      <section className="py-10 md:py-12">
-        <div className="page-container">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center mb-8"
-          >
-            Why Swashine Glowbox?
-          </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            {features.map((f, i) => {
-              const Icon = iconMap[f.icon] || Zap;
-              return (
-                <motion.div
-                  key={f.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className={`${cardInteractive} p-6 md:p-8 group`}
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-500/15 border border-brand-400/20 flex items-center justify-center mb-5 transition duration-300 group-hover:scale-110 group-hover:bg-brand-500/25 group-hover:shadow-[0_0_24px_rgba(251,191,36,0.25)]">
-                    <Icon className="w-6 h-6 text-brand-400 transition group-hover:text-brand-300" />
-                  </div>
-                  <h4 className="text-xl font-semibold mb-3 group-hover:text-brand-300 transition">
-                    {f.title}
-                  </h4>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    {f.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Featured products */}
+      {/* 3. Featured products */}
       <section
         id="products"
         className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02] scroll-mt-24"
@@ -560,7 +518,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Before / After */}
+      {/* 4. Industries */}
+      <section className="py-10 md:py-12">
+        <div className="page-container">
+          <div className="text-center mb-8">
+            <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
+              Made for your space
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2">
+              Industries we serve
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {industries.map((industry) => (
+              <Link
+                key={industry.title}
+                to="/products"
+                className={`${cardInteractive} p-6 group`}
+              >
+                <span className="text-3xl" aria-hidden="true">
+                  {industry.emoji}
+                </span>
+                <h3 className="font-semibold mt-4 mb-2 group-hover:text-brand-300 transition">
+                  {industry.title}
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  {industry.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. How it works */}
+      <HowItWorksSection />
+
+      {/* 6. Features */}
+      <section className="py-10 md:py-12">
+        <div className="page-container">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-8"
+          >
+            Why Swashine Glowbox?
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {features.map((f, i) => {
+              const Icon = iconMap[f.icon] || Zap;
+              return (
+                <motion.div
+                  key={f.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ y: -8 }}
+                  className={`${cardInteractive} p-6 md:p-8 group`}
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-brand-500/15 border border-brand-400/20 flex items-center justify-center mb-5 transition duration-300 group-hover:scale-110 group-hover:bg-brand-500/25 group-hover:shadow-[0_0_24px_rgba(251,191,36,0.25)]">
+                    <Icon className="w-6 h-6 text-brand-400 transition group-hover:text-brand-300" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-300 transition">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm text-zinc-400 leading-relaxed">
+                    {f.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Before / After */}
       <section className="py-10 md:py-12">
         <div className="page-container">
           <motion.div

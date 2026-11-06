@@ -10,6 +10,7 @@ import {
 } from "@/data/company";
 import { listProductsPublic } from "@/services/productService";
 import Button from "@/components/common/Button";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
@@ -219,14 +220,13 @@ export default function Products() {
                 className={`${glassCard} overflow-hidden flex flex-col group`}
               >
                 <Link to={`/products/${p.slug}`} className="block">
-                  <div className="h-52 bg-black/20 flex items-center justify-center relative overflow-hidden">
+                  <div className="product-card-media">
                     {p.image ? (
-                      <img
+                      <ResponsiveImage
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"
-                        loading="lazy"
-                        decoding="async"
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
                       />
                     ) : (
                       <span className="text-6xl">💡</span>

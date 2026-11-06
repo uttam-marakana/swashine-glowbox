@@ -1,0 +1,674 @@
+{
+  "p1-18x24/18-24-inch-img2.png": {
+    "width": 1402,
+    "height": 1122,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18-24-inch-img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18-24-inch-img2-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p1-18x24/18-24-inch-img2-1200.webp"
+      }
+    ]
+  },
+  "p1-18x24/18-24-inch-img3.png": {
+    "width": 1402,
+    "height": 1122,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18-24-inch-img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18-24-inch-img3-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p1-18x24/18-24-inch-img3-1200.webp"
+      }
+    ]
+  },
+  "p1-18x24/18-24-inch-img4.png": {
+    "width": 1122,
+    "height": 1402,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18-24-inch-img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18-24-inch-img4-800.webp"
+      }
+    ]
+  },
+  "p1-18x24/18-24-inch-img5.png": {
+    "width": 1122,
+    "height": 1402,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18-24-inch-img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18-24-inch-img5-800.webp"
+      }
+    ]
+  },
+  "p1-18x24/18-24-inch-img6.png": {
+    "width": 1122,
+    "height": 1402,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18-24-inch-img6-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18-24-inch-img6-800.webp"
+      }
+    ]
+  },
+  "p1-18x24/18x24-inch-glowbox-img1.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p1-18x24/18x24-inch-glowbox-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p1-18x24/18x24-inch-glowbox-img1-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-glowbox-img1.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-glowbox-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-glowbox-img1-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-img1.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-img1-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-img2.png": {
+    "width": 1122,
+    "height": 1402,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-img2-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-img3.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-img3-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-img4.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-img4-800.webp"
+      }
+    ]
+  },
+  "p2-24x36/36x24-inch-img5.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p2-24x36/36x24-inch-img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p2-24x36/36x24-inch-img5-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/24x42-inch-glowbox-img1.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/24x42-inch-glowbox-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/24x42-inch-glowbox-img1-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/42x24-inch-img1.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/42x24-inch-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/42x24-inch-img1-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/42x24-inch-img2.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/42x24-inch-img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/42x24-inch-img2-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/42x24-inch-img3.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/42x24-inch-img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/42x24-inch-img3-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/42x24-inch-img4.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/42x24-inch-img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/42x24-inch-img4-800.webp"
+      }
+    ]
+  },
+  "p3-24x42/42x24-inch-img5.jpg": {
+    "width": 1024,
+    "height": 1792,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p3-24x42/42x24-inch-img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p3-24x42/42x24-inch-img5-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_inch-glowbox-img.jpg": {
+    "width": 1024,
+    "height": 1280,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_inch-glowbox-img-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_inch-glowbox-img-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_product_img1.jpg": {
+    "width": 1024,
+    "height": 1280,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_product_img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_product_img1-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_product_img2.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_product_img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_product_img2-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_product_img3.jpg": {
+    "width": 1024,
+    "height": 1280,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_product_img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_product_img3-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_product_img4.png": {
+    "width": 1122,
+    "height": 1402,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_product_img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_product_img4-800.webp"
+      }
+    ]
+  },
+  "p4-18x12/18x12_product_img5.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p4-18x12/18x12_product_img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p4-18x12/18x12_product_img5-800.webp"
+      }
+    ]
+  },
+  "p5-a4-tabletop/a4-tabletop-img1.png": {
+    "width": 1342,
+    "height": 1172,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img1-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img1-1200.webp"
+      }
+    ]
+  },
+  "p5-a4-tabletop/a4-tabletop-img2.png": {
+    "width": 1448,
+    "height": 1086,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img2-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img2-1200.webp"
+      }
+    ]
+  },
+  "p5-a4-tabletop/a4-tabletop-img3.png": {
+    "width": 1053,
+    "height": 1494,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img3-800.webp"
+      }
+    ]
+  },
+  "p5-a4-tabletop/a4-tabletop-img4.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img4-800.webp"
+      }
+    ]
+  },
+  "p5-a4-tabletop/a4-tabletop-img5.jpg": {
+    "width": 1024,
+    "height": 1820,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p5-a4-tabletop/a4-tabletop-img5-800.webp"
+      }
+    ]
+  },
+  "p6-arch/arch_img.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p6-arch/arch_img-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p6-arch/arch_img-800.webp"
+      }
+    ]
+  },
+  "p6-arch/arch_img1.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p6-arch/arch_img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p6-arch/arch_img1-800.webp"
+      }
+    ]
+  },
+  "p6-arch/arch_img2.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p6-arch/arch_img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p6-arch/arch_img2-800.webp"
+      }
+    ]
+  },
+  "p6-arch/arch_img3.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p6-arch/arch_img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p6-arch/arch_img3-800.webp"
+      }
+    ]
+  },
+  "p7-a5-tabletop/a5-tabletop-img1.png": {
+    "width": 1294,
+    "height": 1216,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img1-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img1-1200.webp"
+      }
+    ]
+  },
+  "p7-a5-tabletop/a5-tabletop-img2.png": {
+    "width": 1448,
+    "height": 1086,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img2-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img2-1200.webp"
+      }
+    ]
+  },
+  "p7-a5-tabletop/a5-tabletop-img3.png": {
+    "width": 1053,
+    "height": 1494,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img3-800.webp"
+      }
+    ]
+  },
+  "p7-a5-tabletop/a5-tabletop-img4.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img4-800.webp"
+      }
+    ]
+  },
+  "p7-a5-tabletop/a5-tabletop-img5.png": {
+    "width": 1254,
+    "height": 1254,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img5-800.webp"
+      },
+      {
+        "width": 1200,
+        "src": "/images/products/p7-a5-tabletop/a5-tabletop-img5-1200.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img1.png": {
+    "width": 863,
+    "height": 1823,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img1-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img1-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img2.png": {
+    "width": 863,
+    "height": 1822,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img2-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img2-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img3.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img3-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img3-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img4.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img4-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img4-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img5.png": {
+    "width": 941,
+    "height": 1670,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img5-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img5-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img6.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img6-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img6-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img7.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img7-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img7-800.webp"
+      }
+    ]
+  },
+  "p8-custom/custom_size_img8.png": {
+    "width": 941,
+    "height": 1672,
+    "variants": [
+      {
+        "width": 400,
+        "src": "/images/products/p8-custom/custom_size_img8-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "/images/products/p8-custom/custom_size_img8-800.webp"
+      }
+    ]
+  }
+}

@@ -1,4 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/terms",
+      "destination": "/terms-condition",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/terms-condition",
+      "permanent": true
+    },
+    {
+      "source": "/returns",
+      "destination": "/return-policy",
+      "permanent": true
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/return-policy",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/robots.txt",

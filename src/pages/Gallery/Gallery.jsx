@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { products } from "@/data/company";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 
 const galleryItems = products.flatMap((p) => {
   const imgs =
@@ -54,7 +55,7 @@ export default function Gallery() {
             No product images yet.
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
             {galleryItems.map((item, i) => (
               <motion.div
                 key={item.key}
@@ -67,12 +68,13 @@ export default function Gallery() {
                   to={`/products/${item.slug}`}
                   className={`block aspect-square ${glassCard} overflow-hidden relative group`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={item.src}
-                    alt={item.title}
+                    alt={`${item.title} ${item.type} LED glowbox`}
                     className="w-full h-full object-contain p-3 group-hover:scale-105 transition duration-500"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(max-width: 639px) 100vw, (max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                    width={800}
+                    height={800}
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[2px]">
                     <div className="font-semibold text-sm line-clamp-1">

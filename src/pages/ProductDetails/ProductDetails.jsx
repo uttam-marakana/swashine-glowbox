@@ -16,6 +16,7 @@ import {
 import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FrameExplorer from "@/components/common/FrameExplorer";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 
 const glass =
   "bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]";
@@ -273,14 +274,16 @@ export default function ProductDetails() {
                   }}
                 >
                   {mainSrc ? (
-                    <img
+                    <ResponsiveImage
                       src={mainSrc}
                       alt={`${product.name} - view ${activeIndex + 1}`}
                       className="block max-w-full max-h-full w-full h-full object-contain p-2 sm:p-3 pointer-events-none select-none"
                       loading="eager"
                       fetchPriority="high"
-                      decoding="async"
                       draggable={false}
+                      sizes="(max-width: 1023px) 100vw, 50vw"
+                      width={1200}
+                      height={900}
                     />
                   ) : (
                     <div className="text-center p-6 sm:p-10 max-w-full min-w-0">
@@ -338,12 +341,13 @@ export default function ProductDetails() {
                     }`}
                     aria-label={`View image ${i + 1}`}
                   >
-                    <img
+                    <ResponsiveImage
                       src={thumb}
                       alt=""
                       className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
+                      sizes="96px"
+                      width={400}
+                      height={400}
                     />
                   </button>
                 ))}
@@ -573,14 +577,13 @@ export default function ProductDetails() {
                   to={`/products/${p.slug}`}
                   className={`${glassCard} min-w-0 max-w-full overflow-hidden group`}
                 >
-                  <div className="aspect-[4/3] bg-black/25 flex items-center justify-center relative overflow-hidden">
+                  <div className="product-card-media">
                     {p.image ? (
-                      <img
+                      <ResponsiveImage
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-1.5 md:p-2 group-hover:scale-[1.03] transition duration-500"
-                        loading="lazy"
-                        decoding="async"
+                        sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
                       />
                     ) : (
                       <span className="text-5xl">💡</span>

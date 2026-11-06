@@ -14,6 +14,7 @@ import Button from "@/components/common/Button";
 import BeforeAfter from "@/components/common/BeforeAfter";
 import FaqList from "@/components/common/FaqList";
 import InstagramFeed from "@/components/common/InstagramFeed";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 import { Zap, RefreshCw, Shield, Ruler } from "lucide-react";
 
 import Slider_img1 from "@/assets/images/hero-section/slider_img1.png";
@@ -326,11 +327,13 @@ export default function Home() {
               {s.image ? (
                 <img
                   src={s.image}
-                  alt=""
+                  alt="Swashine LED glowbox product display"
                   className="absolute inset-0 w-full h-full object-contain object-right-center scale-95"
                   loading={i === slide ? "eager" : "lazy"}
-                  fetchPriority={i === slide ? "high" : "auto"}
+                  fetchpriority={i === slide ? "high" : "auto"}
                   decoding="async"
+                  width={2172}
+                  height={724}
                 />
               ) : (
                 <div className="absolute inset-0 bg-zinc-900" />
@@ -409,11 +412,13 @@ export default function Home() {
                 {s.image ? (
                   <img
                     src={s.image}
-                    alt=""
+                    alt="Swashine LED glowbox product display"
                     className="w-full h-full object-cover object-center"
                     loading={i === slide ? "eager" : "lazy"}
-                    fetchPriority={i === slide ? "high" : "auto"}
+                    fetchpriority={i === slide ? "high" : "auto"}
                     decoding="async"
+                    width={2172}
+                    height={724}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-6xl bg-zinc-900">
@@ -576,14 +581,13 @@ export default function Home() {
                   to={`/products/${p.slug}`}
                   className={`${glassCard} overflow-hidden group`}
                 >
-                  <div className="aspect-[4/3] bg-black/20 flex items-center justify-center overflow-hidden">
+                  <div className="product-card-media">
                     {p.image ? (
-                      <img
+                      <ResponsiveImage
                         src={p.image}
                         alt={p.name}
                         className="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"
-                        loading="lazy"
-                        decoding="async"
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
                       />
                     ) : (
                       <span className="text-5xl">💡</span>

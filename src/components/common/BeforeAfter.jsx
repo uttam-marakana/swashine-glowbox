@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { RiImageUploadLine } from "react-icons/ri";
 import { BsImage as ImageIcon } from "react-icons/bs";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 
 /**
  * Before & After — single image upload.
@@ -136,7 +137,7 @@ export default function BeforeAfter({
           }`}
         >
           {src ? (
-            <img
+            <ResponsiveImage
               src={src}
               alt={showOn ? "ON — illuminated" : "OFF — unlit"}
               className={`h-full w-full object-contain p-4 transition duration-300 ${
@@ -144,8 +145,9 @@ export default function BeforeAfter({
                   ? "brightness-110 contrast-105"
                   : "brightness-50 saturate-50 opacity-90"
               }`}
-              loading="lazy"
-              decoding="async"
+              sizes="(max-width: 768px) 100vw, 768px"
+              width={1200}
+              height={900}
             />
           ) : (
             <div className="text-center text-zinc-500 p-8">

@@ -24,6 +24,8 @@ export default function Footer() {
                 className="h-20 md:h-24 w-auto object-contain"
                 loading="lazy"
                 decoding="async"
+                width={2000}
+                height={1000}
               />
             </Link>
 
@@ -32,7 +34,7 @@ export default function Footer() {
                 <li>
                   <a
                     href={`https://wa.me/${company.whatsapp}`}
-                    className="text-base sm:text-lg hover:text-brand-400 transition-colors"
+                    className="inline-flex min-h-11 items-center text-base sm:text-lg hover:text-brand-400 transition-colors"
                   >
                     {company.phone}
                   </a>
@@ -62,7 +64,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="block hover:text-white transition-colors"
+                    className="flex min-h-11 items-center hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -72,7 +74,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/dealers"
-                  className="block hover:text-white transition-colors"
+                  className="flex min-h-11 items-center hover:text-white transition-colors"
                 >
                   Dealers
                 </Link>
@@ -88,7 +90,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="block hover:text-white transition-colors"
+                    className="flex min-h-11 items-center hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -106,7 +108,7 @@ export default function Footer() {
                   href={company.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sm text-zinc-400 hover:text-pink-400 transition-colors"
+                  className="flex min-h-11 items-center text-sm text-zinc-400 hover:text-pink-400 transition-colors"
                 >
                   @swashine_glowbox
                 </a>
@@ -148,7 +150,7 @@ export default function Footer() {
                       <li key={link.path}>
                         <Link
                           to={link.path}
-                          className="block hover:text-white transition-colors"
+                          className="flex min-h-11 items-center hover:text-white transition-colors"
                         >
                           {link.label}
                         </Link>
@@ -158,7 +160,7 @@ export default function Footer() {
                     <li>
                       <Link
                         to="/dealers"
-                        className="block hover:text-white transition-colors"
+                        className="flex min-h-11 items-center hover:text-white transition-colors"
                       >
                         Dealers
                       </Link>
@@ -167,7 +169,7 @@ export default function Footer() {
                     <li>
                       <Link
                         to="/how-it-works"
-                        className="block hover:text-white transition-colors"
+                        className="flex min-h-11 items-center hover:text-white transition-colors"
                       >
                         How it works
                       </Link>
@@ -208,7 +210,7 @@ export default function Footer() {
                     <li>
                       <a
                         href={`https://wa.me/${company.whatsapp}`}
-                        className="text-lg hover:text-brand-400 transition-colors"
+                        className="inline-flex min-h-11 items-center text-lg hover:text-brand-400 transition-colors"
                       >
                         {company.phone}
                       </a>
@@ -261,7 +263,7 @@ export default function Footer() {
                         href={company.instagram}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm text-zinc-400 hover:text-pink-400 transition-colors"
+                        className="flex min-h-11 items-center text-sm text-zinc-400 hover:text-pink-400 transition-colors"
                       >
                         @swashine_glowbox
                       </a>

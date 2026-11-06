@@ -128,10 +128,12 @@ export default function ProductsAdmin() {
                   {p.image ? (
                     <img
                       src={p.image}
-                      alt=""
+                      alt={p.name || "Product image"}
                       className="w-full h-full object-contain"
                       loading="lazy"
                       decoding="async"
+                      width={64}
+                      height={64}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-2xl">

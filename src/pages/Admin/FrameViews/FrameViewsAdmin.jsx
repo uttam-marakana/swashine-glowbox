@@ -107,6 +107,8 @@ export default function FrameViewsAdmin() {
                   className="h-20 object-contain rounded-lg border border-white/10 bg-black/40"
                   loading="lazy"
                   decoding="async"
+                  width={800}
+                  height={800}
                 />
               ) : null}
             </div>

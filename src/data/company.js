@@ -1,3 +1,5 @@
+import productImageMetadata from "./product-image-metadata.json";
+
 export const company = {
   name: "Swashine Glowbox",
   parent: "Swastik Industries",
@@ -31,6 +33,19 @@ const productImageModules = import.meta.glob(
   "../assets/images/products/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
   { eager: true, import: "default" },
 );
+const productImagePathsByUrl = new Map(
+  Object.entries(productImageModules).map(([path, url]) => [
+    url,
+    path
+      .replace(/\\/g, "/")
+      .replace("../assets/images/products/", ""),
+  ]),
+);
+
+export function getProductImageMetadata(src) {
+  const relativePath = productImagePathsByUrl.get(src);
+  return relativePath ? productImageMetadata[relativePath] || null : null;
+}
 
 /** @param {string} relativePath under products/ e.g. "p1-18x24/file.png" */
 function resolveProductImage(relativePath) {

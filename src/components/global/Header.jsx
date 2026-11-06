@@ -67,6 +67,8 @@ export default function Header() {
               src={logo}
               alt="Swashine Glowbox"
               className="h-14 sm:h-16 md:h-18 lg:h-[4.5rem] w-auto object-contain"
+              width={2000}
+              height={1000}
             />
           </Link>
 

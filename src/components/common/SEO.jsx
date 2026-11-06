@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { company, products } from "@/data/company";
+import { company, faqs, products } from "@/data/company";
 import heroImage from "@/assets/images/hero-section/slider_img1.png";
 
 const pages = {
@@ -59,6 +59,21 @@ const pages = {
     description:
       "Read customer feedback about Swashine Glowbox LED displays, product quality and service.",
   },
+  "/privacy-policy": {
+    title: "Privacy Policy - Swashine Glowbox",
+    description:
+      "Official privacy policy for Swashine Glowbox and Swastik Industries regarding customer data protection, browsing privacy, and inquiries.",
+  },
+  "/return-policy": {
+    title: "Return & Refund Policy - Swashine Glowbox",
+    description:
+      "Warranty coverage, transit damage claims, and replacement policies for Swashine LED illuminated displays and SMPS power supplies.",
+  },
+  "/terms-condition": {
+    title: "Terms & Conditions - Swashine Glowbox",
+    description:
+      "Terms of service, custom order manufacturing guidelines, artwork requirements, and payment policies for Swashine Glowbox products.",
+  },
 };
 
 function siteOrigin() {
@@ -93,10 +108,10 @@ function upsertMeta(attribute, name, content) {
   element.setAttribute("content", content);
 }
 
-function organizationSchema(origin) {
+function localBusinessSchema(origin) {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "LocalBusiness",
     name: company.name,
     legalName: company.parent,
     url: origin,
@@ -114,6 +129,21 @@ function organizationSchema(origin) {
       addressCountry: "IN",
     },
     sameAs: [company.instagram, company.facebook],
+  };
+}
+
+function faqSchema(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: a,
+      },
+    })),
   };
 }
 
@@ -144,12 +174,14 @@ export default function SEO() {
     const structuredData = [];
 
     if (path === "/") {
-      structuredData.push(organizationSchema(origin), {
+      structuredData.push(localBusinessSchema(origin), {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: company.name,
         url: origin,
-      });
+      }, faqSchema(faqs.slice(0, 5)));
+    } else if (path === "/faq") {
+      structuredData.push(faqSchema(faqs));
     }
 
     if (product) {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Image as ImageIcon } from "lucide-react";
 import { getFrameViewsPublic } from "@/services/contentService";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 
 const VIEWS = [
   { id: "front", label: "Front", hint: "Display face" },
@@ -84,12 +85,13 @@ export default function FrameExplorer({
               className="absolute inset-0 p-4 md:p-6 flex items-center justify-center"
             >
               {shellSrc ? (
-                <img
+                <ResponsiveImage
                   src={shellSrc}
                   alt={`${productName} — ${active}`}
                   className="max-w-full max-h-full w-full h-full object-contain"
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, 576px"
+                  width={active === "bottom" ? 1448 : 1086}
+                  height={active === "bottom" ? 1086 : 1448}
                 />
               ) : (
                 <div className="text-center text-zinc-500 p-6">
@@ -118,12 +120,13 @@ export default function FrameExplorer({
                   active === v.id ? "border-brand-500" : "border-white/10"
                 }`}
               >
-                <img
+                <ResponsiveImage
                   src={views[v.id]}
                   alt=""
                   className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
+                  sizes="56px"
+                  width={v.id === "bottom" ? 1448 : 1086}
+                  height={v.id === "bottom" ? 1086 : 1448}
                 />
               </button>
             ) : null,

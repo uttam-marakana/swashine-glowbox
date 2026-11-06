@@ -1,0 +1,69 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /products/{productId} {
+      allow get, list: if isAdmin() || resource.data.published == true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /inquiries/{inquiryId} {
+      allow create: if request.resource.data.keys().hasAll([
+          "name",
+          "phone",
+          "email",
+          "product",
+          "message",
+          "city",
+          "business",
+          "volume",
+          "source",
+          "createdAt",
+          "status"
+        ])
+        && request.resource.data.keys().hasOnly([
+          "name",
+          "phone",
+          "email",
+          "product",
+          "message",
+          "city",
+          "business",
+          "volume",
+          "source",
+          "createdAt",
+          "status"
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() <= 40
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.product is string
+        && request.resource.data.product.size() <= 200
+        && request.resource.data.message is string
+        && request.resource.data.message.size() <= 3000
+        && request.resource.data.city is string
+        && request.resource.data.city.size() <= 120
+        && request.resource.data.business is string
+        && request.resource.data.business.size() <= 120
+        && request.resource.data.volume is string
+        && request.resource.data.volume.size() <= 120
+        && request.resource.data.source is string
+        && request.resource.data.source.size() <= 80
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.status == "new";
+      allow get, list, update, delete: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      allow get: if true;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

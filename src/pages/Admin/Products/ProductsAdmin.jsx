@@ -145,6 +145,11 @@ export default function ProductsAdmin() {
                   <div className="font-semibold truncate">{p.name}</div>
                   <div className="text-xs text-zinc-500">
                     {p.size} · {p.priceLabel}
+                    {p.source === "firestore" && (
+                      <span className="ml-2">
+                        · {p.published === true ? "Published" : "Draft"}
+                      </span>
+                    )}
                     <span className="ml-2 text-zinc-600">
                       ({p.source || "company.js"})
                     </span>

@@ -7,6 +7,8 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
+  query,
+  where,
 } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
 import { products as staticProducts } from "@/data/company";
@@ -78,7 +80,9 @@ export async function listProductsAdmin() {
 export async function listProductsPublic() {
   if (isFirebaseConfigured && db) {
     try {
-      const snap = await getDocs(collection(db, COL));
+      const snap = await getDocs(
+        query(collection(db, COL), where("published", "==", true)),
+      );
       if (!snap.empty) {
         const list = snap.docs.map((d) =>
           mergeWithLocalImages(d.data(), d.id, "firestore"),
@@ -143,6 +147,7 @@ export async function createProduct(data) {
   const payload = detailsOnly(data);
   const ref = await addDoc(collection(db, COL), {
     ...payload,
+    published: payload.published !== false,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
@@ -177,6 +182,7 @@ export async function upsertProduct(form) {
   if (firestoreId) {
     await updateDoc(doc(db, COL, firestoreId), {
       ...payload,
+      published: payload.published !== false,
       updatedAt: serverTimestamp(),
     });
     return firestoreId;
@@ -184,6 +190,7 @@ export async function upsertProduct(form) {
 
   const ref = await addDoc(collection(db, COL), {
     ...payload,
+    published: payload.published !== false,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
@@ -220,6 +227,7 @@ export async function seedProductsFromCompany() {
     const { frameViews, image, gallery, ...rest } = p;
     await addDoc(collection(db, COL), {
       ...rest,
+      published: true,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });

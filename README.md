@@ -45,6 +45,36 @@ VITE_FIREBASE_AUTH_DOMAIN=...
 VITE_FIREBASE_PROJECT_ID=...
 ```
 
+## Firestore product administration
+
+Firestore rules are defined in `firestore.rules`. Deploy them to the intended
+Firebase project with:
+
+```bash
+firebase deploy --only firestore:rules --project YOUR_FIREBASE_PROJECT_ID
+```
+
+Admin access requires the Firebase Auth custom claim `admin: true`; an
+Email/Password account by itself is not an admin. Set the claim only from a
+trusted environment using the Firebase Admin SDK, never from browser code:
+
+```js
+await getAuth().setCustomUserClaims("FIREBASE_AUTH_USER_UID", { admin: true });
+```
+
+After setting or changing a claim, sign out and back in so Firebase refreshes
+the user's ID token. Firestore rules remain the authority for access.
+
+Products with `published: true` are readable by the public; only admins can
+create, update, or delete Firestore products. New products default to published
+and can be unpublished in the admin editor. Product photos continue to come
+from local assets matched by product slug in `src/data/company.js`.
+
+The admin products page can seed the Firestore `products` collection from
+`company.js` only when that collection is empty. If it already contains legacy
+documents, review and set their Published status in the admin editor instead.
+Seeding does not update or duplicate an existing collection.
+
 ## SEO and custom domain
 
 The site sets route-specific titles, descriptions, canonical URLs, Open Graph and

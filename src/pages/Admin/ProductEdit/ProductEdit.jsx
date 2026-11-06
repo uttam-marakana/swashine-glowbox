@@ -14,6 +14,7 @@ const empty = {
   id: 1,
   slug: "",
   name: "",
+  published: true,
   category: "Standard",
   size: "",
   sizeKey: "18x24",
@@ -136,6 +137,15 @@ export default function ProductEdit() {
           <h2 className="text-sm font-semibold text-brand-400 uppercase tracking-wider">
             Basic info
           </h2>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!!form.published}
+              onChange={(e) => set("published", e.target.checked)}
+              className="w-4 h-4 rounded border-zinc-600 text-brand-500 focus:ring-brand-400"
+            />
+            <span className="text-sm text-zinc-200">Published on website</span>
+          </label>
           <div className="grid sm:grid-cols-2 gap-4">
             <label className={labelCls}>
               Name *

@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 
 export default function RequireAdmin({ children }) {
-  const { user, loading } = useAuth();
+  const { user, isAdmin, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -13,9 +13,13 @@ export default function RequireAdmin({ children }) {
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return (
-      <Navigate to="/admin/login" replace state={{ from: location.pathname }} />
+      <Navigate
+        to="/admin/login"
+        replace
+        state={{ from: location.pathname, unauthorized: Boolean(user) }}
+      />
     );
   }
 

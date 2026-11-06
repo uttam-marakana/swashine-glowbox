@@ -7,6 +7,7 @@ import {
 } from "react";
 import {
   onAuthStateChanged,
+  getIdTokenResult,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -16,6 +17,7 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,11 +25,43 @@ export function AuthProvider({ children }) {
       setLoading(false);
       return undefined;
     }
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setLoading(false);
-    });
-    return unsub;
+    let active = true;
+    const unsub = onAuthStateChanged(
+      auth,
+      async (u) => {
+        setUser(u);
+        setLoading(true);
+        if (!u) {
+          setIsAdmin(false);
+          setLoading(false);
+          return;
+        }
+
+        try {
+          const token = await getIdTokenResult(u);
+          if (active && auth.currentUser?.uid === u.uid) {
+            setIsAdmin(token.claims.admin === true);
+          }
+        } catch (error) {
+          console.error("Failed to verify admin role:", error);
+          if (active && auth.currentUser?.uid === u.uid) setIsAdmin(false);
+        } finally {
+          if (active && auth.currentUser?.uid === u.uid) setLoading(false);
+        }
+      },
+      (error) => {
+        console.error("Firebase authentication state failed:", error);
+        if (active) {
+          setUser(null);
+          setIsAdmin(false);
+          setLoading(false);
+        }
+      },
+    );
+    return () => {
+      active = false;
+      unsub();
+    };
   }, []);
 
   const login = useCallback((email, password) => {
@@ -45,7 +79,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, logout, isFirebaseConfigured }}
+      value={{ user, isAdmin, loading, login, logout, isFirebaseConfigured }}
     >
       {children}
     </AuthContext.Provider>

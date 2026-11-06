@@ -810,12 +810,12 @@ export const instagramFeed = [
 
 export const navLinks = [
   { path: "/", label: "Home" },
-  { path: "/#products", label: "Products" },
-  { path: "/#how-it-works", label: "How it works" },
+  { path: "/products", label: "Products" },
+  { path: "/how-it-works", label: "How it works" },
   // { path: "/catalogs", label: "Catalogs" },
   { path: "/dealers", label: "Dealers" },
-  { path: "/#faq", label: "FAQ" },
-  { path: "/#contact", label: "Contact" },
+  { path: "/faq", label: "FAQ" },
+  { path: "/contact", label: "Contact" },
 ];
 
 export const footerLinks = [

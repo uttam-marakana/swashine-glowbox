@@ -18,7 +18,18 @@ export default function Header() {
   // Close drawer on route change
   useEffect(() => {
     setOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
+
+  const isActiveLink = (path) => {
+    const [targetPath, targetHash] = path.split("#");
+    if (targetHash) {
+      return (
+        location.pathname === (targetPath || "/") &&
+        location.hash === `#${targetHash}`
+      );
+    }
+    return location.pathname === path && !location.hash;
+  };
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -79,9 +90,7 @@ export default function Header() {
                 key={link.path}
                 to={link.path}
                 className={`hover:text-brand-400 transition ${
-                  location.pathname === link.path
-                    ? "text-brand-400"
-                    : "text-zinc-300"
+                  isActiveLink(link.path) ? "text-brand-400" : "text-zinc-300"
                 }`}
               >
                 {link.label}
@@ -156,7 +165,7 @@ export default function Header() {
 
               <nav className="flex-1 overflow-y-auto px-4 py-5 space-y-1">
                 {navLinks.map((link) => {
-                  const active = location.pathname === link.path;
+                  const active = isActiveLink(link.path);
                   return (
                     <Link
                       key={link.path}

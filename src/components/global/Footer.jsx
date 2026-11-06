@@ -11,7 +11,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black border-t border-zinc-800 py-12 md:py-14">
+    <footer className="bg-black border-t border-zinc-800 pt-12 pb-28 md:py-14">
       <div className="page-container">
         {/* Main Footer */}
         <div className="grid gap-y-10 lg:grid-cols-[1.35fr_1fr_1fr_0.8fr] lg:gap-x-10">

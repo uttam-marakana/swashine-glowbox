@@ -5,7 +5,7 @@ import heroImage from "@/assets/images/hero-section/slider_img1.png";
 
 const pages = {
   "/": {
-    title: "LED Glowboxes Manufacturer in India | Swashine Glowbox",
+    title: "Swashine Glowbox",
     description:
       "Shop premium LED glowboxes and custom illuminated displays, made by Swastik Industries in Rajkot, Gujarat. Manufacturer-direct quality and custom sizes.",
   },

@@ -322,13 +322,13 @@ Add a downloadable specification card for print-ready graphics:
 
 ### Sprint 1: Quick UX & Navigation Wins (Day 1 - 2)
 
-* \[ \] Hardcode static fallback values for hero counter numbers (`15+`, `1 Yr`, `100%`).
+* [x] Keep hero counter values visible immediately, without a zero-count animation. Use the existing verified `8+` product variants rather than the unverified `15+` figure.
 
-* \[ \] Update all navbar links to root-relative paths (`/#products`, `/#how-it-works`, `/#faq`).
+* [x] Update homepage section links to root-relative paths (`/#products`, `/#how-it-works`, `/#faq`, `/#contact`) and scroll to anchors after client-side navigation.
 
-* \[ \] Deploy mobile persistent bottom bar (Call + WhatsApp).
+* [x] Deploy mobile persistent bottom bar (Call + WhatsApp); preserve the floating WhatsApp button on desktop.
 
-* \[ \] Implement `touch-action: pan-y;` on the Instagram reels carousel.
+* [x] Not applicable: Instagram posts and reels render in a responsive grid, not a horizontal carousel; no touch-action override is needed.
 
 ### Sprint 2: Conversion & Media Polish (Week 1)
 

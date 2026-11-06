@@ -49,71 +49,15 @@ function useInViewOnce(ref) {
   return inView;
 }
 
-function useCountUp(target, enabled, duration = 1200) {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    if (!enabled) return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setValue(target);
-      return;
-    }
-    let start = null;
-    let frame;
-    const step = (ts) => {
-      if (start == null) start = ts;
-      const p = Math.min(1, (ts - start) / duration);
-      setValue(Math.round(target * p));
-      if (p < 1) frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [target, enabled, duration]);
-  return value;
-}
-
-function parseStatValue(raw) {
-  const s = String(raw);
-  if (s.includes("–") || s.includes("-")) {
-    return { kind: "range", num: 0, label: s };
-  }
-  const num = parseInt(s.replace(/[^\d]/g, ""), 10);
-  if (!Number.isFinite(num)) return { kind: "text", num: 0, label: s };
-  if (s.includes("%")) return { kind: "percent", num, label: s };
-  if (s.toLowerCase().includes("yr")) return { kind: "year", num, label: s };
-  if (s.includes("+")) return { kind: "plus", num, label: s };
-  return { kind: "num", num, label: s };
-}
-
-function formatStat(kind, n, fallback) {
-  if (kind === "text" || kind === "range") return fallback;
-  if (kind === "percent") return `${n}%`;
-  if (kind === "year") return `${n} Yr`;
-  if (kind === "plus") return `${n}+`;
-  return String(n);
-}
-
 function StatCell({ value, label }) {
-  const ref = useRef(null);
-  const inView = useInViewOnce(ref);
-  const parsed = parseStatValue(value);
-  const n = useCountUp(parsed.num, inView);
-  const display =
-    parsed.kind === "range" || parsed.kind === "text"
-      ? value
-      : formatStat(parsed.kind, n, value);
-
   return (
     <motion.div
-      ref={ref}
       whileHover={{ y: -4, scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
       className="cursor-default rounded-2xl px-2 py-2"
     >
       <div className="text-3xl md:text-4xl font-bold text-brand-400 tabular-nums">
-        {display}
+        {value}
       </div>
       <div className="text-sm text-zinc-500 mt-1">{label}</div>
     </motion.div>
@@ -136,7 +80,7 @@ function HowItWorksSection() {
   }, [inView]);
 
   return (
-    <section className="py-12" ref={sectionRef}>
+    <section id="how-it-works" className="py-12 scroll-mt-24" ref={sectionRef}>
       <div className="page-container">
         <div className="text-center mb-4">
           <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
@@ -555,7 +499,10 @@ export default function Home() {
       </section>
 
       {/* 5. Featured products */}
-      <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
+      <section
+        id="products"
+        className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02] scroll-mt-24"
+      >
         <div className="page-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div>
@@ -678,7 +625,10 @@ export default function Home() {
       </section>
 
       {/* 9. FAQ */}
-      <section className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02]">
+      <section
+        id="faq"
+        className="w-full py-10 md:py-12 border-y border-white/5 bg-white/[0.02] scroll-mt-24"
+      >
         <div className="page-container">
           <div className="mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
@@ -698,7 +648,7 @@ export default function Home() {
       </section>
 
       {/* 10. CTA */}
-      <section className="w-full py-12 md:py-14">
+      <section id="contact" className="w-full py-12 md:py-14 scroll-mt-24">
         <div className="page-container">
           <div className="mx-auto">
             <div
